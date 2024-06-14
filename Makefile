@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/06/14 11:25:23 by lzipp            ###   ########.fr        #
+#    Updated: 2024/06/14 12:57:08 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,14 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+submodule:
+	@if [ ! -d "./libft/.git" ]; then \
+		echo "Submodule not found. Initializing and updating submodule..."; \
+		git submodule update --init --recursive; \
+	else \
+		echo "Submodule already initialized."; \
+	fi
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	mkdir -p $(OBJDIR)
