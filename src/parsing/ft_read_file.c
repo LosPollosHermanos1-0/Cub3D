@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fn_read_file.c                                     :+:      :+:    :+:   */
+/*   ft_read_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 08:39:57 by vscode            #+#    #+#             */
-/*   Updated: 2024/06/19 14:40:49 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/19 14:52:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ bool	ft_read_file(char *file_path, char ***textures_ptr,  int ***colors_ptr, cha
 static void	ft_read_textures_colors(int fd, char ***textures_ptr, int ***colors_ptr)
 {
 	char	*line;
-	char	*valid;
 
-	valid = "NOSWEAFC \t,1234567890";
 	line = ft_get_next_line(fd);
 	while (line)
 	{
-		if 
+		if (ft_includes_only(&line, "NOSWEAFC \t,1234567890") == false)
+			return (free(line), perror("Error: invalid character in file"), false);
 		line = ft_trim_in_place(line, " ");
 		if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 			|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
@@ -44,6 +43,20 @@ static void	ft_read_textures_colors(int fd, char ***textures_ptr, int ***colors_
 			ft_get_rgb_arr(&line, colors_ptr);
 		free(line);
 		line = ft_get_next_line(fd);
+	}
+	return (true);
+}
+
+static bool	ft_includes_only(char **str, char ***valid)
+{
+	int		i;
+
+	i = -1;
+	while (*str[++i])
+	{
+		if (!ft_strchr(valid, *str))
+			return (false);
+		str++;
 	}
 	return (true);
 }
@@ -57,18 +70,8 @@ static bool ft_get_texture(char **line, char ***textures_ptr)
 	ft_memmove(direction, *line, 2);
 	direction[2] = NULL;
 	texture = ft_strtrim(*line + 2, " ");
-	if (!texture)
-		return (perror("Error: could not get texture"), false);
-	if (ft_strrcmp(texture, ".png", 4) != 0)
-		return (perror("Error: texture must be of type .png"), false);
-	fd = open(texture, O_RDONLY);
-	if (fd == -1)
-		return (perror("Error: could not open texture"), false);
-	close(fd);
-	fd = open(texture, O_DIRECTORY);
-	if (fd != -1)
-		return (perror("Error: texture must be a file"), false);
-	return (close(fd), true);
+	if (ft_check_texture(&texture) == false)
+		return (false);
 }
 
 static bool	ft_check_texture(char **texture)
@@ -87,7 +90,7 @@ static bool	ft_check_texture(char **texture)
 	return (close(fd), true);
 }
 
-static bool	ft_get_rg_arr(char **line, int ***colors_ptr)
+static bool	ft_get_rgb_arr(char **line, int ***colors_ptr)
 {
 	char	*color;
 	char	direction[3];
