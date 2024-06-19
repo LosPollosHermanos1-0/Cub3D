@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fn_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:51:36 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/19 08:35:31 by vscode           ###   ########.fr       */
+/*   Updated: 2024/06/19 16:12:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// # include "../../inc/parsing.h"
+# include "../../inc/parsing.h"
 
 bool fn_validate_input(int argc, char **argv)
 {
