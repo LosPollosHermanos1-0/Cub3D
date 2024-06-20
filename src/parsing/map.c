@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/19 16:12:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/20 16:36:37 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-bool	ft_create_map(int fd, char*** map)
+bool	ft_get_map(int fd, char*** map)
 {
-	// TODO
+	return (true);
 }
