@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 13:37:34 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/20 13:43:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ static bool	ft_get_textures_colors(int fd, char ***texture_ptr, int **rgb_ptr)
 			|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
 			if (ft_get_texture(&line, texture_ptr) == false)
 				return (false);
-		if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+		else if (ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
 			if (ft_get_rgb_arr(&line, rgb_ptr) == false)
 				return (false);
+		else if (line[0] == '\n')
+			;
+		else
+			return (free(line), perror("Error: invalid line"), false);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
