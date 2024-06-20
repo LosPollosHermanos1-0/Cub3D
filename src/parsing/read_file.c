@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 13:43:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/20 14:21:29 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,21 @@ static bool	ft_get_textures_colors(int fd, char ***texture_ptr, int **rgb_ptr)
 		line = ft_get_next_line(fd);
 	}
 	return (true);
+}
+
+int	main(void)
+{
+	char	**map;
+	char	**textures;
+	int		colors[2][3];
+
+	char *filepath = "./test_files/test.cub";
+	map = ft_calloc(1, sizeof(char *));
+	textures = ft_calloc(5, sizeof(char *));
+	
+	if (ft_read_file(filepath, &map, &textures, &colors) == false)
+		return (1);
+	
+	// do stuff with map, textures and colors
+	return (0);
 }
