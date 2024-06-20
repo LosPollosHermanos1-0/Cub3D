@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/06/20 16:09:20 by lzipp            ###   ########.fr        #
+#    Updated: 2024/06/20 16:14:55 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ HEADERS_DIR := inc
 SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing
 
 # Source files
-SRC_FILES := test.c
+SRC_FILES := colors.c ft_validate_input.c helpers.c map.c read_file.c textures.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR)
