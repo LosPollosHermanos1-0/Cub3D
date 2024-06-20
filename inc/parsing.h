@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 14:23:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/20 16:11:40 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# include "../libft/libft.h"
+# include "lib.h"
 
 // read_file
 bool	ft_read_file(char **file, char ***map_ptr, char ***texture_ptr,
