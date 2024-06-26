@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 16:55:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/26 09:20:58 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool	ft_get_textures_colors(int fd, char ***texture_ptr, int **rgb_ptr)
 {
 	char	*line;
 
-	line =get_next_line(fd);
+	line = get_next_line(fd);
 	while (line)
 	{
 		if (ft_wrong_char_inside(&line) == true)
@@ -92,4 +92,37 @@ int	main(void)
 	// }
 	// do stuff with map, textures and colors
 	return (0);
+}
+
+/**
+ * Reads in whole file content, returns line of map start.
+ *
+ * @param content File content.
+ * @return The line at which the map was encountered OR -1 if an error occured.
+ */
+static int	ft_read_whole_file(char **content, int fd)
+{
+	char	*line;
+	char	*tmp;
+	int		start;
+	int		i;
+
+	start = -1;
+	i = -1;
+	line = get_next_line(fd);
+	while (line)
+	{
+		i++;
+		line = ft_strtrim_in_place(line, " ");
+		if (ft_wrong_char_inside(&line) == true)
+			return (free(line), perror("Error: invalid character in file"), -1);
+		if (line[0] != '\n' && (bool)ft_contains("NOWEA ") == false)
+			start = i;
+		*content = ft_strjoin_in_place(*content, line);
+		free(line);
+		if (!*content)
+			return (-1);
+		line = get_next_line(fd);
+	}
+	return (start);
 }
