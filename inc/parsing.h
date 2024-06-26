@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 16:52:18 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/26 10:05:17 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@
 
 // # include "lib.h"
 #include "../libft/include/lib.h"
+
+// enums
+enum	e_map_elements
+{
+	EMPTY,
+	WALL,
+	PLAYER_NO,
+	PLAYER_SO,
+	PLAYER_WE,
+	PLAYER_EA,
+	ITEM,
+	EXIT,
+	DOOR
+};
 
 // read_file
 bool	ft_read_file(char **file, char ***map_ptr, char ***texture_ptr,
