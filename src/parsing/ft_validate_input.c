@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fn_validate_input.c                                :+:      :+:    :+:   */
+/*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:51:36 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 13:53:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/26 12:25:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool fn_validate_input(int argc, char **argv)
 {
 	if (argc != 2)
 		return(perror("Usage: ./cub3d <mapname.cub>"), false);
-	if (ft_strlen(argv[1]) <= 4 || ft_strrchr(".cub", argv[1]) != 0)
+	if (ft_strlen(argv[1]) <= 4 || ft_strrncmp(".cub", argv[1], 4) != 0)
 		return(perror("Error: Incorrect number of arguments"), false);
 	return (true);
 }
