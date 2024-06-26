@@ -27,13 +27,13 @@ SRC_DIR := src
 HEADERS_DIR := inc
 
 # Additional source directories
-SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing
+SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static
 
 # Source files
-SRC_FILES := test.c
+SRC_FILES := static_data.c init_window.c init_data.c cub3d.c
 
 # Include directory for headers
-INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR)
+INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(REPO_DIR)/include/MLX42
 
 # Object files
 OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(SRC_FILES))
