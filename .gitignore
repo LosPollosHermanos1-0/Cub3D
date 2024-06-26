@@ -54,3 +54,4 @@ dkms.conf
 # others
 *.py
 test
+cub3d
