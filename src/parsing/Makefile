@@ -5,7 +5,7 @@ CFLAGS := -Wextra -Wall -Werror -fsanitize=address
 LDFLAGS := -fsanitize=address
 
 SRCDIR := .
-SOURCES := colors.c helpers.c map.c read_file.c textures.c free.c ft_validate_input.c
+SOURCES := colors.c map.c read_file.c textures.c free.c ft_validate_input.c
 OBJDIR = ./obj
 OBJECTS := $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.c=.o)))
 
