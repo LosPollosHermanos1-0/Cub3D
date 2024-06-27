@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   init_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 19:12:47 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/20 19:14:01 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/06/26 12:07:59 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/06/26 12:08:09 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_window	*init_window()
+t_player	*init_player(t_data *data)
 {
-    t_window *window;
-    window = malloc(sizeof(t_window));
-    window->mlx = mlx_init(WINDOW_W, WINDOW_H, "Cub3D", false);
-    if (window->mlx == NULL) {
-        printf("Error: Malloc failed\n");
-        exit(1);
-    }
-    window->image = mlx_new_image(window->mlx, WINDOW_W, WINDOW_H);
-    if (window->image == NULL) {
-        printf("Error: Malloc failed\n");
-        exit(1);
-    }
-    window->width = WINDOW_W;
-    window->height = WINDOW_H;
+    t_player	*player;
 
-    return window;
+    player = malloc(sizeof(t_player));
+    if (player == NULL) {
+        printf("Error: Malloc failed\n");
+        exit(1);
+    }
+    player->pos = ft_vector_init(data->map->player_x + 0.5, data->map->player_y + 0.5);
+    player->dir = ft_vector_init(-1, 0);
+    player->plane = ft_vector_init(0, 0.66);
+    player->move_speed = 0.05;
+    player->rot_speed = 0.05;
+    return (player);
 }

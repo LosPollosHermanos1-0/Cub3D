@@ -27,10 +27,10 @@ SRC_DIR := src
 HEADERS_DIR := inc
 
 # Additional source directories
-SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static
+SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static $(SRC_DIR)/draw
 
 # Source files
-SRC_FILES := static_data.c init_window.c init_data.c cub3d.c
+SRC_FILES := static_data.c init_window.c init_data.c cub3d.c init_player.c init_map.c draw_line.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(REPO_DIR)/include/MLX42

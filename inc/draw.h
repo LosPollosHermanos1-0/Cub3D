@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 11:44:32 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/06/26 14:21:54 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#ifndef DRAW_H
+#define DRAW_H
 
-# include <stdlib.h>
-# include <stdio.h>
+void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end, uint32_t color);
+void draw_line_vector(mlx_image_t *img, t_vector_2d start, t_vector_2d direction, uint32_t color);
 
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "draw.h"
-
-#endif
+#endif //DRAW_H

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 11:44:32 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/06/26 12:20:33 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/06/26 12:20:37 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+# include "cub3d.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "draw.h"
-
-#endif
+t_map *init_map()
+{
+    t_map *map = malloc(sizeof(t_map));
+    if (map == NULL) {
+        printf("Error: Malloc failed\n");
+        exit(1);
+    }
+    map->player_x = WINDOW_W / 2;
+    map->player_y = WINDOW_H / 2;
+    return map;
+}
