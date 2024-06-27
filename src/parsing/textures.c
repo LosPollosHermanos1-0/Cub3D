@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:04:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/20 17:06:18 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/27 17:30:00 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-bool ft_get_texture(char **line, char ***textures_ptr)
+bool ft_get_texture(char **line, char ***texture_ptr)
 {
 	char	*texture;
 	char	direction[3];
@@ -33,9 +33,9 @@ bool ft_get_texture(char **line, char ***textures_ptr)
 		index = 3;
 	else
 		return (perror("Error: invalid texture direction"), false);
-	if (*textures_ptr[index])
+	if (*texture_ptr[index])
 		return (perror("Error: Same direction encountered twice"), false);
-	*textures_ptr[index] = texture;
+	*texture_ptr[index] = texture;
 	return (true);
 }
 
