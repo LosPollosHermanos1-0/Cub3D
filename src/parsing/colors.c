@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:38 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 11:49:54 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 11:54:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-bool	ft_get_rgb(char **line, int ***colors_ptr)
+bool	ft_get_color(char **line, int ***colors_ptr)
 {
 	char	*color;
 	char	direction[2];
