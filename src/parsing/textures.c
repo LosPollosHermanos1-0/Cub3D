@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:04:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/27 17:30:00 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 12:26:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-bool ft_get_texture(char **line, char ***texture_ptr)
+bool ft_get_texture(char **line, char ****texture_ptr)
 {
 	char	*texture;
 	char	direction[3];
@@ -39,7 +39,7 @@ bool ft_get_texture(char **line, char ***texture_ptr)
 	return (true);
 }
 
-bool	ft_check_texture(char **texture)
+bool	ft_check_texture(char ***texture)
 {
 	int	fd;
 
