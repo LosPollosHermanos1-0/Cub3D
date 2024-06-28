@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 14:42:00 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 15:11:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 // }
 static int	ft_read_whole_file(char **content, int fd);
 
-static bool	ft_load_config_from_file(char **filepath, //e_map_elements ***map_ptr,
-		char ***texture_ptr, int ***rgb_ptr)
+static bool	ft_load_config_from_file(char **filepath,
+		// e_map_elements ***map_ptr,
+										char ***texture_ptr,
+										int ***rgb_ptr)
 {
 	int		fd;
 	int		start;
@@ -131,15 +133,18 @@ int	main(void)
 		return (free(texture_ptr), free(rgb_ptr), 1);
 	if (ft_load_config_from_file(&filepath, &texture_ptr, &rgb_ptr) == false)
 		return (1);
-	while(*texture_ptr)
+	while (*texture_ptr)
 	{
 		printf("%s\n", *texture_ptr);
 		texture_ptr++;
 	}
-	while (rgb_ptr)
+	while (*rgb_ptr)
 	{
-		printf("%d\n", **rgb_ptr);
+		printf("%d,", (*rgb_ptr)[0]);
+		printf("%d,", (*rgb_ptr)[1]);
+		printf("%d\n", (*rgb_ptr)[2]);
 		rgb_ptr++;
 	}
+	printf("success\n");
 	return (0);
 }

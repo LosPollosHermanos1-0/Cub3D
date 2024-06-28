@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 14:42:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 15:07:23 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr)
 	i = -1;
 	while (++i < 4)
 	{
-		if (!texture_ptr[i])
+		if (!(*texture_ptr)[i])
 			return (perror("Error: missing texture"), false);
 	}
 	i = -1;
 	while (++i < 2)
 	{
-		if (!rgb_ptr[i])
+		if (!(*rgb_ptr)[i])
 			return (perror("Error: missing color"), false);
 	}
 	return (true);
