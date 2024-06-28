@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 15:11:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 16:46:34 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ static int	ft_read_whole_file(char **content, int fd)
 			start = i;
 			look_for_start = false;
 		}
-		if (!ft_contains_only(line, " \n"))
+		if (look_for_start == false && (bool)ft_contains_only(line, " \n") == true)
+			return (perror("Error: map is invalid"), -1);
+		if ((bool)ft_contains_only(line, " \n") == false)
 		{
 			*content = ft_strjoin_in_place(*content, line);
 			i++;
@@ -104,47 +106,43 @@ static int	ft_read_whole_file(char **content, int fd)
 
 #include <stdio.h>
 
-// int	main(void)
-// {
-// 	char	*content;
-// 	int		fd;
-// 	int		start;
-
-// 	content = NULL;
-// 	fd = open("./test_files/test.cub", O_RDONLY);
-// 	start = ft_read_whole_file(&content, fd);
-// 	printf("start: %d\n", start);
-// 	printf("content:\n%s\n", content);
-// 	if (start == -1)
-// 		return (1);
-// 	return (0);
-// }
-
-int	main(void)
+bool	test(char *filepath)
 {
-	char	*filepath;
 	char	**texture_ptr;
 	int		**rgb_ptr;
 
-	filepath = "./test_files/test.cub";
 	texture_ptr = ft_calloc(sizeof(char *), 5);
 	rgb_ptr = ft_calloc(sizeof(int *), 3);
 	if (!texture_ptr || !rgb_ptr)
 		return (free(texture_ptr), free(rgb_ptr), 1);
 	if (ft_load_config_from_file(&filepath, &texture_ptr, &rgb_ptr) == false)
 		return (1);
-	while (*texture_ptr)
-	{
-		printf("%s\n", *texture_ptr);
-		texture_ptr++;
-	}
-	while (*rgb_ptr)
-	{
-		printf("%d,", (*rgb_ptr)[0]);
-		printf("%d,", (*rgb_ptr)[1]);
-		printf("%d\n", (*rgb_ptr)[2]);
-		rgb_ptr++;
-	}
-	printf("success\n");
+	// while (*texture_ptr)
+	// {
+	// 	printf("%s\n", *texture_ptr);
+	// 	texture_ptr++;
+	// }
+	// while (*rgb_ptr)
+	// {
+	// 	printf("%d, ", (*rgb_ptr)[0]);
+	// 	printf("%d, ", (*rgb_ptr)[1]);
+	// 	printf("%d\n", (*rgb_ptr)[2]);
+	// 	rgb_ptr++;
+	// }
+	printf("success\n-------------\n");
+	return(true);
+}
+
+int	main(void)
+{
+	test("./test_files/correct1.cub");
+	test("./test_files/correct2.cub");
+	test("./test_files/correct3.cub");
+	test("./test_files/correct4.cub");
+	test("./test_files/incorrect1.cub");
+	test("./test_files/incorrect2.cub");
+	test("./test_files/incorrect3.cub");
+	test("./test_files/incorrect4.cub");
+	test("./test_files/incorrect5.cub");
 	return (0);
 }
