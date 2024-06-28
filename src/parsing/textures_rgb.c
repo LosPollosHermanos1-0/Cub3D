@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 12:26:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 14:42:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-bool	ft_get_textures_rgb(char **content, char ****texture_ptr, int **rgb_ptr)
+bool	ft_get_textures_rgb(char **content, char ***texture_ptr, int ***rgb_ptr)
 {
 	int		i;
 	char	**lines;
@@ -32,7 +32,7 @@ bool	ft_get_textures_rgb(char **content, char ****texture_ptr, int **rgb_ptr)
 		else if (ft_strncmp(lines[i], "F ", 2) == 0 || ft_strncmp(lines[i],
 				"C ", 2) == 0)
 		{
-			if (ft_get_color(&lines[i], rgb_ptr) == false)
+			if (ft_get_rgb(&lines[i], rgb_ptr) == false)
 				return (false);
 		}
 		else
@@ -41,7 +41,7 @@ bool	ft_get_textures_rgb(char **content, char ****texture_ptr, int **rgb_ptr)
 	return (true);
 }
 
-bool	ft_validate_textures_rgb(char ***texture_ptr, int **rgb_ptr)
+bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr)
 {
 	int i;
 
