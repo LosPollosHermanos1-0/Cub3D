@@ -6,24 +6,24 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/27 16:28:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/06/28 15:06:10 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // # include "lib.h"
-#include "../libft/include/lib.h"
+# include "../libft/include/lib.h"
 
 // enums
-typedef enum	e_map_elements
+typedef enum e_map_elements
 {
 	EMPTY,
 	WALL,
@@ -32,29 +32,48 @@ typedef enum	e_map_elements
 	PLAYER_WE,
 	PLAYER_EA,
 	ITEM,
-	EXIT,
 	DOOR
-};
+}					e_map_elements;
+
+// structs
+typedef struct s_config
+{
+	char			**textures;
+	int				**rgb;
+}					t_config;
+
+typedef struct s_map
+{
+	e_map_elements	**map;
+	int				width;
+	int				height;
+}					t_map;
 
 // read_file
-bool	ft_read_file(char **file, char ***map_ptr, char ***texture_ptr,
-		int **rgb_ptr);
+bool				ft_read_file(char **file, char ***map_ptr,
+						char ***texture_ptr, int ***rgb_ptr);
 
 // map
-bool	ft_get_map(int fd, char*** map);
+bool				ft_get_map(int fd, char ***map);
 
 // rgb
-bool	ft_get_rgb_arr(char **line, int **colors_ptr);
+bool				ft_get_rgb(char **line, int ***rgb_ptr);
 
 // textures
-bool	ft_get_texture(char **line, char ***textures_ptr);
-bool	ft_check_texture(char **texture);
+bool				ft_get_texture(char **line, char ***textures_ptr);
+bool				ft_check_texture(char **texture);
+
+// textures rgb
+bool				ft_get_textures_rgb(char **content, char ***texture_ptr,
+						int ***rgb_ptr);
+bool				ft_validate_textures_rgb(char ***texture_ptr,
+						int ***rgb_ptr);
 
 // helpers
-bool	ft_wrong_char_inside(char **str);
+bool				ft_wrong_char_inside(char **str);
 
 // free
-void	free_textures(char ***textures);
-void	free_map(char ***map);
+void				free_textures(char ***textures);
+void				free_map(char ***map);
 
 #endif
