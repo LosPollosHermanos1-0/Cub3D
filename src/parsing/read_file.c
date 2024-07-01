@@ -6,36 +6,23 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 16:46:34 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/01 15:22:06 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-// static bool	ft_get_textures_rgb(int fd, char ***texture_ptr, int **rgb_ptr);
-
-// bool	ft_read_file(char **file, char ***map_ptr, char ***texture_ptr,
-// 		int **rgb_ptr)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open(*file, O_RDONLY);
-// 	if (fd == -1)
-// 		return (close(fd), perror("Error: could not open file"), false);
-// 	if (ft_get_textures_rgb(fd, texture_ptr, rgb_ptr) == false)
-// 		return (close(fd), false);
-// 	if (ft_get_map(fd, map_ptr) == false)
-// 		return (close(fd), false);
-// 	close(fd);
-// 	return (true);
-// }
 static int	ft_read_whole_file(char **content, int fd);
 
-static bool	ft_load_config_from_file(char **filepath,
-		// e_map_elements ***map_ptr,
-										char ***texture_ptr,
-										int ***rgb_ptr)
+/**
+ * Loads the configuration from the file.
+ *
+ * @param filepath pointer to filepath.
+ * @param texture_ptr Pointer to the texture array.
+ * @param rgb_ptr Pointer to the rgb array.
+ */
+static bool	ft_load_config_from_file(char **filepath, char ***texture_ptr,
+		int ***rgb_ptr)
 {
 	int		fd;
 	int		start;
@@ -43,19 +30,15 @@ static bool	ft_load_config_from_file(char **filepath,
 
 	fd = open(*filepath, O_RDONLY);
 	if (fd == -1)
-		return (close(fd), perror("Error: could not open file"), -1);
+		return (close(fd), printf("Error: could not open file\n"), -1);
 	content = NULL;
 	start = ft_read_whole_file(&content, fd);
-	printf("after read_whole_file\n");
 	if (start != 6)
-		return (close(fd), perror("Error: config not formatted correctly"),
-			false);
+		return (close(fd), false);
 	if (ft_get_textures_rgb(&content, texture_ptr, rgb_ptr) == false)
 		return (close(fd), false);
-	printf("after get_textures_rgb\n");
 	if (ft_validate_textures_rgb(texture_ptr, rgb_ptr) == false)
 		return (close(fd), false);
-	printf("after validate_textures_rgb\n");
 	close(fd);
 	return (true);
 }
@@ -78,19 +61,21 @@ static int	ft_read_whole_file(char **content, int fd)
 	look_for_start = true;
 	line = get_next_line(fd);
 	if (!line)
-		return (perror("Error: file is empty"), -1);
+		return (printf("Error: file is empty\n"), -1);
 	while (line)
 	{
 		if (ft_contains(line, "\t\r\v") == true)
-			return (free(line), perror("Error: invalid character in file"), -1);
-		if (look_for_start == true && ft_contains_only(line, "1 \n") == 1
-			&& ft_contains(line, "1") == 1)
+			return (free(line), printf("Error: invalid character in file\n"),
+				-1);
+		if (look_for_start == true && (bool)ft_contains_only(line,
+				"1 \n") == true && (bool)ft_contains(line, "1") == true)
 		{
 			start = i;
 			look_for_start = false;
 		}
-		if (look_for_start == false && (bool)ft_contains_only(line, " \n") == true)
-			return (perror("Error: map is invalid"), -1);
+		else if (look_for_start == false && (bool)ft_contains_only(line,
+				" \n") == true)
+			return (printf("Error: map is invalid\n"), -1);
 		if ((bool)ft_contains_only(line, " \n") == false)
 		{
 			*content = ft_strjoin_in_place(*content, line);
@@ -98,7 +83,10 @@ static int	ft_read_whole_file(char **content, int fd)
 		}
 		free(line);
 		if (!(*content))
-			return (perror("Error: failed to join content and next line"), -1);
+		{
+			return (printf("Error: failed to join content and next line\n"),
+				-1);
+		}
 		line = get_next_line(fd);
 	}
 	return (start);
@@ -117,32 +105,36 @@ bool	test(char *filepath)
 		return (free(texture_ptr), free(rgb_ptr), 1);
 	if (ft_load_config_from_file(&filepath, &texture_ptr, &rgb_ptr) == false)
 		return (1);
-	// while (*texture_ptr)
-	// {
-	// 	printf("%s\n", *texture_ptr);
-	// 	texture_ptr++;
-	// }
-	// while (*rgb_ptr)
-	// {
-	// 	printf("%d, ", (*rgb_ptr)[0]);
-	// 	printf("%d, ", (*rgb_ptr)[1]);
-	// 	printf("%d\n", (*rgb_ptr)[2]);
-	// 	rgb_ptr++;
-	// }
-	printf("success\n-------------\n");
-	return(true);
+	return (true);
 }
 
 int	main(void)
 {
+	printf("name: correct1: ");
 	test("./test_files/correct1.cub");
+	printf("-------------\n");
+	printf("name: correct2: ");
 	test("./test_files/correct2.cub");
+	printf("-------------\n");
+	printf("name: correct3: ");
 	test("./test_files/correct3.cub");
+	printf("-------------\n");
+	printf("name: correct4: ");
 	test("./test_files/correct4.cub");
+	printf("-------------\n");
+	printf("name: incorrect1: ");
 	test("./test_files/incorrect1.cub");
+	printf("-------------\n");
+	printf("name: incorrect2: ");
 	test("./test_files/incorrect2.cub");
+	printf("-------------\n");
+	printf("name: incorrect3: ");
 	test("./test_files/incorrect3.cub");
+	printf("-------------\n");
+	printf("name: incorrect4: ");
 	test("./test_files/incorrect4.cub");
+	printf("-------------\n");
+	printf("name: incorrect5: ");
 	test("./test_files/incorrect5.cub");
 	return (0);
 }

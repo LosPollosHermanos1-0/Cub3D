@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:04:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/28 14:39:34 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:03:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ bool	ft_get_texture(char **line, char ***texture_ptr)
 	else if (ft_strcmp(direction, "EA") == 0)
 		index = 3;
 	else
-		return (perror("Error: invalid texture direction"), false);
+		return (printf("Error: invalid texture direction\n"), false);
 	if ((*texture_ptr)[index])
-		return (perror("Error: Same direction encountered twice"), false);
+		return (printf("Error: same direction encountered twice\n"), false);
 	(*texture_ptr)[index] = texture;
 	return (true);
 }
@@ -44,15 +44,15 @@ bool	ft_check_texture(char **texture)
 	int	fd;
 
 	if (!*texture)
-		return (perror("Error: texture could not be read."), false);
+		return (printf("Error: texture could not be read.\n"), false);
 	if (ft_strrncmp(*texture, ".png", 4) != 0)
-		return (perror("Error: texture must be of type .png"), false);
+		return (printf("Error: texture must be of type .png\n"), false);
 	fd = open(*texture, O_RDONLY);
 	if (fd == -1)
-		return (perror("Error: could not open texture"), false);
+		return (printf("Error: could not open texture\n"), false);
 	close(fd);
 	fd = open(*texture, O_DIRECTORY);
 	if (fd != -1)
-		return (perror("Error: texture must be a file"), false);
+		return (printf("Error: texture must be a file\n"), false);
 	return (close(fd), true);
 }

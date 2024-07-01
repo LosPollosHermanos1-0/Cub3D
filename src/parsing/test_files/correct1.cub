@@ -1,13 +1,10 @@
-NO     ./test_files/north.png 
-
+NO ./test_files/north.png
 SO ./test_files/south.png
 WE ./test_files/east.png
 EA ./test_files/west.png
 
 F 220,100,0
 C 225,30,0
-        
-
 
 1111111111111111111111111
 1000000000110000000000001

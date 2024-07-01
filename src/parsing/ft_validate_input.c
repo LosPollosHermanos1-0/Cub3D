@@ -6,18 +6,18 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:51:36 by lzipp             #+#    #+#             */
-/*   Updated: 2024/06/26 12:25:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/01 12:59:35 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/parsing.h"
+#include "../../inc/parsing.h"
 
-bool fn_validate_input(int argc, char **argv)
+bool	fn_validate_input(int argc, char **argv)
 {
 	if (argc != 2)
-		return(perror("Usage: ./cub3d <mapname.cub>"), false);
+		return (printf("Usage: ./cub3d <mapname.cub>\n"), false);
 	if (ft_strlen(argv[1]) <= 4 || ft_strrncmp(".cub", argv[1], 4) != 0)
-		return(perror("Error: Incorrect number of arguments"), false);
+		return (printf("Error: Incorrect number of arguments\n"), false);
 	return (true);
 }
 
@@ -32,5 +32,4 @@ bool fn_validate_input(int argc, char **argv)
 // 	char *w3[] = {"./cub3d", "mapname.cu"};
 // 	char *w4[] = {"./cub3d", "mapname.cub", "mapname2.cub"};
 
-	
 // }
