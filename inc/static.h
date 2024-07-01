@@ -19,6 +19,7 @@ typedef struct s_player {
     t_vector_2d plane;
     double move_speed;
     double rot_speed;
+    double wall_dist;
 } t_player;
 
 typedef struct s_map {

@@ -24,7 +24,8 @@ t_player	*init_player()
     player->pos = ft_vector_init(22, 12);
     player->dir = ft_vector_init(-1, 0);
     player->plane = ft_vector_init(0, 0.66);
-    player->move_speed = 0.05;
+    player->move_speed = 0.1;
+    player->wall_dist = 0.1;
     player->rot_speed = 0.05;
     return (player);
 }
