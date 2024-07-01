@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 15:22:06 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:11:13 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,23 @@ static bool	ft_load_config_from_file(char **filepath, char ***texture_ptr,
 	fd = open(*filepath, O_RDONLY);
 	if (fd == -1)
 		return (close(fd), printf("Error: could not open file\n"), -1);
-	content = NULL;
+	content = ft_strdup("");
 	start = ft_read_whole_file(&content, fd);
 	if (start != 6)
-		return (close(fd), false);
+	{
+		if (start == -1)
+			return (close(fd), free(content), false);
+		else
+			return (close(fd), free(content),
+				printf("Error: wrong number of directions and/or colors\n"),
+				false);
+	}
 	if (ft_get_textures_rgb(&content, texture_ptr, rgb_ptr) == false)
-		return (close(fd), false);
+		return (close(fd), free(content), false);
 	if (ft_validate_textures_rgb(texture_ptr, rgb_ptr) == false)
-		return (close(fd), false);
+		return (close(fd), free(content), false);
 	close(fd);
+	printf("start: %d\n", start);
 	return (true);
 }
 
@@ -73,17 +81,19 @@ static int	ft_read_whole_file(char **content, int fd)
 			start = i;
 			look_for_start = false;
 		}
-		else if (look_for_start == false && (bool)ft_contains_only(line,
-				" \n") == true)
-			return (printf("Error: map is invalid\n"), -1);
-		if ((bool)ft_contains_only(line, " \n") == false)
+		if ((bool)ft_contains_only(line, " \n") == false
+			&& look_for_start == true)
 		{
 			*content = ft_strjoin_in_place(*content, line);
 			i++;
 		}
+		if (look_for_start == false && (bool)ft_contains_only(line,
+				" \n") == true)
+			return (free(line), start);
 		free(line);
-		if (!(*content))
+		if (*content == NULL)
 		{
+			// printf
 			return (printf("Error: failed to join content and next line\n"),
 				-1);
 		}
@@ -105,6 +115,16 @@ bool	test(char *filepath)
 		return (free(texture_ptr), free(rgb_ptr), 1);
 	if (ft_load_config_from_file(&filepath, &texture_ptr, &rgb_ptr) == false)
 		return (1);
+	printf("textures 0: %s\n", texture_ptr[0]);
+	printf("textures 1: %s\n", texture_ptr[1]);
+	printf("textures 2: %s\n", texture_ptr[2]);
+	printf("textures 3: %s\n", texture_ptr[3]);
+	printf("rgb: %d\n", rgb_ptr[0][0]);
+	printf("rgb: %d\n", rgb_ptr[0][1]);
+	printf("rgb: %d\n", rgb_ptr[0][2]);
+	printf("rgb: %d\n", rgb_ptr[1][0]);
+	printf("rgb: %d\n", rgb_ptr[1][1]);
+	printf("rgb: %d\n", rgb_ptr[1][2]);
 	return (true);
 }
 
@@ -122,19 +142,19 @@ int	main(void)
 	printf("name: correct4: ");
 	test("./test_files/correct4.cub");
 	printf("-------------\n");
-	printf("name: incorrect1: ");
-	test("./test_files/incorrect1.cub");
-	printf("-------------\n");
-	printf("name: incorrect2: ");
-	test("./test_files/incorrect2.cub");
-	printf("-------------\n");
-	printf("name: incorrect3: ");
-	test("./test_files/incorrect3.cub");
-	printf("-------------\n");
-	printf("name: incorrect4: ");
-	test("./test_files/incorrect4.cub");
-	printf("-------------\n");
-	printf("name: incorrect5: ");
-	test("./test_files/incorrect5.cub");
+	// printf("name: incorrect1: ");
+	// test("./test_files/incorrect1.cub");
+	// printf("-------------\n");
+	// printf("name: incorrect2: ");
+	// test("./test_files/incorrect2.cub");
+	// printf("-------------\n");
+	// printf("name: incorrect3: ");
+	// test("./test_files/incorrect3.cub");
+	// printf("-------------\n");
+	// printf("name: incorrect4: ");
+	// test("./test_files/incorrect4.cub");
+	// printf("-------------\n");
+	// printf("name: incorrect5: ");
+	// test("./test_files/incorrect5.cub");
 	return (0);
 }
