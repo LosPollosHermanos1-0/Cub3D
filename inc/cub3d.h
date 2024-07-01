@@ -18,6 +18,7 @@
 
 # include "lib.h"
 # include "MLX42.h"
+# include "input.h"
 # include "window.h"
 # include "static.h"
 # include "draw.h"

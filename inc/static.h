@@ -33,7 +33,7 @@ typedef struct s_data  {
 } t_data;
 
 t_data      *init_data();
-t_player	*init_player(t_data *data);
+t_player	*init_player();
 t_map       *init_map();
 t_data      *static_data();
 

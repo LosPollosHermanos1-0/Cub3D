@@ -17,6 +17,6 @@ t_data *init_data()
     t_data *data = malloc(sizeof(t_data));
     data->window = init_window();
     data->map = init_map();
-    data->player = init_player(data);
+    data->player = init_player();
     return data;
 }

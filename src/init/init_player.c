@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-t_player	*init_player(t_data *data)
+t_player	*init_player()
 {
     t_player	*player;
 
@@ -21,7 +21,7 @@ t_player	*init_player(t_data *data)
         printf("Error: Malloc failed\n");
         exit(1);
     }
-    player->pos = ft_vector_init(data->map->player_x + 0.5, data->map->player_y + 0.5);
+    player->pos = ft_vector_init(22, 12);
     player->dir = ft_vector_init(-1, 0);
     player->plane = ft_vector_init(0, 0.66);
     player->move_speed = 0.05;
