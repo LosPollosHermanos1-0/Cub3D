@@ -107,11 +107,9 @@ t_vector_2d calculate_delta_dist(t_vector_2d ray_dir) {
 }
 
 void draw_rays() {
-    printf("Drawing rays\n");
     t_data *data = static_data();
 
     for (int x = 0; x < WINDOW_W; ++x) {
-        printf("Drawing ray %d\n", x);
         double camera_x = 2 * x / (double)WINDOW_W - 1;
         t_vector_2d ray_dir = ft_vector_init(data->player->dir.x + data->player->plane.x * camera_x,
                                              data->player->dir.y + data->player->plane.y * camera_x);
@@ -171,31 +169,28 @@ void draw_rays() {
 
         t_vector_2d start = ft_vector_init(x, WINDOW_H / 2 - line_height / 2);
         t_vector_2d end = ft_vector_init(x, WINDOW_H / 2 + line_height / 2);
-        printf("Drawing line from (%f, %f) to (%f, %f)\n", start.x, start.y, end.x, end.y);
         draw_line(data->window->image, start, end, color);
-        printf("test\n");
     }
 }
 
 void arrow_key_hook(const mlx_key_data_t keydata, void* param) {
     t_data *data = param;
     if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS) {
-        printf("Left arrow key pressed\n");
         data->player->dir = ft_vector_rotate(data->player->dir, -0.1);
         data->player->plane = ft_vector_rotate(data->player->plane, -0.1);
-        ft_print_vector(data->player->dir);
-        ft_print_vector(data->player->plane);
     }
     if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS) {
         data->player->dir = ft_vector_rotate(data->player->dir, 0.1);
         data->player->plane = ft_vector_rotate(data->player->plane, 0.1);
     }
-
-    printf("Player direction: ");
-    ft_print_vector(data->player->dir);
-
-
+    if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS) {
+        if (worldMap[(int)(data->player->pos.x + data->player->dir.x * 0.1)][(int)data->player->pos.y] == 0) {
+            data->player->pos = ft_vector_add(data->player->pos, ft_vector_scale(data->player->dir, 0.1));
+        }
+        if (worldMap[(int)data->player->pos.x][(int)(data->player->pos.y + data->player->dir.y * 0.1)] == 0) {
+            data->player->pos = ft_vector_add(data->player->pos, ft_vector_scale(data->player->dir, 0.1));
+        }
+    }
     make_window_black();
-    // draw_grid();
     draw_rays();
 }

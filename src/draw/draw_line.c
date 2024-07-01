@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:20:06 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 14:26:56 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/01 10:58:15 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ void	do_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
 		*sign = ft_vector_init(-1, -1);
 }
 
+void clamp_to_window(t_vector_2d *point) {
+	if (point->x < 0) point->x = 0;
+	if (point->x >= WINDOW_W) point->x = WINDOW_W - 1;
+	if (point->y < 0) point->y = 0;
+	if (point->y >= WINDOW_H) point->y = WINDOW_H - 1;
+}
+
 void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		uint32_t color)
 {
@@ -34,13 +41,17 @@ void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 	int			error;
 	int			error2;
 
+	clamp_to_window(&start);
+	clamp_to_window(&end);
+
 	delta = ft_vector_init(fabs(end.x - start.x), fabs(end.y - start.y));
 	do_work(start, end, &sign);
 	error = (int)(delta.x - delta.y);
 	cur = start;
 	while (1)
 	{
-		mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
+		if (cur.x >= 0 && cur.x < WINDOW_W && cur.y >= 0 && cur.y < WINDOW_H)
+			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
 		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
 			break ;
 		error2 = error * 2;
