@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/02 18:31:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/02 19:41:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
 		return (free(content), false);
 	if (ft_get_map_char(&content, map_ptr) == false)
 		return (free(content), false);
-	// printf("content:\n%s\n", content);
 	return (true);
 }
 
@@ -91,6 +90,7 @@ static int	ft_read_whole_file(char **content, int fd)
 		line = get_next_line(fd);
 	}
 	// printf("content:\n%s\n", *content);
+	printf("start: %d\n", start);
 	return (free(line), start);
 }
 
