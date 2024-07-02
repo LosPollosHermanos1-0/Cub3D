@@ -23,5 +23,6 @@
 # include "input.h"
 # include "player.h"
 # include "draw.h"
+# include "utils.h"
 
 #endif

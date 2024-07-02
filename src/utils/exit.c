@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 14:51:34 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/27 14:51:39 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/07/02 19:15:48 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/07/02 19:16:14 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef INPUT_H
-#define INPUT_H
+#include "cub3d.h"
 
-void arrow_key_hook(mlx_key_data_t keydata, void* param);
-void	wasd_key_input(void *data);
-void key_handler(mlx_key_data_t keydata, void *data);
+void free_data(t_data *data) {
+    free(data->player);
+    free(data->window);
+    free(data->map);
+    free(data);
+}
 
-#endif
+
+void ft_exit() {
+    mlx_terminate(static_data()->window->mlx);
+    free_data(static_data());
+    exit(0);
+}
