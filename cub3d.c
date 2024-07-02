@@ -22,7 +22,7 @@ int main()
     // draw_line_vector(data->window->image, (t_vector_2d){400, 400}, (t_vector_2d){0, 100}, 0x00FF00FF);
     // draw_line_vector(data->window->image, (t_vector_2d){500, 400}, (t_vector_2d){180, -100}, 0x00FF00FF);
     mlx_image_to_window(data->window->mlx, data->window->image, 0, 0);
-    mlx_key_hook(data->window->mlx, arrow_key_hook, data);
+    // mlx_key_hook(data->window->mlx, arrow_key_hook, data);
     mlx_loop_hook(data->window->mlx, wasd_key_input, data);
     mlx_loop(data->window->mlx);
     mlx_terminate(data->window->mlx);

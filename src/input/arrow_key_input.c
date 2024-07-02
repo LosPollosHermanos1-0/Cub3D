@@ -39,41 +39,19 @@ void set_color_based_on_map(const int number, uint32_t *color) {
     }
 }
 
-
-
-// void make_window_black() {
-//     t_data *data = static_data();
-//     for (int y = 0; y < WINDOW_H; ++y) {
-//         for (int x = 0; x < WINDOW_W; ++x) {
-//             mlx_put_pixel(data->window->image,  x, y, 0x00000000);
-//         }
-//     }
-// }
-
-void draw_grid() {
-    t_data *data = static_data();
-    for (int y = 0; y < WINDOW_H; y += 20) {
-        for (int x = 0; x < WINDOW_W; x += 20) {
-            mlx_put_pixel(data->window->image, x, y, 0x00FF00FF);
-        }
-    }
-}
-
 t_vector_2d calculate_delta_dist(t_vector_2d ray_dir) {
     t_vector_2d delta_dist;
 
     if (ray_dir.x != 0) {
         delta_dist.x = fabs(1 / ray_dir.x);
     } else {
-        // Handle the case where ray_dir.x is zero
-        delta_dist.x = INFINITY; // or some large number, or handle as needed
+        delta_dist.x = INFINITY;
     }
 
     if (ray_dir.y != 0) {
         delta_dist.y = fabs(1 / ray_dir.y);
     } else {
-        // Handle the case where ray_dir.y is zero
-        delta_dist.y = INFINITY; // or some large number, or handle as needed
+        delta_dist.y = INFINITY;
     }
 
     return delta_dist;
@@ -146,47 +124,4 @@ void draw_rays() {
         t_vector_2d end = ft_vector_init(x, WINDOW_H / 2 + line_height / 2);
         draw_line(data->window->image, start, end, color);
     }
-}
-
-
-// // Calculate the movement vector based on the player's direction and key presses
-// t_vector_2d calculate_movement_vector(t_vector_2d direction) {
-//     t_vector_2d movement = ft_vector_init(0, 0);
-//     t_vector_2d perp = ft_vector_perpendicular(direction);
-//     mlx_t *mlx = static_data()->window->mlx;
-//     if (mlx_is_key_down(mlx, MLX_KEY_W)) {
-//         movement = ft_vector_add(movement, direction);
-//     }
-//     if (mlx_is_key_down(mlx, MLX_KEY_S)) {
-//         movement = ft_vector_add(movement, ft_vector_scale(direction, -1));
-//     }
-//     if (mlx_is_key_down(mlx, MLX_KEY_A)) {
-//         movement = ft_vector_add(movement, ft_vector_scale(perp, -1));
-//     }
-//     if (mlx_is_key_down(mlx, MLX_KEY_D)) {
-//         movement = ft_vector_add(movement, perp);
-//     }
-//
-//     // Normalize the diagonal movement
-//     if ((mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_S)) && (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_D))) {
-//         movement = ft_vector_scale(movement, 0.7071); // 1/sqrt(2) for normalization
-//     }
-//
-//     return movement;
-// }
-
-
-void arrow_key_hook(const mlx_key_data_t keydata, void* param) {
-    t_data *data = param;
-    t_player *player = data->player;
-    if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS) {
-        player->dir = ft_vector_rotate(player->dir, -0.1);
-        player->plane = ft_vector_rotate(player->plane, -0.1);
-    }
-    if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS) {
-        player->dir = ft_vector_rotate(player->dir, 0.1);
-        player->plane = ft_vector_rotate(player->plane, 0.1);
-    }
-
-    // move_player(player);
 }

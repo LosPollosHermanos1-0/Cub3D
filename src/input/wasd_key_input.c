@@ -28,10 +28,12 @@ void	wasd_key_input(void *data)
 
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
 		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
-	{
-		printf("key pressed\n");
 		move_player(d);
-	}
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		rotate_player(d, -d->player->rot_speed);
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		rotate_player(d, d->player->rot_speed);
+
 	make_window_black();
 	draw_rays();
 }
