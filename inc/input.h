@@ -15,5 +15,6 @@
 #define INPUT_H
 
 void arrow_key_hook(mlx_key_data_t keydata, void* param);
+void	wasd_key_input(void *data);
 
 #endif

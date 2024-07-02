@@ -13,8 +13,7 @@
 #include "cub3d.h"
 
 
-#define mapWidth 24
-#define mapHeight 24
+
 
 uint32_t create_color(const uint8_t alpha, const uint8_t red, const uint8_t green, const uint8_t blue) {
     return (red << 24) | (green << 16) | (blue << 8) | alpha;
@@ -40,42 +39,16 @@ void set_color_based_on_map(const int number, uint32_t *color) {
     }
 }
 
-int worldMap[mapWidth][mapHeight]=
-{
-    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
 
-void make_window_black() {
-    t_data *data = static_data();
-    for (int y = 0; y < WINDOW_H; ++y) {
-        for (int x = 0; x < WINDOW_W; ++x) {
-            mlx_put_pixel(data->window->image,  x, y, 0x00000000);
-        }
-    }
-}
+
+// void make_window_black() {
+//     t_data *data = static_data();
+//     for (int y = 0; y < WINDOW_H; ++y) {
+//         for (int x = 0; x < WINDOW_W; ++x) {
+//             mlx_put_pixel(data->window->image,  x, y, 0x00000000);
+//         }
+//     }
+// }
 
 void draw_grid() {
     t_data *data = static_data();
@@ -151,7 +124,7 @@ void draw_rays() {
                 map_y += step_y;
                 side = 1;
             }
-            if (worldMap[map_x][map_y] > 0) {
+            if (data->map->map[map_x][map_y] > 0) {
                 hit = 1;
             }
         }
@@ -165,7 +138,7 @@ void draw_rays() {
         int line_height = (int)(WINDOW_H / perp_wall_dist);
 
         u_int32_t color;
-        set_color_based_on_map(worldMap[map_x][map_y], &color);
+        set_color_based_on_map(data->map->map[map_x][map_y], &color);
 
         if (side == 1) {color = color / 2;}
 
@@ -175,67 +148,33 @@ void draw_rays() {
     }
 }
 
-t_vector_2d ft_vector_perpendicular(t_vector_2d v) {
-    return ft_vector_init(-v.y, v.x);
-}
 
-// Calculate the movement vector based on the player's direction and key presses
-t_vector_2d calculate_movement_vector(t_vector_2d direction) {
-    t_vector_2d movement = ft_vector_init(0, 0);
-    t_vector_2d perp = ft_vector_perpendicular(direction);
-    mlx_t *mlx = static_data()->window->mlx;
-    if (mlx_is_key_down(mlx, MLX_KEY_W)) {
-        movement = ft_vector_add(movement, direction);
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_S)) {
-        movement = ft_vector_add(movement, ft_vector_scale(direction, -1));
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_A)) {
-        movement = ft_vector_add(movement, ft_vector_scale(perp, -1));
-    }
-    if (mlx_is_key_down(mlx, MLX_KEY_D)) {
-        movement = ft_vector_add(movement, perp);
-    }
+// // Calculate the movement vector based on the player's direction and key presses
+// t_vector_2d calculate_movement_vector(t_vector_2d direction) {
+//     t_vector_2d movement = ft_vector_init(0, 0);
+//     t_vector_2d perp = ft_vector_perpendicular(direction);
+//     mlx_t *mlx = static_data()->window->mlx;
+//     if (mlx_is_key_down(mlx, MLX_KEY_W)) {
+//         movement = ft_vector_add(movement, direction);
+//     }
+//     if (mlx_is_key_down(mlx, MLX_KEY_S)) {
+//         movement = ft_vector_add(movement, ft_vector_scale(direction, -1));
+//     }
+//     if (mlx_is_key_down(mlx, MLX_KEY_A)) {
+//         movement = ft_vector_add(movement, ft_vector_scale(perp, -1));
+//     }
+//     if (mlx_is_key_down(mlx, MLX_KEY_D)) {
+//         movement = ft_vector_add(movement, perp);
+//     }
+//
+//     // Normalize the diagonal movement
+//     if ((mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_S)) && (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_D))) {
+//         movement = ft_vector_scale(movement, 0.7071); // 1/sqrt(2) for normalization
+//     }
+//
+//     return movement;
+// }
 
-    // Normalize the diagonal movement
-    if ((mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_S)) && (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_D))) {
-        movement = ft_vector_scale(movement, 0.7071); // 1/sqrt(2) for normalization
-    }
-
-    return movement;
-}
-
-void move_player(t_player *player) {
-    t_vector_2d new_pos = ft_vector_add(player->pos, ft_vector_scale(player->dir, player->move_speed));
-    t_vector_2d movement = calculate_movement_vector(player->dir);
-
-    // Check if moving in the x direction is possible
-    int can_move_x = worldMap[(int)(new_pos.x + (movement.x > 0 ? player->wall_dist : -player->wall_dist))][(int)(player->pos.y)] == 0;
-
-    // Check if moving in the y direction is possible
-    int can_move_y = worldMap[(int)(player->pos.x)][(int)(new_pos.y + (movement.y > 0 ? player->wall_dist : -player->wall_dist))] == 0;
-
-    int can_move_x_and_y = worldMap[(int)(new_pos.x + (movement.x > 0 ? player->wall_dist : -player->wall_dist))][(int)(new_pos.y + (movement.y > 0 ? player->wall_dist : -player->wall_dist))] == 0;
-
-    // If both x and y directions are free, move diagonally
-    if (can_move_x && can_move_y && can_move_x_and_y) {
-        player->pos = ft_vector_add(player->pos, ft_vector_scale(movement, player->move_speed));
-    }
-    // If only the x direction is free, move in the x direction
-    else if (can_move_x) {
-        // Additional check to prevent sliding into a corner
-        if (worldMap[(int)(new_pos.x + (movement.x > 0 ? player->wall_dist : -player->wall_dist))][(int)(new_pos.y)] == 0) {
-            player->pos.x = new_pos.x;
-        }
-    }
-    // If only the y direction is free, move in the y direction
-    else if (can_move_y) {
-        // Additional check to prevent sliding into a corner
-        if (worldMap[(int)(new_pos.x)][(int)(new_pos.y + (player->dir.y > 0 ? player->wall_dist : -player->wall_dist))] == 0) {
-            player->pos.y = new_pos.y;
-        }
-    }
-}
 
 void arrow_key_hook(const mlx_key_data_t keydata, void* param) {
     t_data *data = param;
@@ -249,7 +188,5 @@ void arrow_key_hook(const mlx_key_data_t keydata, void* param) {
         player->plane = ft_vector_rotate(player->plane, 0.1);
     }
 
-    move_player(player);
-    make_window_black();
-    draw_rays();
+    // move_player(player);
 }

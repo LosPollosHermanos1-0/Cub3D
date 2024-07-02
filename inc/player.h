@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 11:44:32 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/07/02 10:16:41 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/07/02 10:16:47 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
 
-# include <stdlib.h>
-# include <stdio.h>
 
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "input.h"
-# include "player.h"
-# include "draw.h"
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#endif
+typedef struct movement_check {
+    bool can_move_x;
+    bool can_move_y;
+    bool can_move_x_and_y;
+} t_movement_check;
+
+t_movement_check	*check_move_with_wall_dist(const t_vector_2d movement);
+void	move_player(const t_data *d);
+
+#endif //PLAYER_H

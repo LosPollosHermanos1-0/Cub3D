@@ -23,8 +23,7 @@ typedef struct s_player {
 } t_player;
 
 typedef struct s_map {
-    int player_x;
-    int player_y;
+    int **map;
 } t_map;
 
 typedef struct s_data  {
