@@ -30,6 +30,7 @@ typedef struct s_data  {
     t_window *window;
     t_player *player;
     t_map *map;
+    mlx_texture_t **texture;
 } t_data;
 
 t_data      *init_data();
