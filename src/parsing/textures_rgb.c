@@ -6,11 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 13:04:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/02 14:52:09 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
+
+static bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr);
 
 bool	ft_get_textures_rgb(char **content, char ***texture_ptr, int ***rgb_ptr)
 {
@@ -38,12 +40,12 @@ bool	ft_get_textures_rgb(char **content, char ***texture_ptr, int ***rgb_ptr)
 		else
 			return (printf("Error: invalid line\n"), false);
 	}
-	return (true);
+	return (ft_validate_textures_rgb(texture_ptr, rgb_ptr));
 }
 
-bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr)
+static bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < 4)
