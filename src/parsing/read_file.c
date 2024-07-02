@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 18:11:13 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/02 11:31:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,13 @@ static bool	ft_load_config_from_file(char **filepath, char ***texture_ptr,
 			return (close(fd), free(content), false);
 		else
 			return (close(fd), free(content),
-				printf("Error: wrong number of directions and/or colors\n"),
-				false);
+				printf("Error: config is not formatted correctly\n"), false);
 	}
 	if (ft_get_textures_rgb(&content, texture_ptr, rgb_ptr) == false)
 		return (close(fd), free(content), false);
 	if (ft_validate_textures_rgb(texture_ptr, rgb_ptr) == false)
 		return (close(fd), free(content), false);
 	close(fd);
-	printf("start: %d\n", start);
 	return (true);
 }
 
@@ -75,28 +73,23 @@ static int	ft_read_whole_file(char **content, int fd)
 		if (ft_contains(line, "\t\r\v") == true)
 			return (free(line), printf("Error: invalid character in file\n"),
 				-1);
-		if (look_for_start == true && (bool)ft_contains_only(line,
-				"1 \n") == true && (bool)ft_contains(line, "1") == true)
+		if (look_for_start == true && ft_contains_only(line, "1 \n") == 1
+			&& ft_contains(line, "1") == 1)
 		{
 			start = i;
 			look_for_start = false;
 		}
-		if ((bool)ft_contains_only(line, " \n") == false
-			&& look_for_start == true)
+		if (ft_contains_only(line, " \n") == 0 && look_for_start == true)
 		{
 			*content = ft_strjoin_in_place(*content, line);
 			i++;
 		}
-		if (look_for_start == false && (bool)ft_contains_only(line,
-				" \n") == true)
+		if (look_for_start == false && ft_contains_only(line, " \n") == 1)
 			return (free(line), start);
 		free(line);
 		if (*content == NULL)
-		{
-			// printf
 			return (printf("Error: failed to join content and next line\n"),
 				-1);
-		}
 		line = get_next_line(fd);
 	}
 	return (start);
@@ -109,52 +102,37 @@ bool	test(char *filepath)
 	char	**texture_ptr;
 	int		**rgb_ptr;
 
+	printf("name: %s: ", filepath);
 	texture_ptr = ft_calloc(sizeof(char *), 5);
 	rgb_ptr = ft_calloc(sizeof(int *), 3);
 	if (!texture_ptr || !rgb_ptr)
 		return (free(texture_ptr), free(rgb_ptr), 1);
 	if (ft_load_config_from_file(&filepath, &texture_ptr, &rgb_ptr) == false)
 		return (1);
-	printf("textures 0: %s\n", texture_ptr[0]);
-	printf("textures 1: %s\n", texture_ptr[1]);
-	printf("textures 2: %s\n", texture_ptr[2]);
-	printf("textures 3: %s\n", texture_ptr[3]);
-	printf("rgb: %d\n", rgb_ptr[0][0]);
-	printf("rgb: %d\n", rgb_ptr[0][1]);
-	printf("rgb: %d\n", rgb_ptr[0][2]);
-	printf("rgb: %d\n", rgb_ptr[1][0]);
-	printf("rgb: %d\n", rgb_ptr[1][1]);
-	printf("rgb: %d\n", rgb_ptr[1][2]);
+	// printf("textures 0: %s\n", texture_ptr[0]);
+	// printf("textures 1: %s\n", texture_ptr[1]);
+	// printf("textures 2: %s\n", texture_ptr[2]);
+	// printf("textures 3: %s\n", texture_ptr[3]);
+	// printf("rgb: %d\n", rgb_ptr[0][0]);
+	// printf("rgb: %d\n", rgb_ptr[0][1]);
+	// printf("rgb: %d\n", rgb_ptr[0][2]);
+	// printf("rgb: %d\n", rgb_ptr[1][0]);
+	// printf("rgb: %d\n", rgb_ptr[1][1]);
+	// printf("rgb: %d\n", rgb_ptr[1][2]);
+	printf("-------------\n");
 	return (true);
 }
 
 int	main(void)
 {
-	printf("name: correct1: ");
 	test("./test_files/correct1.cub");
-	printf("-------------\n");
-	printf("name: correct2: ");
 	test("./test_files/correct2.cub");
-	printf("-------------\n");
-	printf("name: correct3: ");
 	test("./test_files/correct3.cub");
-	printf("-------------\n");
-	printf("name: correct4: ");
 	test("./test_files/correct4.cub");
-	printf("-------------\n");
-	// printf("name: incorrect1: ");
-	// test("./test_files/incorrect1.cub");
-	// printf("-------------\n");
-	// printf("name: incorrect2: ");
-	// test("./test_files/incorrect2.cub");
-	// printf("-------------\n");
-	// printf("name: incorrect3: ");
-	// test("./test_files/incorrect3.cub");
-	// printf("-------------\n");
-	// printf("name: incorrect4: ");
-	// test("./test_files/incorrect4.cub");
-	// printf("-------------\n");
-	// printf("name: incorrect5: ");
-	// test("./test_files/incorrect5.cub");
+	test("./test_files/incorrect1.cub");
+	test("./test_files/incorrect2.cub");
+	test("./test_files/incorrect3.cub");
+	test("./test_files/incorrect4.cub");
+	test("./test_files/incorrect5.cub");
 	return (0);
 }
