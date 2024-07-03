@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 12:33:41 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 13:48:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ bool	ft_validate_map(char ***map_ptr)
 {
 	int		*pos;
 	char	**map_copy;
-	int		i;
 
 	pos = ft_get_player(map_ptr);
 	if (!pos)
@@ -34,13 +33,11 @@ bool	ft_validate_map(char ***map_ptr)
 	if (ft_copy_map(map_ptr, &map_copy, ft_map_width(map_ptr),
 			ft_map_height(map_ptr)) == false)
 		return (free(pos), printf("Error: failed to copy map\n"), false);
-	if (!map_copy)
-		return (free(pos), printf("Error: failed to copy map\n"), false);
 	if (ft_floodfill(&map_copy, pos[1], pos[0]) == false)
-	{
-		ft_free_2d_arr((void **)map_copy);
-		return (free(pos), printf("Error: map is not valid\n"), false);
-	}
+		return (free(pos), ft_free_2d_arr((void **)map_copy),
+			printf("Error: map is not valid\n"), false);
+	free(*map_ptr);
+	*map_ptr = ft_strdup_2d(map_copy);
 	return (free(pos), ft_free_2d_arr((void **)map_copy), true);
 }
 
