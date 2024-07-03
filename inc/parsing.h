@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/02 19:29:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 13:51:44 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef enum e_map_elements
 	PLAYER_WE,
 	PLAYER_EA,
 	ITEM,
-	DOOR
+	DOOR,
+	OUTSIDE,
+	END
 }					e_map_elements;
 
 // structs
@@ -54,8 +56,7 @@ bool				ft_read_file(char **file, char ***map_ptr,
 						char ***texture_ptr, int ***rgb_ptr);
 
 // map
-bool				ft_get_map(int fd, char ***map);
-bool				ft_get_map_char(char **content, char ***map_ptr);
+bool				ft_get_map(char **content, e_map_elements ***map_ptr);
 int					*ft_get_player(char ***map_ptr);
 int					ft_map_width(char ***map_ptr);
 int					ft_map_height(char ***map_ptr);
