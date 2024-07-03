@@ -6,11 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:52:41 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 15:56:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:59:00 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
+
+static bool	ft_is_player(char c);
 
 /**
  * Returns the width of the map.

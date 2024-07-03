@@ -6,15 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 15:53:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:59:31 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parsing.h"
 
-static bool	ft_is_player(char c);
 static bool	ft_get_map_char(char **content, char ***map_ptr);
-static void	map_char_to_enum(e_map_elements ***map_ptr, char **row_ptr, int i);
 
 /**
  * Gets the map from the content.
