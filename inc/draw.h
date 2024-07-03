@@ -16,6 +16,9 @@
 # define TEX_WIDTH 128
 # define TEX_HEIGHT 128
 
+# define TEX_WIDTH_FLOOR 64
+# define TEX_HEIGHT_FLOOR 64
+
 typedef enum e_direction
 {
 	NORTH,
@@ -65,6 +68,6 @@ uint32_t			get_pixel(const mlx_texture_t *texture, uint32_t x,
 						uint32_t y);
 void				draw_walls(const t_data *data, const t_raycast_data *rd,
 						const int x);
-void draw_floor(t_data *data, int y);
+void draw_floor_and_ceiling(t_data *data, int y);
 
 #endif // DRAW_H

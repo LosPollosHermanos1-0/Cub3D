@@ -34,6 +34,6 @@ void	wasd_key_input(void *data)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(d, d->player->rot_speed);
 
-	make_window_black();
+	// make_window_black();
 	draw_rays();
 }

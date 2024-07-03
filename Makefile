@@ -17,7 +17,7 @@ CC := cc
 REPO_DIR := MLX42
 REPO_URL := https://github.com/codam-coding-college/MLX42.git
 
-CFLAGS := #-Wextra -Wall -Werror -Ofast
+CFLAGS := -Ofast #-Wextra -Wall -Werror -Ofast
 
 # Directories
 OBJDIR := obj

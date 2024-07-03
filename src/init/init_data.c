@@ -18,11 +18,13 @@ t_data *init_data()
     data->window = init_window();
     data->map = init_map();
     data->player = init_player();
-    data->texture = malloc(sizeof(mlx_texture_t *) * 5);
+    data->texture = malloc(sizeof(mlx_texture_t *) * 7);
     data->texture[0] = mlx_load_png("textures/CEMENT1.png");
     data->texture[1] = mlx_load_png("textures/CEMENT2.png");
     data->texture[2] = mlx_load_png("textures/CEMENT3.png");
     data->texture[3] = mlx_load_png("textures/CEMENT4.png");
     data->texture[4] = mlx_load_png("textures/CEMENT5.png");
+    data->texture[5] = mlx_load_png("textures/GRAY1.png");
+    data->texture[6] = mlx_load_png("textures/WOOD.png");
     return data;
 }

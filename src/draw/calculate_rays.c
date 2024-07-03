@@ -68,7 +68,6 @@ void	calculate_perpendicular_wall_distance(t_raycast_data *rd)
 	else
 		rd->perp_wall_dist = rd->side_dist.y - rd->delta_dist.y;
 }
-
 void	draw_rays(void)
 {
 	t_data			*data;
@@ -76,7 +75,7 @@ void	draw_rays(void)
 
 	data = static_data();
 	for (int y = data->window->height / 2 + 1; y < data->window->height; y++) {
-		draw_floor(data, y);
+		draw_floor_and_ceiling(data, y);
 	}
 
 	for (int x = 0; x < data->window->width; ++x)
