@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   static_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:50:51 by lzipp            ###   ########.fr       */
+/*   Created: 2024/06/26 11:19:15 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/06/26 11:50:39 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-void	free_textures(char ***textures)
-{
-	int	i;
+# include "cub3d.h"
 
-	i = -1;
-	while (++i < 5)
-		free((*textures)[i]);
-	free(*textures);
+t_data *static_data()
+{
+    static t_data *data = NULL;
+
+    if (data == NULL)
+        data = init_data();
+    return data;
 }

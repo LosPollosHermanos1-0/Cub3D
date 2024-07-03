@@ -6,11 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:51:36 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 12:59:35 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:50:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parsing.h"
+#include "inc/parsing.h"
 
 bool	fn_validate_input(int argc, char **argv)
 {

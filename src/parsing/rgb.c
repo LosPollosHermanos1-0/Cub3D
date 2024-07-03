@@ -6,11 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:38 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 13:00:52 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:51:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parsing.h"
+#include "parsing.h"
 
 bool	ft_get_rgb(char **line, int ***rgb_ptr)
 {

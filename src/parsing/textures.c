@@ -6,11 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:04:22 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/01 13:03:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:51:21 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parsing.h"
+#include "parsing.h"
 
 bool	ft_get_texture(char **line, char ***texture_ptr)
 {

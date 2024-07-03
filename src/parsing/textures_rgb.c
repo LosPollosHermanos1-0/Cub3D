@@ -6,11 +6,11 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/02 14:52:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 16:51:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/parsing.h"
+#include "parsing.h"
 
 static bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr);
 

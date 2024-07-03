@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   arrow_key_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:50:51 by lzipp            ###   ########.fr       */
+/*   Created: 2024/06/27 14:35:25 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/06/27 14:35:28 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-void	free_textures(char ***textures)
-{
-	int	i;
+#include "cub3d.h"
 
-	i = -1;
-	while (++i < 5)
-		free((*textures)[i]);
-	free(*textures);
-}
+
+
+
+
+
