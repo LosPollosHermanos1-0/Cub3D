@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void draw_floor_and_ceiling(t_data *data, int y) {
+inline void draw_floor_and_ceiling(t_data *data, int y) {
     const t_player *p = data->player;
     double half_height = data->window->height / 2.0;
     double position = y - half_height;
