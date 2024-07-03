@@ -16,24 +16,24 @@ void	calculate_step_and_side_distance(const t_data *data, t_raycast_data *rd)
 {
 	if (rd->ray_dir.x < 0)
 	{
-		rd->step_x = -1;
-		rd->side_dist.x = (data->player->pos.x - rd->map_x) * rd->delta_dist.x;
+		rd->step.x = -1;
+		rd->side_dist.x = (data->player->pos.x - rd->map.x) * rd->delta_dist.x;
 	}
 	else
 	{
-		rd->step_x = 1;
-		rd->side_dist.x = (rd->map_x + 1.0 - data->player->pos.x)
+		rd->step.x = 1;
+		rd->side_dist.x = (rd->map.x + 1.0 - data->player->pos.x)
 			* rd->delta_dist.x;
 	}
 	if (rd->ray_dir.y < 0)
 	{
-		rd->step_y = -1;
-		rd->side_dist.y = (data->player->pos.y - rd->map_y) * rd->delta_dist.y;
+		rd->step.y = -1;
+		rd->side_dist.y = (data->player->pos.y - rd->map.y) * rd->delta_dist.y;
 	}
 	else
 	{
-		rd->step_y = 1;
-		rd->side_dist.y = (rd->map_y + 1.0 - data->player->pos.y)
+		rd->step.y = 1;
+		rd->side_dist.y = (rd->map.y + 1.0 - data->player->pos.y)
 			* rd->delta_dist.y;
 	}
 }
@@ -45,16 +45,16 @@ void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
 		if (rd->side_dist.x < rd->side_dist.y)
 		{
 			rd->side_dist.x += rd->delta_dist.x;
-			rd->map_x += rd->step_x;
+			rd->map.x += rd->step.x;
 			rd->side = 0;
 		}
 		else
 		{
 			rd->side_dist.y += rd->delta_dist.y;
-			rd->map_y += rd->step_y;
+			rd->map.y += rd->step.y;
 			rd->side = 1;
 		}
-		if (data->map->map[rd->map_x][rd->map_y] > 0)
+		if (data->map->map[rd->map.x][rd->map.y] > 0)
 		{
 			rd->hit = 1;
 		}

@@ -24,17 +24,21 @@ typedef enum e_direction
 	WEST
 }				t_direction;
 
+typedef struct s_coordinate
+{
+	int x;
+	int y;
+} t_coordinate;
+
 typedef struct s_raycast_data
 {
 	double		camera_x;
 	t_vector_2d	ray_dir;
 	t_vector_2d	delta_dist;
-	int			map_x;
-	int			map_y;
+	t_coordinate	map;
 	t_vector_2d	side_dist;
 	double		perp_wall_dist;
-	int			step_x;
-	int			step_y;
+	t_coordinate	step;
 	int			hit;
 	int			side;
 	int		line_height;

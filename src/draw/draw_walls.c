@@ -49,7 +49,7 @@ void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x)
     t_wall_rendering_data	*wrd;
 
     wrd = malloc(sizeof(t_wall_rendering_data));
-    wrd->tex_num = data->map->map[rd->map_x][rd->map_y] - 1;
+    wrd->tex_num = data->map->map[rd->map.x][rd->map.y] - 1;
     calculate_wall_intersection_piont(data, rd, wrd);
     adjust_texture_x_coordinate(rd, wrd);
     calculate_wall_projection_bounds(rd, wrd);

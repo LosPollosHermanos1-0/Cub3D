@@ -36,12 +36,10 @@ t_raycast_data	*init_raycast_data(const t_data *data, const int x)
         * rd->camera_x, data->player->dir.y + data->player->plane.y
         * rd->camera_x};
     rd->delta_dist = calculate_delta_dist(rd->ray_dir);
-    rd->map_x = (int)data->player->pos.x;
-    rd->map_y = (int)data->player->pos.y;
+    rd->map = (t_coordinate){(int)data->player->pos.x,(int)data->player->pos.y};
     rd->side_dist = (t_vector_2d){0, 0};
     rd->perp_wall_dist = 0;
-    rd->step_x = 0;
-    rd->step_y = 0;
+    rd->step = (t_coordinate){0,0};
     rd->hit = 0;
     rd->side = 0;
     rd->line_height = 0;
