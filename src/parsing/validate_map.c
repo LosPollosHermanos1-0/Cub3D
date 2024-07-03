@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 12:19:02 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 12:32:24 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@ static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
 		while (j < width)
 			(*map_copy_ptr)[i][j++] = ' ';
 	}
-	i = -1;
-	while ((*map_ptr)[++i])
-		printf("--||%s||--\n", (*map_ptr)[i]);
 	return (true);
 }
 
@@ -95,12 +92,13 @@ static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
 static bool	ft_floodfill(char ***map_ptr, int c, int r)
 {
 	(*map_ptr)[r][c] = '.';
-	if (((r < 1 || (*map_ptr)[r - 1][c] == ' ' || (*map_ptr)[r - 1][c] == '\0'))
+	if (((r < 1 || (*map_ptr)[r - 1][c] == ' '
+		|| (*map_ptr)[r - 1][c] == '\0'))
 		|| ((!(*map_ptr)[r + 1] || (*map_ptr)[r + 1][c] == ' ' || (*map_ptr)[r
 				+ 1][c] == '\0')) || ((c < 1 || (*map_ptr)[r][c - 1] == ' '
 				|| (*map_ptr)[r][c - 1] == '\0')) || ((!(*map_ptr)[r][c + 1]
-				|| (*map_ptr)[r][c + 1] == ' ' || (*map_ptr)[r][c
-				+ 1] == '\0')))
+				|| (*map_ptr)[r][c + 1] == ' '
+				|| (*map_ptr)[r][c + 1] == '\0')))
 		return (false);
 	if (r > 0 && ((*map_ptr)[r - 1][c] == '0' || (*map_ptr)[r - 1][c] == 'D'))
 		if (ft_floodfill(map_ptr, c, r - 1) == false)
