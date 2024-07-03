@@ -12,9 +12,11 @@
 
 # include "cub3d.h"
 
+
+
 int main()
 {
-    // mlx_set_setting(MLX_DECORATED, 0);
+    // mlx_set_setting(MLX_STRETCH_IMAGE, 1);
     t_data *data = static_data();
     draw_rays();
 
@@ -25,6 +27,7 @@ int main()
     mlx_set_cursor_mode(data->window->mlx, MLX_MOUSE_HIDDEN);
     mlx_set_mouse_pos(data->window->mlx, WINDOW_H_INIT/2, WINDOW_W_INIT/2);
     mlx_cursor_hook(data->window->mlx, &mouse_move_callback, data);
+    mlx_mouse_hook(data->window->mlx, mouse_click_handler, data);
     mlx_key_hook(data->window->mlx, key_handler, data);
     mlx_resize_hook(data->window->mlx, resize_handler, data->window);
     mlx_loop(data->window->mlx);
