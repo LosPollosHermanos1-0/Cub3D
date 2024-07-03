@@ -41,7 +41,9 @@ void	mouse_move_callback(const double xpos, const double ypos, void *param)
 void	mouse_click_handler(const mouse_key_t button, const action_t action,
 		const modifier_key_t mods, void *p)
 {
+	const t_data *data = p;
 	(void)mods;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-		toogle_mouselock_and_visability(p);
+		if(!(data->flags & FLAG_MOUSE_LOCKED))
+			toogle_mouselock_and_visability(p);
 }

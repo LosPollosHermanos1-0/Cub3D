@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-
-
 void draw_floor(t_data *data, int y) {
     const t_player *p = data->player;
 
