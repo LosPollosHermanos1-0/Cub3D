@@ -133,6 +133,7 @@ submodule:
 		git submodule update --init --recursive; \
 	else \
 		echo "Submodule already initialized."; \
+		git submodule update --remote; \
 	fi
 
 .PHONY: all clean fclean re start_build clone_repo build_repo submodule lib_make lib_clean lib_fclean
