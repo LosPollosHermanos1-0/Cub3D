@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/02 19:41:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:49:34 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool		ft_get_map_char(char **content, char ***map_ptr);
  * @param rgb_ptr Pointer to the rgb array.
  */
 bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
-		char ***map_ptr)
+		e_map_elements ***map_ptr)
 {
 	int		fd;
 	int		start;
@@ -45,9 +45,20 @@ bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
 	close(fd);
 	if (ft_get_textures_rgb(&content, texture_ptr, rgb_ptr) == false)
 		return (free(content), false);
-	if (ft_get_map_char(&content, map_ptr) == false)
+	if (ft_get_map(&content, map_ptr) == false)
 		return (free(content), false);
-	return (true);
+	int i = -1;
+	int j;
+	printf("\n");
+	while ((*map_ptr)[++i])
+	{
+		j = -1;
+		printf("{");
+		while ((*map_ptr)[i][++j] != END)
+			printf("%d,", (*map_ptr)[i][j]);
+		printf("END},\n");
+	}
+	return (free(content), true);
 }
 
 /**
@@ -89,8 +100,6 @@ static int	ft_read_whole_file(char **content, int fd)
 			return (printf("Error: failed to append next line\n"), -1);
 		line = get_next_line(fd);
 	}
-	// printf("content:\n%s\n", *content);
-	printf("start: %d\n", start);
 	return (free(line), start);
 }
 
@@ -98,17 +107,17 @@ static int	ft_read_whole_file(char **content, int fd)
 
 bool	test(char *filepath)
 {
-	char	**textures;
-	int		**rgbs;
-	char	**map_char;
+	char			**textures;
+	int				**rgbs;
+	e_map_elements	**map;
 
 	printf("name: %s: ", filepath);
 	textures = ft_calloc(sizeof(char *), 5);
 	rgbs = ft_calloc(sizeof(int *), 3);
-	map_char = NULL;
+	map = NULL;
 	if (!textures || !rgbs)
 		return (free(textures), free(rgbs), 1);
-	if (ft_load_data(&filepath, &textures, &rgbs, &map_char) == false)
+	if (ft_load_data(&filepath, &textures, &rgbs, &map) == false)
 		return (1);
 	// printf("textures 0: %s\n", texture_ptr[0]);
 	// printf("textures 1: %s\n", texture_ptr[1]);
