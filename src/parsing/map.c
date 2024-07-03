@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/02 19:29:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 10:27:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ bool	ft_get_map_char(char **content, char ***map_ptr)
  * @param map_ptr Map to search player in.
  * @return row-col position if found, else [-1, -1].
  */
-int	*ft_get_player(char ***map_ptr)
+int *ft_get_player(char ***map_ptr)
 {
-	int	row;
-	int	col;
+	int *pos;
+	int row;
+	int col;
 
 	row = -1;
 	while ((*map_ptr)[++row])
@@ -66,7 +67,14 @@ int	*ft_get_player(char ***map_ptr)
 		{
 			if ((*map_ptr)[row][col] == 'N' || (*map_ptr)[row][col] == 'S'
 				|| (*map_ptr)[row][col] == 'W' || (*map_ptr)[row][col] == 'E')
-				return ((int[]){row, col});
+			{
+				pos = malloc(2 * sizeof(int)); // Allocate memory for the position
+				if (!pos) // Check if malloc failed
+					return (NULL);
+				pos[0] = row;
+				pos[1] = col;
+				return pos;
+			}
 		}
 	}
 	return (NULL);
