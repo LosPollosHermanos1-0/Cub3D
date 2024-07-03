@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   determine_direction.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 19:19:48 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/02 19:19:52 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/07/03 02:43:36 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/07/03 02:44:04 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-#define UTILS_H
+#include "cub3d.h"
 
-void ft_exit();
-t_direction	determine_direction(const t_vector_2d ray_dir, const int side);
-t_raycast_data	*init_raycast_data(const t_data *data, const int x);
+t_direction	determine_direction(const t_vector_2d ray_dir, const int side)
+{
+    t_direction	direction;
 
-#endif
+    if (side == 0)
+    {
+        if (ray_dir.x < 0)
+            direction = WEST;
+        else
+            direction = EAST;
+    }
+    else
+    {
+        if (ray_dir.y < 0)
+            direction = NORTH;
+        else
+            direction = SOUTH;
+    }
+    return (direction);
+}

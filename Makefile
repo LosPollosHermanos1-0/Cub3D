@@ -30,7 +30,7 @@ HEADERS_DIR := inc
 SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static $(SRC_DIR)/draw $(SRC_DIR)/input $(SRC_DIR)/player_movement $(SRC_DIR)/utils
 
 # Source files
-SRC_FILES := static_data.c init_window.c init_data.c cub3d.c init_player.c init_map.c draw_line.c arrow_key_input.c wasd_key_input.c check_possible_move.c move_player.c mouse_movement.c key_handler.c exit.c get_pixel_from_image.c calculate_rays.c
+SRC_FILES := static_data.c init_window.c init_data.c cub3d.c init_player.c init_map.c draw_line.c arrow_key_input.c wasd_key_input.c check_possible_move.c move_player.c mouse_movement.c key_handler.c exit.c get_pixel_from_image.c calculate_rays.c draw_walls.c determine_direction.c init_raycast_data.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(REPO_DIR)/include/MLX42
