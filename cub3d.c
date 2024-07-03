@@ -12,8 +12,6 @@
 
 # include "cub3d.h"
 
-
-
 int main()
 {
     // mlx_set_setting(MLX_STRETCH_IMAGE, 1);

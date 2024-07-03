@@ -75,6 +75,10 @@ void	draw_rays(void)
 	t_raycast_data	*rd;
 
 	data = static_data();
+	for (int y = data->window->height / 2 + 1; y < data->window->height; y++) {
+		draw_floor(data, y);
+	}
+
 	for (int x = 0; x < data->window->width; ++x)
 	{
 		rd = init_raycast_data(data, x);

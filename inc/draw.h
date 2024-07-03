@@ -65,5 +65,6 @@ uint32_t			get_pixel(const mlx_texture_t *texture, uint32_t x,
 						uint32_t y);
 void				draw_walls(const t_data *data, const t_raycast_data *rd,
 						const int x);
+void draw_floor(t_data *data, int y);
 
 #endif // DRAW_H
