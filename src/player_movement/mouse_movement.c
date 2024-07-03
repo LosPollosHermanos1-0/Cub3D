@@ -18,8 +18,8 @@ void mouse_move_callback(double xpos, double ypos, void *param) {
     (void)ypos;
 
     // Center of the window
-    const int center_x = WINDOW_H / 2;
-    const int center_y = WINDOW_W / 2;
+    const int center_x = data->window->height / 2;
+    const int center_y = data->window->width / 2;
 
     if (last_xpos == -1) {
         last_xpos = xpos;

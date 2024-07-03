@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   resize_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 19:12:47 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/20 19:14:01 by jmoritz          ###   ########.fr       */
+/*   Created: 2024/07/03 13:24:54 by jmoritz           #+#    #+#             */
+/*   Updated: 2024/07/03 13:25:00 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_window	*init_window()
+void	resize_handler(int32_t width, int32_t height, void* win)
 {
-    t_window *window;
-    window = malloc(sizeof(t_window));
-    window->mlx = mlx_init(WINDOW_W_INIT, WINDOW_H_INIT, "Cub3D", true);
-    if (window->mlx == NULL) {
+    t_window *window = win;
+    mlx_delete_image(window->mlx, window->image);
+    window->width = width;
+    window->height = height;
+    window->image = mlx_new_image(window->mlx, window->width, window->height);
+    mlx_image_to_window(window->mlx, window->image, 0,0);
+    if (window->image == NULL)
+    {
         printf("Error: Malloc failed\n");
         exit(1);
     }
-    window->image = mlx_new_image(window->mlx, WINDOW_W_INIT, WINDOW_H_INIT);
-    if (window->image == NULL) {
-        printf("Error: Malloc failed\n");
-        exit(1);
-    }
-    window->width = WINDOW_W_INIT;
-    window->height = WINDOW_H_INIT;
-
-    return window;
 }

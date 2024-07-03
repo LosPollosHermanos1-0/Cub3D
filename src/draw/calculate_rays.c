@@ -6,7 +6,7 @@
 /*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 23:52:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/02 23:52:34 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/03 02:56:49 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ void	draw_rays(void)
 	t_raycast_data	*rd;
 
 	data = static_data();
-	for (int x = 0; x < WINDOW_W; ++x)
+	for (int x = 0; x < data->window->width; ++x)
 	{
 		rd = init_raycast_data(data, x);
 		calculate_step_and_side_distance(data, rd);
 		processe_ray_collision(data, rd);
 		calculate_perpendicular_wall_distance(rd);
-		rd->line_height = (int)(WINDOW_H / rd->perp_wall_dist);
+		rd->line_height = (int)(data->window->height / rd->perp_wall_dist);
 		draw_walls(data, rd, x);
 		free(rd);
 	}

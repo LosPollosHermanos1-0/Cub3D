@@ -26,15 +26,17 @@ void	do_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
 }
 
 void clamp_to_window(t_vector_2d *point) {
+	t_data *data = static_data();
 	if (point->x < 0) point->x = 0;
-	if (point->x >= WINDOW_W) point->x = WINDOW_W - 1;
+	if (point->x >= data->window->width) point->x = data->window->width - 1;
 	if (point->y < 0) point->y = 0;
-	if (point->y >= WINDOW_H) point->y = WINDOW_H - 1;
+	if (point->y >= data->window->height) point->y = data->window->height - 1;
 }
 
 void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		uint32_t color)
 {
+	t_data		*data = static_data();
 	t_vector_2d	delta;
 	t_vector_2d	sign;
 	t_vector_2d	cur;
@@ -50,7 +52,7 @@ void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 	cur = start;
 	while (1)
 	{
-		if (cur.x >= 0 && cur.x < WINDOW_W && cur.y >= 0 && cur.y < WINDOW_H)
+		if (cur.x >= 0 && cur.x < data->window->width && cur.y >= 0 && cur.y < data->window->height)
 			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
 		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
 			break ;

@@ -31,7 +31,7 @@ t_raycast_data	*init_raycast_data(const t_data *data, const int x)
     t_raycast_data	*rd;
 
     rd = malloc(sizeof(t_raycast_data));
-    rd->camera_x = 2 * x / (double)WINDOW_W - 1;
+    rd->camera_x = 2 * x / (double)data->window->width - 1;
     rd->ray_dir = (t_vector_2d){data->player->dir.x + data->player->plane.x
         * rd->camera_x, data->player->dir.y + data->player->plane.y
         * rd->camera_x};

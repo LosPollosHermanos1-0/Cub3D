@@ -32,15 +32,15 @@ void	adjust_texture_x_coordinate(const t_raycast_data *rd,
         wrd->tex_x = TEX_WIDTH - wrd->tex_x - 1;
 }
 
-void	calculate_wall_projection_bounds(const t_raycast_data *rd,
+void	calculate_wall_projection_bounds(const t_data *data,const t_raycast_data *rd,
         t_wall_rendering_data *wrd)
 {
-    wrd->draw_start = -rd->line_height / 2 + WINDOW_H / 2;
+    wrd->draw_start = -rd->line_height / 2 + data->window->height / 2;
     if (wrd->draw_start < 0)
         wrd->draw_start = 0;
-    wrd->draw_end = rd->line_height / 2 + WINDOW_H / 2;
-    if (wrd->draw_end >= WINDOW_H)
-        wrd->draw_end = WINDOW_H - 1;
+    wrd->draw_end = rd->line_height / 2 + data->window->height / 2;
+    if (wrd->draw_end >= data->window->height)
+        wrd->draw_end = data->window->height - 1;
 }
 
 void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x)
@@ -52,9 +52,9 @@ void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x)
     wrd->tex_num = data->map->map[rd->map.x][rd->map.y] - 1;
     calculate_wall_intersection_piont(data, rd, wrd);
     adjust_texture_x_coordinate(rd, wrd);
-    calculate_wall_projection_bounds(rd, wrd);
+    calculate_wall_projection_bounds(data ,rd, wrd);
     wrd->step = 1.0 * TEX_HEIGHT / rd->line_height;
-    wrd->tex_pos = (wrd->draw_start - WINDOW_H / 2 + rd->line_height / 2)
+    wrd->tex_pos = (wrd->draw_start - data->window->height / 2 + rd->line_height / 2)
         * wrd->step;
     for (int y = wrd->draw_start; y < wrd->draw_end; y++)
     {

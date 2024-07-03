@@ -14,8 +14,8 @@
 #ifndef INIT_WINDOW_H
 #define INIT_WINDOW_H
 
-# define WINDOW_H 800
-# define WINDOW_W 1200
+# define WINDOW_H_INIT 800
+# define WINDOW_W_INIT 1200
 
 typedef struct s_window {
     mlx_t *mlx;

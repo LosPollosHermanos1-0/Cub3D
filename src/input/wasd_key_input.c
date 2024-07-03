@@ -14,8 +14,8 @@
 
 void make_window_black() {
 	t_data *data = static_data();
-	for (int y = 0; y < WINDOW_H; ++y) {
-		for (int x = 0; x < WINDOW_W; ++x) {
+	for (int y = 0; y < data->window->height; ++y) {
+		for (int x = 0; x < data->window->width; ++x) {
 			mlx_put_pixel(data->window->image,  x, y, 0x00000000);
 		}
 	}
