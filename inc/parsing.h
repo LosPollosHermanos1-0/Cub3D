@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 13:51:44 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:56:44 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,15 @@ bool				ft_read_file(char **file, char ***map_ptr,
 
 // map
 bool				ft_get_map(char **content, e_map_elements ***map_ptr);
-int					*ft_get_player(char ***map_ptr);
+
+// validate_map
+bool				ft_validate_map(char ***map_ptr);
+
+// map_utility
 int					ft_map_width(char ***map_ptr);
 int					ft_map_height(char ***map_ptr);
-bool				ft_validate_map(char ***map_ptr);
+void				map_char_to_enum(e_map_elements ***map_ptr, char **row_ptr, int i);
+int					*ft_get_player(char ***map_ptr);
 
 // rgb
 bool				ft_get_rgb(char **line, int ***rgb_ptr);
