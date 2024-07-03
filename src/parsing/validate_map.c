@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 12:32:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 12:33:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ bool	ft_validate_map(char ***map_ptr)
 		ft_free_2d_arr((void **)map_copy);
 		return (free(pos), printf("Error: map is not valid\n"), false);
 	}
-	printf("Map is valid:\n");
-	i = -1;
-	while (map_copy[++i])
-		printf("--||%s||--\n", map_copy[i]);
 	return (free(pos), ft_free_2d_arr((void **)map_copy), true);
 }
 
