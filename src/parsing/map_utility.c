@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:52:41 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 15:55:40 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:56:24 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_map_height(char ***map_ptr)
  * @param row_ptr Pointer to the row.
  * @param i Index of the row.
  */
-static void	map_char_to_enum(e_map_elements ***map_ptr, char **row_ptr, int i)
+void	map_char_to_enum(e_map_elements ***map_ptr, char **row_ptr, int i)
 {
 	int		j;
 
