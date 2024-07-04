@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 13:05:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 13:07:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_data *init_data(char **filepath)
 	data->window = init_window();
 	data->map = init_map(&map);
 	data->player = init_player(&map);
-	data->texture = ft_load_textures(&textures);
+	data->texture = ft_load_texture(&textures);
 	if (!data->window || !data->map || !data->player || !data->texture)
 		return (free_data(data), NULL);
 	return data;
