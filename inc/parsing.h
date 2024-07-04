@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/04 15:28:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 16:08:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ typedef enum e_map_elements
 }					e_map_elements;
 
 // structs
-typedef struct s_config
-{
-	char			**textures;
-	int				**rgb;
-}					t_config;
+// typedef struct s_config
+// {
+// 	char			**textures;
+// 	int				**rgb;
+// }					t_config;
 
-typedef struct s_map
-{
-	e_map_elements	**map;
-	int				width;
-	int				height;
-}					t_map;
+// typedef struct s_map
+// {
+// 	e_map_elements	**map;
+// 	int				width;
+// 	int				height;
+// }					t_map;
 
 // validate input
 bool				ft_validate_input(int argc, char ***argv);
 
-// read_file
-bool				ft_read_file(char **file, char ***map_ptr,
-						char ***texture_ptr, int ***rgb_ptr);
+// load_data
+bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
+					e_map_elements ***map_ptr);
 
 // map
 bool				ft_get_map(char **content, e_map_elements ***map_ptr);
@@ -85,7 +85,7 @@ bool				ft_get_textures_rgb(char **content, char ***texture_ptr,
 bool				ft_wrong_char_inside(char **str);
 
 // free
-void				free_textures(char ***textures);
-void				ft_free_rgb(int **rgb);
+void				ft_free_textures(char ***textures);
+void				ft_free_rgb(int ***rgb);
 
 #endif

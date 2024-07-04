@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 15:46:10 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 16:22:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum	e_textures {
 	EAST,
 	FLOOR,
 	CEILING
-}				e_textures;
+}				t_textures;
 
 typedef struct	s_player {
 	t_vector_2d pos;
@@ -46,11 +46,15 @@ typedef struct	s_data  {
 	t_map *map;
 	t_player *player;
 	mlx_texture_t **texture;
+	int **rgb;
 }				t_data;
 
 t_data			*init_data(void);
+void			free_data(t_data **data);
 t_player		*init_player(e_map_elements ***map_ptr);
+void			free_player(t_player **player);
 t_map			*init_map(e_map_elements ***map_ptr);
+void			free_map(t_map **map);
 mlx_texture_t	**init_texture(char ***textures);
 t_data			*static_data();
 
