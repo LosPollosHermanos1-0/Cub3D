@@ -6,12 +6,12 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:50:51 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 12:58:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-void	free_textures(char ***textures)
+void	ft_free_textures(char ***textures)
 {
 	int	i;
 
@@ -19,4 +19,14 @@ void	free_textures(char ***textures)
 	while (++i < 5)
 		free((*textures)[i]);
 	free(*textures);
+}
+
+void	ft_free_rgb(int **rgb)
+{
+	int		i;
+
+	i = -1;
+	while (++i < 2)
+		free((*rgb)[i]);
+	free(*rgb);
 }
