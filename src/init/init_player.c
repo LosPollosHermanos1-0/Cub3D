@@ -22,11 +22,7 @@ t_player	*init_player(e_map_elements ***map_ptr)
 
 	player = malloc(sizeof(t_player));
 	if (player == NULL)
-	{
-		return (printf("Error: Malloc failed\n"), NULL);
-		// dont exit, because map already allocated!
-		// exit(1);
-	}
+		return (printf("Error: player not allocated\n"), NULL);
 	ft_get_pos_and_dir(map_ptr, &(player->pos), &(player->dir));
 	player->plane = ft_vector_init(0, 0.66);
 	player->move_speed = MOVE_SPEED;
