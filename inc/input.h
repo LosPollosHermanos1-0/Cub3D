@@ -16,7 +16,7 @@
 void	arrow_key_hook(mlx_key_data_t keydata, void *param);
 void	wasd_key_input(void *data);
 void	key_handler(mlx_key_data_t keydata, void *data);
-void	resize_handler(int32_t width, int32_t height, void *win);
+void	resize_handler(int32_t width, int32_t height, void *d);
 void	center_mouse(const t_data *data);
 void	toogle_mouselock_and_visability(t_data *data);
 

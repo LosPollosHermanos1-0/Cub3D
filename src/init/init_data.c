@@ -18,7 +18,7 @@ t_data *init_data()
     data->window = init_window();
     data->map = init_map();
     data->player = init_player();
-    data->texture = malloc(sizeof(mlx_texture_t *) * 7);
+    data->texture = malloc(sizeof(mlx_texture_t *) * 8);
     data->texture[0] = mlx_load_png("textures/CEMENT1.png");
     data->texture[1] = mlx_load_png("textures/CEMENT2.png");
     data->texture[2] = mlx_load_png("textures/CEMENT3.png");
@@ -26,5 +26,8 @@ t_data *init_data()
     data->texture[4] = mlx_load_png("textures/CEMENT5.png");
     data->texture[5] = mlx_load_png("textures/GRAY1.png");
     data->texture[6] = mlx_load_png("textures/WOOD.png");
+    data->texture[7] = mlx_load_png("textures/LostSoul.png");
+    data->z_buffer = ft_calloc(sizeof(int) * data->window->width, sizeof(int));
+    ft_memset(data->z_buffer, -1, sizeof(int) * data->window->width);
     return data;
 }

@@ -59,6 +59,30 @@ typedef struct s_wall_rendering_data
 	double			tex_pos;
 }					t_wall_rendering_data;
 
+typedef struct s_sprite_rendering_data
+{
+	t_vector_2d		transform;
+	t_vector_2d		rela_pos;
+	double			distance;
+	int				sprite_screen_x;
+	int				sprite_height;
+	int				draw_start_y;
+	int				draw_end_y;
+	int				sprite_width;
+	int				draw_start_x;
+	int				draw_end_x;
+	int				tex_x;
+	int				tex_y;
+	int				color;
+	int				d;
+}					t_sprite_rendering_data;
+
+typedef struct s_sprite_data
+{
+	t_vector_2d pos;
+	t_sprite_rendering_data render_data;
+} t_sprite_data;
+
 void				draw_line(mlx_image_t *img, t_vector_2d start,
 						t_vector_2d end, uint32_t color);
 void				draw_line_vector(mlx_image_t *img, t_vector_2d start,
@@ -69,5 +93,6 @@ uint32_t			get_pixel(const mlx_texture_t *texture, uint32_t x,
 void				draw_walls(const t_data *data, const t_raycast_data *rd,
 						const int x);
 void draw_floor_and_ceiling(t_data *data, int y);
+void draw_sprite(t_data *data, t_sprite_data *sprite);
 
 #endif // DRAW_H

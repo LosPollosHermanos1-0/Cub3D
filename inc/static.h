@@ -40,6 +40,7 @@ typedef struct s_data
 	t_map			*map;
 	mlx_texture_t	**texture;
 	t_data_flags	flags;
+	double*			z_buffer;
 }					t_data;
 
 t_data				*init_data(void);

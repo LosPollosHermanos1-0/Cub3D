@@ -36,4 +36,11 @@ void	wasd_key_input(void *data)
 
 	// make_window_black();
 	draw_rays();
+	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){5.5, 5.5}});
+	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){7.5, 5.5}});
+	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){9.5, 5.5}});
+	static t_vector_2d pos = {10, 5.5};
+	pos.x += 0.01;
+	draw_sprite(data, &(t_sprite_data){.pos = pos});
 }
+

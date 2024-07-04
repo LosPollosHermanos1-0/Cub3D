@@ -27,7 +27,7 @@ int main()
     mlx_cursor_hook(data->window->mlx, &mouse_move_callback, data);
     mlx_mouse_hook(data->window->mlx, mouse_click_handler, data);
     mlx_key_hook(data->window->mlx, key_handler, data);
-    mlx_resize_hook(data->window->mlx, resize_handler, data->window);
+    mlx_resize_hook(data->window->mlx, resize_handler, data);
     mlx_loop(data->window->mlx);
     mlx_terminate(data->window->mlx);
     return 0;

@@ -61,12 +61,13 @@ static void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
 	}
 }
 
-static void	calculate_perpendicular_wall_distance(t_raycast_data *rd)
+static void	calculate_perpendicular_wall_distance(const t_data *data, t_raycast_data *rd, int x)
 {
 	if (rd->side == 0)
 		rd->perp_wall_dist = rd->side_dist.x - rd->delta_dist.x;
 	else
 		rd->perp_wall_dist = rd->side_dist.y - rd->delta_dist.y;
+	data->z_buffer[x] = rd->perp_wall_dist;
 }
 void	draw_rays(void)
 {
@@ -83,7 +84,7 @@ void	draw_rays(void)
 		rd = init_raycast_data(data, x);
 		calculate_step_and_side_distance(data, &rd);
 		processe_ray_collision(data, &rd);
-		calculate_perpendicular_wall_distance(&rd);
+		calculate_perpendicular_wall_distance(data, &rd, x);
 		rd.line_height = (int)(data->window->height / rd.perp_wall_dist);
 		draw_walls(data, &rd, x);
 	}
