@@ -31,6 +31,11 @@ t_player	*init_player(e_map_elements ***map_ptr)
 	return (player);
 }
 
+void	free_player(t_player **player)
+{
+	free(*player);
+}
+
 static void	ft_get_pos_and_dir(e_map_elements ***map_ptr,
 				t_vector_2d *pos, t_vector_2d *dir)
 {
