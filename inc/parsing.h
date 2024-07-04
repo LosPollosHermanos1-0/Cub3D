@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 15:56:44 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 15:28:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
+// validate input
+bool				ft_validate_input(int argc, char ***argv);
+
 // read_file
 bool				ft_read_file(char **file, char ***map_ptr,
 						char ***texture_ptr, int ***rgb_ptr);
@@ -83,6 +86,6 @@ bool				ft_wrong_char_inside(char **str);
 
 // free
 void				free_textures(char ***textures);
-void				free_map(char ***map);
+void				ft_free_rgb(int **rgb);
 
 #endif

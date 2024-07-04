@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 11:44:32 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/04 12:12:23 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 # include "player.h"
 # include "draw.h"
 # include "utils.h"
+# include "parsing.h"
 
 #endif

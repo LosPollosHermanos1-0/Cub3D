@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 17:13:00 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 15:46:10 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define WALL_DIST 0.1
+
+typedef enum	e_textures {
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	FLOOR,
+	CEILING
+}				e_textures;
 
 typedef struct	s_player {
 	t_vector_2d pos;
@@ -34,14 +43,18 @@ typedef struct	s_map {
 
 typedef struct	s_data  {
 	t_window *window;
-	t_player *player;
 	t_map *map;
+	t_player *player;
 	mlx_texture_t **texture;
 }				t_data;
 
-t_data		*init_data();
-t_player	*init_player();
-t_map		*init_map();
-t_data		*static_data();
+t_data			*init_data(void);
+t_player		*init_player(e_map_elements ***map_ptr);
+t_map			*init_map(e_map_elements ***map_ptr);
+mlx_texture_t	**init_texture(char ***textures);
+t_data			*static_data();
+
+void		free_data(t_data **data);
+bool		ft_set_data(char **filepath, t_data **data_ptr);
 
 #endif
