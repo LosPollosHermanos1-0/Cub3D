@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:50:42 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 16:35:47 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,16 +133,16 @@ bool	test(char *filepath)
 	return (true);
 }
 
-int	main(void)
-{
-	test("./test_files/correct1.cub");
-	// test("./test_files/correct2.cub");
-	// test("./test_files/correct3.cub");
-	// test("./test_files/correct4.cub");
-	// test("./test_files/incorrect1.cub");
-	// test("./test_files/incorrect2.cub");
-	// test("./test_files/incorrect3.cub");
-	// test("./test_files/incorrect4.cub");
-	// test("./test_files/incorrect5.cub");
-	return (0);
-}
+// int	main(void)
+// {
+// 	test("./test_files/correct1.cub");
+// 	// test("./test_files/correct2.cub");
+// 	// test("./test_files/correct3.cub");
+// 	// test("./test_files/correct4.cub");
+// 	// test("./test_files/incorrect1.cub");
+// 	// test("./test_files/incorrect2.cub");
+// 	// test("./test_files/incorrect3.cub");
+// 	// test("./test_files/incorrect4.cub");
+// 	// test("./test_files/incorrect5.cub");
+// 	return (0);
+// }
