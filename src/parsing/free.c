@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/04 12:58:58 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 14:52:44 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_free_textures(char ***textures)
 	free(*textures);
 }
 
-void	ft_free_rgb(int **rgb)
+void	ft_free_rgb(int ***rgb)
 {
 	int		i;
 
