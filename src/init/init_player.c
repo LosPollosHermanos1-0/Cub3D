@@ -12,20 +12,22 @@
 
 #include "cub3d.h"
 
-static void			ft_get_pos_and_dir(t_vector_2d *pos, t_vector_2d *dir);
+static void			ft_get_pos_and_dir(e_map_elements ***map_ptr,
+						t_vector_2d *pos, t_vector_2d *dir);
 static t_vector_2d	ft_get_dir(e_map_elements player);
 
-t_player	*init_player()
+t_player	*init_player(e_map_elements ***map_ptr)
 {
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
-	if (player == NULL) {
-		return(printf("Error: Malloc failed\n"), NULL);
+	if (player == NULL)
+	{
+		return (printf("Error: Malloc failed\n"), NULL);
 		// dont exit, because map already allocated!
 		// exit(1);
 	}
-	ft_get_pos_and_dir(&(player->pos), &(player->dir));
+	ft_get_pos_and_dir(map_ptr, &(player->pos), &(player->dir));
 	player->plane = ft_vector_init(0, 0.66);
 	player->move_speed = MOVE_SPEED;
 	player->rot_speed = ROT_SPEED;
@@ -33,7 +35,8 @@ t_player	*init_player()
 	return (player);
 }
 
-static void	ft_get_pos_and_dir(t_vector_2d *pos, t_vector_2d *dir)
+static void	ft_get_pos_and_dir(e_map_elements ***map_ptr,
+				t_vector_2d *pos, t_vector_2d *dir)
 {
 	t_map	*map;
 	int		row;
@@ -41,18 +44,18 @@ static void	ft_get_pos_and_dir(t_vector_2d *pos, t_vector_2d *dir)
 
 	map = static_data()->map;
 	row = -1;
-	while (map->map[++row])
+	while ((*map_ptr)[++row])
 	{
 		col = -1;
-		while (map->map[row][++col])
+		while ((*map_ptr)[row][++col])
 		{
-			if (map->map[row][col] == PLAYER_EA
-				|| map->map[row][col] == PLAYER_NO
-				|| map->map[row][col] == PLAYER_SO
-				|| map->map[row][col] == PLAYER_WE)
+			if ((*map_ptr)[row][col] == PLAYER_EA
+				|| (*map_ptr)[row][col] == PLAYER_NO
+				|| (*map_ptr)[row][col] == PLAYER_SO
+				|| (*map_ptr)[row][col] == PLAYER_WE)
 			{
 				*pos = ft_vector_init(col, row);
-				*dir = ft_get_dir(map->map[row][col]);
+				*dir = ft_get_dir((*map_ptr)[row][col]);
 			}
 		}
 	}
@@ -61,12 +64,12 @@ static void	ft_get_pos_and_dir(t_vector_2d *pos, t_vector_2d *dir)
 static t_vector_2d	ft_get_dir(e_map_elements player)
 {
 	if (player == PLAYER_EA)
-		return(ft_vector_init(1, 0));
+		return (ft_vector_init(1, 0));
 	else if (player == PLAYER_NO)
-		return(ft_vector_init(0, -1));
+		return (ft_vector_init(0, -1));
 	else if (player == PLAYER_SO)
-		return(ft_vector_init(0, 1));
+		return (ft_vector_init(0, 1));
 	else if (player == PLAYER_WE)
-		return(ft_vector_init(-1, 0));
+		return (ft_vector_init(-1, 0));
 	return (ft_vector_init(-1, -1));
 }
