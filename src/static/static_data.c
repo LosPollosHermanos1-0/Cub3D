@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:19:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 16:59:55 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 14:23:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_data *static_data()
 {
-    static t_data *data = NULL;
+	static t_data *data = NULL;
 
-    if (data == NULL)
-        data = init_data();
-    return data;
+	if (data == NULL)
+		data = init_data();
+	return data;
 }

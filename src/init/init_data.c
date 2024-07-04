@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 15:42:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 15:46:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static mlx_texture_t	**ft_load_texture(char ***textures);
 
-t_data *init_data(char **filepath)
+t_data	*init_data(void)
 {
 	t_data			*data;
 	char			**textures;
