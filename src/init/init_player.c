@@ -21,8 +21,9 @@ t_player	*init_player()
 
 	player = malloc(sizeof(t_player));
 	if (player == NULL) {
-		printf("Error: Malloc failed\n");
-		exit(1);
+		return(printf("Error: Malloc failed\n"), NULL);
+		// dont exit, because map already allocated!
+		// exit(1);
 	}
 	ft_get_pos_and_dir(&(player->pos), &(player->dir));
 	player->plane = ft_vector_init(0, 0.66);
@@ -59,17 +60,13 @@ static void	ft_get_pos_and_dir(t_vector_2d *pos, t_vector_2d *dir)
 
 static t_vector_2d	ft_get_dir(e_map_elements player)
 {
-	t_vector_2d	dir;
-
 	if (player == PLAYER_EA)
-		dir = ft_vector_init(1, 0);
+		return(ft_vector_init(1, 0));
 	else if (player == PLAYER_NO)
-		dir = ft_vector_init(0, -1);
+		return(ft_vector_init(0, -1));
 	else if (player == PLAYER_SO)
-		dir = ft_vector_init(0, 1);
+		return(ft_vector_init(0, 1));
 	else if (player == PLAYER_WE)
-		dir = ft_vector_init(-1, 0);
-	else
-		dir = ft_vector_init(-1, -1);
-	return (dir);
+		return(ft_vector_init(-1, 0));
+	return (ft_vector_init(-1, -1));
 }
