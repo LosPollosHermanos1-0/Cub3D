@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 15:46:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 16:02:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_data	*init_data(void)
 	data->texture = NULL;
 	data->map = NULL;
 	data->texture = NULL;
+	data->rgb = NULL;
 	return (data);
 }
 
@@ -41,6 +42,8 @@ bool	ft_set_data(char **filepath, t_data **data_ptr)
 		return (false);
 	// call only when bonus
 	ft_free_rgb(&rgb);
+	// when not bonus
+	// (*data_ptr)->rgb = rgb;
 	(*data_ptr)->texture = init_texture(&textures);
 	ft_free_texctures(&textures);
 	if ((*data_ptr)->texture == NULL)
