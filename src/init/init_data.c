@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 13:07:41 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/04 15:42:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,38 @@ t_data *init_data(char **filepath)
 
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
-		return (printf("Error: Malloc failed\n"), NULL);
+		return (printf("Error: data not allocated\n"), NULL);
 	data->player = NULL;
 	data->texture = NULL;
 	data->map = NULL;
 	data->texture = NULL;
-	if (data->map == NULL)
-		return (free_data(data), NULL);
-	if (ft_load_data(filepath, &textures, &rgb, &map) == false)
-		return (free(data), NULL);
-	data->window = init_window();
-	data->map = init_map(&map);
-	data->player = init_player(&map);
-	data->texture = ft_load_texture(&textures);
-	if (!data->window || !data->map || !data->player || !data->texture)
-		return (free_data(data), NULL);
-	return data;
+	return (data);
 }
 
-static mlx_texture_t	**ft_load_texture(char ***textures)
+bool	ft_set_data(char **filepath, t_data **data_ptr)
 {
-	mlx_texture_t		**texture;
+	char			**textures;
+	int				**rgb;
+	e_map_elements	**map;
 
-	texture = ft_calloc(7, sizeof(mlx_texture_t *));
-	if ((*texture) == NULL)
-		return (printf("Error: textures not allocated"), NULL);
-	texture[NORTH] = mlx_load_png(texture[NORTH]);
-	texture[SOUTH] = mlx_load_png(texture[SOUTH]);
-	texture[WEST] = mlx_load_png(texture[WEST]);
-	texture[EAST] = mlx_load_png(texture[EAST]);
-	texture[FLOOR] = mlx_load_png(texture[FLOOR]);
-	texture[CEILING] = mlx_load_png(texture[CEILING]);
-	return (texture);
+	if (ft_load_data(filepath, &textures, &rgb, &map) == false)
+		return (false);
+	// call only when bonus
+	ft_free_rgb(&rgb);
+	(*data_ptr)->texture = init_texture(&textures);
+	ft_free_texctures(&textures);
+	if ((*data_ptr)->texture == NULL)
+		return (false);
+	(*data_ptr)->window = init_window();
+	if ((*data_ptr)->window == NULL)
+		return (false);
+	(*data_ptr)->map = init_map(&map);
+	if ((*data_ptr)->map == NULL)
+		return (false);
+	(*data_ptr)->player = init_player(&map);
+	if ((*data_ptr)->player == NULL)
+		return (false);
+	return (true);
 }
 
 void	free_data(t_data **data)
