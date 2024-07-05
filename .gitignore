@@ -50,3 +50,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/.idea/.gitignore
+/.idea/a_cup_3d.iml
+/.idea/codeStyles/codeStyleConfig.xml
+/cub3d
+/.idea/editor.xml
+/.idea/misc.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
