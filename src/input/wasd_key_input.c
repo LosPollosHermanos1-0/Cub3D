@@ -21,10 +21,23 @@ void make_window_black() {
 	}
 }
 
+//TODO: remove this
+static t_sprite_data g_sprite = {.pos = {0, 0}, .texture = 0, .last_animation_change = 0, .animation_speed = 0};
+static int g_sprite_initialized = 0;
+
 void	wasd_key_input(void *data)
 {
 	t_data	*d = data;
 	mlx_t *mlx = d->window->mlx;
+
+	//TODO: remove this
+	if (!g_sprite_initialized) {
+		g_sprite.pos = (t_vector_2d){15, 15};
+		g_sprite.texture = 0;
+		g_sprite.last_animation_change = 0;
+		g_sprite.animation_speed = 0.2;
+		g_sprite_initialized = 1;
+	}
 
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
 		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
@@ -36,11 +49,6 @@ void	wasd_key_input(void *data)
 
 	// make_window_black();
 	draw_rays();
-	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){5.5, 5.5}});
-	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){7.5, 5.5}});
-	draw_sprite(data, &(t_sprite_data){.pos = (t_vector_2d){9.5, 5.5}});
-	static t_vector_2d pos = {10, 5.5};
-	pos.x += 0.01;
-	draw_sprite(data, &(t_sprite_data){.pos = pos});
+	draw_sprite(data, &g_sprite);
 }
 

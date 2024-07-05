@@ -66,6 +66,11 @@ void	calculate_drawing_start_and_end(t_data *data, t_sprite_data *sprite)
 
 void	draw_sprite(t_data *data, t_sprite_data *sprite)
 {
+	if (mlx_get_time() > sprite->last_animation_change + sprite->animation_speed)
+	{
+		sprite->texture = (sprite->texture + 1) %2;
+		sprite->last_animation_change = mlx_get_time();
+	}
 	calculate_relative_position(data, sprite);
 	calculate_transformation(data, sprite);
 	calculate_sprite_screen_position_and_size(data, sprite);
@@ -77,7 +82,7 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 			for(int y = sprite->render_data.draw_start_y; y < sprite->render_data.draw_end_y; y++) {
 				sprite->render_data.d = (y) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128;
 				sprite->render_data.tex_y = ((sprite->render_data.d * TEX_HEIGHT) / sprite->render_data.sprite_height) / 256;
-				uint32_t color = get_pixel(data->texture[7], sprite->render_data.tex_x, sprite->render_data.tex_y);
+				uint32_t color = get_pixel(data->sprite_t[sprite->texture], sprite->render_data.tex_x, sprite->render_data.tex_y);
 				if((color & 0x00FFFFFF) != 0) mlx_put_pixel(data->window->image, stripe, y, color);
 			}
 		}

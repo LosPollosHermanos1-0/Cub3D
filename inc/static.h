@@ -39,6 +39,7 @@ typedef struct s_data
 	t_player		*player;
 	t_map			*map;
 	mlx_texture_t	**texture;
+	mlx_texture_t	**sprite_t;
 	t_data_flags	flags;
 	double*			z_buffer;
 }					t_data;
