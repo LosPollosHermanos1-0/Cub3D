@@ -23,6 +23,6 @@ typedef struct movement_check
 t_movement_check	check_move_with_wall_dist(const t_vector_2d move);
 void				move_player(const t_data *d);
 void				rotate_player(const t_data *d, const double angle);
-void				mouse_move_callback(double xpos, double ypos, void *param);
+void				rotate_player_mouse(double xpos, double ypos, void *param);
 
 #endif // PLAYER_H

@@ -6,12 +6,12 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 16:22:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:32:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STATIC_H
-#define STATIC_H
+# define STATIC_H
 
 # include "parsing.h"
 

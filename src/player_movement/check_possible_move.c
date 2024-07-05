@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:16:16 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 16:58:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:35:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	adjust_position(double move, double *new_pos, double wall_dist)
 
 t_movement_check	check_move_with_wall_dist(const t_vector_2d move)
 {
-	const t_player *player = static_data()->player;
-	const t_vector_2d new_pos = ft_vector_add(player->pos, move);
-	t_vector_2d	adjusted_pos_x;
-	t_vector_2d adjusted_pos_y;
-	t_vector_2d adjusted_pos_xy;
+	const t_player		*player = static_data()->player;
+	const t_vector_2d	new_pos = ft_vector_add(player->pos, move);
+	t_vector_2d			adjusted_pos_x;
+	t_vector_2d			adjusted_pos_y;
+	t_vector_2d			adjusted_pos_xy;
 
 	adjusted_pos_x = (t_vector_2d){new_pos.x, player->pos.y};
 	adjusted_pos_y = (t_vector_2d){player->pos.x, new_pos.y};

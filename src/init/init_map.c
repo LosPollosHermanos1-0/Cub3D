@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:20:33 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 17:28:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:36:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_map *init_map(e_map_elements ***map_ptr)
 	if (map == NULL)
 		return(printf("Error: map not allocated\n"), NULL);
 	map->map = *map_ptr;
-	return map;
+	return (map);
 }
 
 void	free_map(t_map **map)

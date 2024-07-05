@@ -11,3 +11,4 @@ obj/
 .idea/
 test
 cub3d
+.idea/*

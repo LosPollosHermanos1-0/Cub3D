@@ -12,18 +12,15 @@
 
 #include "cub3d.h"
 
-uint32_t	create_color(const uint8_t r, const uint8_t g, const uint8_t b,
-		const uint8_t alpha)
-{
-	return ((r << 24) | (g << 16) | (b << 8) | alpha);
-}
-
-uint32_t	get_pixel(const mlx_texture_t *texture, uint32_t x, uint32_t y)
+inline uint32_t	get_pixel(const mlx_texture_t *texture, uint32_t x, uint32_t y)
 {
 	const uint32_t	index = (y * texture->width + x) * texture->bytes_per_pixel;
+	const uint8_t	*pixel_address = texture->pixels + index;
 
 	if (x >= texture->width || y >= texture->height)
 		return (0);
-	return (create_color(texture->pixels[index], texture->pixels[index + 1],
-			texture->pixels[index + 2], texture->pixels[index + 3]));
+	return ((pixel_address[0] << 24)
+		| (pixel_address[1] << 16)
+		| (pixel_address[2] << 8)
+		| pixel_address[3]);
 }

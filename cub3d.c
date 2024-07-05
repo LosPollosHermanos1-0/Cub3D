@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:42:07 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 15:57:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:38:11 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int main(int argc, char **argv)
 	mlx_image_to_window(data->window->mlx, data->window->image, 0, 0);
 	mlx_loop_hook(data->window->mlx, wasd_key_input, data);
 
+
 	mlx_set_cursor_mode(data->window->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(data->window->mlx, WINDOW_H_INIT/2, WINDOW_W_INIT/2);
 	mlx_cursor_hook(data->window->mlx, &mouse_move_callback, data);
+	mlx_mouse_hook(data->window->mlx, mouse_click_handler, data);
 	mlx_key_hook(data->window->mlx, key_handler, data);
-	mlx_resize_hook(data->window->mlx, resize_handler, data->window);
+	mlx_resize_hook(data->window->mlx, resize_handler, data);
 	mlx_loop(data->window->mlx);
 	mlx_terminate(data->window->mlx);
 	return 0;
