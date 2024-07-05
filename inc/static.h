@@ -6,14 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/05 10:44:07 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:57:37 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STATIC_H
 # define STATIC_H
 
-# include "parsing.h"
+# include "cub3d.h"
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05

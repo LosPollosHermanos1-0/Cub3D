@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/04 16:08:52 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:58:47 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libft/include/lib.h"
 
 // enums
-typedef enum e_map_elements
+typedef enum	e_map_elements
 {
 	EMPTY,
 	WALL,
@@ -35,7 +35,7 @@ typedef enum e_map_elements
 	DOOR,
 	OUTSIDE,
 	END
-}					e_map_elements;
+}				e_map_elements;
 
 // structs
 // typedef struct s_config

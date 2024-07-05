@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/05 10:40:05 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/05 10:54:55 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static $(SR
 
 # Source files
 SRC_FILES := free.c ft_validate_input.c load_data.c map_utility.c map.c rgb.c textures_rgb.c textures.c validate_map.c
-SRC_FILES := static_data.c init_window.c draw_floor_and_cealing.c draw_spites.c init_data.c cub3d.c init_player.c init_map.c draw_line.c wasd_key_input.c check_possible_move.c move_player.c rotate_player_via_mouse.c key_handler.c exit.c get_pixel_from_image.c calculate_rays.c draw_walls.c determine_direction.c init_raycast_data.c resize_handler.c mouse_handler.c
+SRC_FILES := static_data.c init_window.c init_texture.c draw_floor_and_cealing.c draw_spites.c init_data.c cub3d.c init_player.c init_map.c draw_line.c wasd_key_input.c check_possible_move.c move_player.c rotate_player_via_mouse.c key_handler.c exit.c get_pixel_from_image.c calculate_rays.c draw_walls.c determine_direction.c init_raycast_data.c resize_handler.c mouse_handler.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(REPO_DIR)/include/MLX42
