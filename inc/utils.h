@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:19:48 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/02 19:19:52 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:33:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #define UTILS_H
 
 void ft_exit();
-t_direction	determine_direction(const t_vector_2d ray_dir, const int side);
+
+// t_direction	determine_direction(const t_vector_2d ray_dir, const int side);
 t_raycast_data	init_raycast_data(const t_data *data, const int x);
 void set_last_xpos(double xpos);
 

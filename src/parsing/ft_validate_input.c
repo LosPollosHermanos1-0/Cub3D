@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 12:12:23 by lzipp            ###   ########.fr       */
+/*   Created: 2024/06/14 09:51:36 by lzipp             #+#    #+#             */
+/*   Updated: 2024/07/04 17:28:06 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#include "parsing.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "input.h"
-# include "player.h"
-# include "draw.h"
-# include "utils.h"
-# include "parsing.h"
-
-#endif
+bool	ft_validate_input(int argc, char ***argv)
+{
+	if (argc != 2)
+		return (printf("Usage: ./cub3d <mapname.cub>\n"), false);
+	if (ft_strlen((*argv)[1]) <= 4 || ft_strrncmp(".cub", (*argv)[1], 4) != 0)
+		return (printf("Error: Incorrect number of arguments\n"), false);
+	return (true);
+}

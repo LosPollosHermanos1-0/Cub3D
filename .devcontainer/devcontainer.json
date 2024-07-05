@@ -25,15 +25,23 @@
 				"ms-vscode.makefile-tools",
 				"streetsidesoftware.code-spell-checker",
 				"GitHub.copilot",
-                "kube.42header"
-			]
+				"kube.42header"
+			],
+			"settings": {
+				"editor.autoIndent": true,
+				"editor.formatOnSave": true,
+				"editor.formatOnType": true,
+				"editor.saveAfterDelay": 1000,
+				"editor.tabSize": 4,
+				"editor.insertSpaces": false
+			}
 		}
 	},
 	"dockerOptions": {
-        "user": "vscode",
-        "memory": "16GB",
-        "cpus": "12"
-    }
+		"user": "vscode",
+		"memory": "16GB",
+		"cpus": "12"
+	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

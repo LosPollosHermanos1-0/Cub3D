@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 12:12:23 by lzipp            ###   ########.fr       */
+/*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
+/*   Updated: 2024/07/04 14:52:44 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#include "parsing.h"
+void	ft_free_textures(char ***textures)
+{
+	int	i;
 
-# include <stdlib.h>
-# include <stdio.h>
+	i = -1;
+	while (++i < 5)
+		free((*textures)[i]);
+	free(*textures);
+}
 
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "input.h"
-# include "player.h"
-# include "draw.h"
-# include "utils.h"
-# include "parsing.h"
+void	ft_free_rgb(int ***rgb)
+{
+	int		i;
 
-#endif
+	i = -1;
+	while (++i < 2)
+		free((*rgb)[i]);
+	free(*rgb);
+}
