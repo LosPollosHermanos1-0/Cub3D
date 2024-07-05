@@ -6,12 +6,15 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/05 10:31:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 10:46:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
+
+# define TEX_WIDTH 128
+# define TEX_HEIGHT 128
 
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
