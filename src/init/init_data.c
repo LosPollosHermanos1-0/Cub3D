@@ -22,14 +22,10 @@ t_data	*init_data(void)
 
 bool	ft_set_data(char **filepath, t_data **data_ptr)
 {
-	char			*texture_paths[4];
+	static char			*texture_paths[4];
 	int				**rgb;
 	e_map_elements	**map;
 
-	texture_paths[0] = NULL;
-	texture_paths[1] = NULL;
-	texture_paths[2] = NULL;
-	texture_paths[3] = NULL;
 	if (ft_load_data(filepath, texture_paths, &rgb, &map) == false)
 		return (false);
 	// call only when bonus
