@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-static void			ft_get_pos_and_dir(e_map_elements ***map_ptr,
+static void			ft_get_pos_and_dir(t_map_elements ***map_ptr,
 						t_vector_2d *pos, t_vector_2d *dir);
-static t_vector_2d	ft_get_dir(e_map_elements player);
+static t_vector_2d	ft_get_dir(t_map_elements player);
 
-t_player	*init_player(e_map_elements ***map_ptr)
+t_player	*init_player(t_map_elements ***map_ptr)
 {
 	t_player	*player;
 
@@ -36,7 +36,7 @@ void	free_player(t_player **player)
 	free(*player);
 }
 
-static void	ft_get_pos_and_dir(e_map_elements ***map_ptr,
+static void	ft_get_pos_and_dir(t_map_elements ***map_ptr,
 				t_vector_2d *pos, t_vector_2d *dir)
 {
 	t_map	*map;
@@ -62,7 +62,7 @@ static void	ft_get_pos_and_dir(e_map_elements ***map_ptr,
 	}
 }
 
-static t_vector_2d	ft_get_dir(e_map_elements player)
+static t_vector_2d	ft_get_dir(t_map_elements player)
 {
 	if (player == PLAYER_EA)
 		return (ft_vector_init(1, 0));

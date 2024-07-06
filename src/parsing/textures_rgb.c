@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static bool	ft_validate_textures_rgb(char **texture_paths, int ***rgb_ptr);
+static bool	ft_validate_textures_rgb(char **texture_paths, t_rgb_color **f_and_c_color);
 
-bool	ft_get_textures_rgb(char **content, char **texture_paths, int ***rgb_ptr)
+bool	ft_get_textures_rgb(char **content, char **texture_paths, t_rgb_color **f_and_c_color)
 {
 	int		i;
 	char	**lines;
@@ -34,16 +34,16 @@ bool	ft_get_textures_rgb(char **content, char **texture_paths, int ***rgb_ptr)
 		else if (ft_strncmp(lines[i], "F ", 2) == 0 || ft_strncmp(lines[i],
 				"C ", 2) == 0)
 		{
-			if (ft_get_rgb(&lines[i], rgb_ptr) == false)
+			if (ft_get_rgb(&lines[i], f_and_c_color) == false)
 				return (false);
 		}
 		else
 			return (printf("Error: invalid line\n"), false);
 	}
-	return (ft_validate_textures_rgb(texture_paths, rgb_ptr));
+	return (ft_validate_textures_rgb(texture_paths, f_and_c_color));
 }
 
-static bool	ft_validate_textures_rgb(char **texture_paths, int ***rgb_ptr)
+static bool	ft_validate_textures_rgb(char **texture_paths, t_rgb_color **f_and_c_color)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ static bool	ft_validate_textures_rgb(char **texture_paths, int ***rgb_ptr)
 	i = -1;
 	while (++i < 2)
 	{
-		if (!(*rgb_ptr)[i])
+		if (f_and_c_color[i] == NULL)
 			return (printf("Error: missing color\n"), false);
 	}
 	return (true);

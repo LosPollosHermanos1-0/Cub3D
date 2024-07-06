@@ -13,11 +13,11 @@
 #ifndef STATIC_H
 # define STATIC_H
 
-# include "parsing.h"
-
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define WALL_DIST 0.1
+
+typedef enum	e_map_elements t_map_elements;
 
 typedef enum	e_textures {
 	NORTH,
@@ -38,7 +38,7 @@ typedef struct	s_player {
 }				t_player;
 
 typedef struct	s_map {
-	e_map_elements	**map;
+	t_map_elements	**map;
 }				t_map;
 
 typedef enum	e_data_flags
@@ -59,11 +59,11 @@ typedef struct	s_data  {
 
 t_data			*init_data(void);
 void			free_data(t_data **data);
-t_player		*init_player(e_map_elements ***map_ptr);
+t_player		*init_player(t_map_elements ***map_ptr);
 void			free_player(t_player **player);
-t_map			*init_map(e_map_elements ***map_ptr);
+t_map			*init_map(t_map_elements ***map_ptr);
 void			free_map(t_map **map);
-mlx_texture_t	**init_texture(char **textures);
+mlx_texture_t	**init_texture(char **texture_paths);
 t_data			*static_data();
 
 void		free_data(t_data **data);

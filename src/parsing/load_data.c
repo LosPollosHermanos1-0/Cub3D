@@ -15,15 +15,9 @@
 static int	ft_read_whole_file(char **content, int fd);
 bool		ft_get_map_char(char **content, char ***map_ptr);
 
-/**
- * Loads the configuration from the file.
- *
- * @param filepath pointer to filepath.
- * @param texture_paths Pointer to the texture array.
- * @param rgb_ptr Pointer to the rgb array.
- */
-bool	ft_load_data(char **filepath, char **texture_paths, int ***rgb_ptr,
-		e_map_elements ***map_ptr)
+
+bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
+		t_map_elements ***map_ptr)
 {
 	int		fd;
 	int		start;
@@ -43,7 +37,7 @@ bool	ft_load_data(char **filepath, char **texture_paths, int ***rgb_ptr,
 				printf("Error: config is not formatted correctly\n"), false);
 	}
 	close(fd);
-	if (ft_get_textures_rgb(&content, texture_paths, rgb_ptr) == false)
+	if (ft_get_textures_rgb(&content, texture_paths, f_and_c_color) == false)
 		return (free(content), false);
 	if (ft_get_map(&content, map_ptr) == false)
 		return (free(content), false);

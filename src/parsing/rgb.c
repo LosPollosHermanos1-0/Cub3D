@@ -12,39 +12,48 @@
 
 #include "cub3d.h"
 
-bool	ft_get_rgb(char **line, int ***rgb_ptr)
+int ft_strs_len(char ** rgb_str) {
+	int i;
+
+	i = 0;
+	while (rgb_str[i])
+		i++;
+	return (i);
+}
+
+bool ft_get_rgb(char **line, t_rgb_color **f_and_c_color)
 {
 	char	*color;
 	char	direction[2];
 	char	**rgb_str;
 	int		index;
-	int		*rgb_arr;
-	int		i;
+	t_rgb_color new_color;
 
 	ft_memmove(direction, *line, 1);
 	direction[1] = '\0';
 	color = ft_strtrim(*line + 1, " ");
 	rgb_str = ft_split(color, ',');
-	if (!rgb_str)
+	if (rgb_str == NULL)
 		return (printf("Error: could not split color\n"), false);
-	rgb_arr = ft_calloc(sizeof(int), 3);
-	i = -1;
-	while (rgb_str[++i])
-	{
-		if ((bool)ft_is_str_digit(rgb_str[i]) == false)
-			return (printf("Error: color must be a number\n"), false);
-		rgb_arr[i] = ft_atoi(rgb_str[i]);
-		if (rgb_arr[i] < 0 || rgb_arr[i] > 255)
-			return (printf("Error: rgb must be between 0 and 255\n"), false);
-	}
+	if (ft_strs_len(rgb_str) != 3)
+		return (printf("Error: color must have 3 values\n"), false);
+
+	new_color.r = ft_atoi(rgb_str[0]);
+	new_color.g = ft_atoi(rgb_str[1]);
+	new_color.b = ft_atoi(rgb_str[2]);
+	if (!ft_is_str_digit(rgb_str[0]) || !ft_is_str_digit(rgb_str[1]) || !ft_is_str_digit(rgb_str[2]))
+		return (printf("Error: color must be a number\n"), false);
+	if (new_color.r < 0 || new_color.r > 255 || new_color.g < 0 || new_color.g > 255 || new_color.b < 0 || new_color.b > 255)
+		return (printf("Error: rgb must be between 0 and 255\n"), false);
+
 	if (ft_strncmp(direction, "F", 1) == 0)
 		index = 0;
 	else if (ft_strncmp(direction, "C", 1) == 0)
 		index = 1;
 	else
 		return (printf("Error: invalid color direction\n"), false);
-	if ((*rgb_ptr)[index])
+	if (f_and_c_color[index])
 		return (printf("Error: color direction encountered twice\n"), false);
-	(*rgb_ptr)[index] = rgb_arr;
+	f_and_c_color[index] = &new_color;
 	return (true);
 }

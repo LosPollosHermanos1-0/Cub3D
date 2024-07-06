@@ -61,7 +61,7 @@ int	ft_map_height(char ***map_ptr)
  * @param row_ptr Pointer to the row.
  * @param i Index of the row.
  */
-void	map_char_to_enum(e_map_elements ***map_ptr, char **row_ptr, int i)
+void	map_char_to_enum(t_map_elements ***map_ptr, char **row_ptr, int i)
 {
 	int		j;
 

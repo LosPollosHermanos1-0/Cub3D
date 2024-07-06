@@ -16,18 +16,20 @@ void	ft_free_texture_paths(char **textures)
 {
 	int	i;
 
-	i = -1;
-	while (++i < 5)
-		free(textures[i]);
-	free(textures);
+	i = 0;
+	while (i < 4) {;
+		free(textures[i++]);
+		i++;
+	}
 }
 
-void	ft_free_rgb(int ***rgb)
+void	ft_free_rgb(t_rgb_color			**f_and_c_color)
 {
-	int		i;
-
-	i = -1;
-	while (++i < 2)
-		free((*rgb)[i]);
-	free(*rgb);
+	(void) f_and_c_color;
+	// int		i;
+	//
+	// i = -1;
+	// while (++i < 2)
+	// 	free((*rgb)[i]);
+	// free(*rgb);
 }

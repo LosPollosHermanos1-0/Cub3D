@@ -23,17 +23,15 @@ t_data	*init_data(void)
 bool	ft_set_data(char **filepath, t_data **data_ptr)
 {
 	static char			*texture_paths[4];
-	int				**rgb;
-	e_map_elements	**map;
+	static t_rgb_color	*f_and_c_color[2];
+	t_map_elements		**map;
 
-	if (ft_load_data(filepath, texture_paths, &rgb, &map) == false)
+	if (ft_load_data(filepath, texture_paths, f_and_c_color, &map) == false)
 		return (false);
 	// call only when bonus
-	ft_free_rgb(&rgb);
 	// when not bonus
 	// (*data_ptr)->rgb = rgb;
 	(*data_ptr)->texture = init_texture(texture_paths);
-	ft_free_texture_paths(texture_paths);
 	if ((*data_ptr)->texture == NULL)
 		return (false);
 	(*data_ptr)->window = init_window();

@@ -20,7 +20,7 @@ static bool	ft_get_map_char(char **content, char ***map_ptr);
  * @param map_ptr Pointer to the map.
  * @return true if map was successfully retrieved, false otherwise.
  */
-bool	ft_get_map(char **content, e_map_elements ***map_ptr)
+bool	ft_get_map(char **content, t_map_elements ***map_ptr)
 {
 	int			i;
 	int			width;
@@ -29,14 +29,14 @@ bool	ft_get_map(char **content, e_map_elements ***map_ptr)
 	if (ft_get_map_char(content, &map_char) == false)
 		return (false);
 	(*map_ptr) = ft_calloc(ft_map_height(&map_char) + 1,
-			sizeof(e_map_elements *));
+			sizeof(t_map_elements *));
 	if (!(*map_ptr))
 		return (false);
 	i = -1;
 	while (map_char[++i])
 	{
 		width = ft_strlen(map_char[i]);
-		(*map_ptr)[i] = ft_calloc(width + 1, sizeof(e_map_elements));
+		(*map_ptr)[i] = ft_calloc(width + 1, sizeof(t_map_elements));
 		if (!(*map_ptr)[i])
 			return (ft_free_2d_arr((void **)(*map_ptr)), false);
 		map_char_to_enum(map_ptr, &(map_char[i]), i);
