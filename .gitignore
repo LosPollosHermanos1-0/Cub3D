@@ -6,7 +6,7 @@
 !*/*.c
 !Makefile
 
-MLX42/
+lib/MLX42/
 obj/
 .idea/
 test

@@ -32,16 +32,21 @@ void	calculate_transformation(t_data *data, t_sprite_data *sprite)
 			* sprite->render_data.rela_pos.y);
 }
 
-void	calculate_sprite_screen_position_and_size(t_data *data,
-		t_sprite_data *sprite)
+void calculate_sprite_screen_position_and_size(t_data *data, t_sprite_data *sprite)
 {
-	sprite->render_data.sprite_screen_x = (int)((data->window->width / 2) * (1
-				+ sprite->render_data.transform.x
-				/ sprite->render_data.transform.y));
-	sprite->render_data.sprite_height = abs((int)(data->window->height
-				/ (sprite->render_data.transform.y)));
-	sprite->render_data.sprite_width = abs((int)(data->window->height
-				/ (sprite->render_data.transform.y)));
+	if (sprite->render_data.transform.y == 0) {
+		sprite->render_data.sprite_screen_x = 0;
+		sprite->render_data.sprite_height = 0;
+		sprite->render_data.sprite_width = 0;
+	} else {
+		sprite->render_data.sprite_screen_x = (int)((data->window->width / 2) * (1
+					+ sprite->render_data.transform.x
+					/ sprite->render_data.transform.y));
+		sprite->render_data.sprite_height = abs((int)(data->window->height
+					/ (sprite->render_data.transform.y)));
+		sprite->render_data.sprite_width = abs((int)(data->window->height
+					/ (sprite->render_data.transform.y)));
+	}
 }
 
 void	calculate_drawing_start_and_end(t_data *data, t_sprite_data *sprite)
@@ -77,7 +82,7 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 	calculate_drawing_start_and_end(data, sprite);
 	// Step 4: Drawing loop
 	for(int stripe = sprite->render_data.draw_start_x; stripe < sprite->render_data.draw_end_x; stripe++) {
-		sprite->render_data.tex_x = (int)(256 * (stripe - (-sprite->render_data.sprite_width / 2 + sprite->render_data.sprite_screen_x)) * TEX_WIDTH / sprite->render_data.sprite_width) / 256;
+		sprite->render_data.tex_x = (stripe - (-sprite->render_data.sprite_width / 2 + sprite->render_data.sprite_screen_x)) * TEX_WIDTH / sprite->render_data.sprite_width;
 		if(sprite->render_data.transform.y > 0 && stripe > 0 && stripe < data->window->width && sprite->render_data.transform.y < data->z_buffer[stripe]) {
 			for(int y = sprite->render_data.draw_start_y; y < sprite->render_data.draw_end_y; y++) {
 				sprite->render_data.d = (y) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128;

@@ -10,34 +10,67 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME := cub3d
+NAME := cub3D
 
 CC := cc
 
-REPO_DIR := MLX42
-REPO_URL := https://github.com/codam-coding-college/MLX42.git
-
-CFLAGS := -Wextra -Wall -Werror -Ofast -fsanitize=address -g
+CFLAGS := -Wextra -Wall -Werror -Ofast # -fsanitize=address -g
 
 # Directories
 OBJDIR := obj
-LIB_DIR := libft
+MLX := lib/MLX42/build/libmlx42.a
+MLX_DIR := lib/MLX42
+MLX_INCLUDES := $(MLX_DIR)/include/MLX42
+LIB := lib/libft/libft.a
+LIB_DIR := lib/libft
 LIB_INCLUDES := $(LIB_DIR)/include
 SRC_DIR := src
-HEADERS_DIR := inc
+HEADERS_DIR := include
 
-# Additional source directories
-SRC_DIRS := $(SRC_DIR) $(SRC_DIR)/parsing $(SRC_DIR)/init $(SRC_DIR)/static $(SRC_DIR)/draw $(SRC_DIR)/input $(SRC_DIR)/player_movement $(SRC_DIR)/utils
+HEADERS := cub3d.h draw.h input.h parsing.h player.h static.h utils.h window.h
 
+SUB_DIRS := parsing init static draw input player_movement utils
+SRC_DIRS := $(SRC_DIR) $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
 # Source files
-SRC_FILES := free.c ft_validate_input.c load_data.c map_utility.c map.c rgb.c textures_rgb.c textures.c validate_map.c
-SRC_FILES += static_data.c init_window.c init_texture.c draw_floor_and_cealing.c draw_spites.c init_data.c cub3d.c init_player.c init_map.c draw_line.c wasd_key_input.c check_possible_move.c move_player.c rotate_player_via_mouse.c key_handler.c exit.c get_pixel_from_image.c calculate_rays.c draw_walls.c determine_direction.c init_raycast_data.c resize_handler.c mouse_handler.c
+SRC_FILES := \
+	free.c \
+	ft_validate_input.c \
+	load_data.c \
+	map_utility.c \
+	map.c \
+	rgb.c \
+	textures_rgb.c \
+	textures.c \
+	validate_map.c \
+	static_data.c \
+	init_window.c \
+	init_texture.c \
+	init_data.c \
+	init_player.c \
+	init_map.c \
+	draw_floor_and_cealing.c \
+	draw_spites.c \
+	draw_line.c \
+	draw_walls.c \
+	wasd_key_input.c \
+	check_possible_move.c \
+	move_player.c \
+	rotate_player_via_mouse.c \
+	key_handler.c \
+	mouse_handler.c \
+	cub3d.c \
+	exit.c \
+	get_pixel_from_image.c \
+	calculate_rays.c \
+	determine_direction.c \
+	init_raycast_data.c \
+	resize_handler.c
 
 # Include directory for headers
-INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(REPO_DIR)/include/MLX42
+INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)
 
 # Object files
-OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(SRC_FILES))
+OBJS := $(addprefix $(OBJDIR)/,$(SRC_FILES:.c=.o))
 
 # Total number of objects (for progress bar)
 TOTAL := $(words $(OBJS))
@@ -63,9 +96,10 @@ export ASCII_HEADER
 
 # VPATH
 vpath %.c $(SRC_DIRS)
+vpath %.h $(HEADERS_DIR)
 
 # Create obj directory and compile the project
-all: clone_repo build_repo lib_make start_build $(NAME)
+all:  start_build $(NAME)
 
 start_build:
 	@echo "$$ASCII_HEADER"
@@ -75,11 +109,11 @@ start_build:
 		printf "$(GREEN)cub3d project is up to date. Nothing to build.$(NC)\n"; \
 	fi
 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L. $(LIB_DIR)/libft.a -L$(REPO_DIR)/lib -framework Cocoa -framework OpenGL -framework IOKit MLX42/build/libmlx42.a -lglfw
+$(NAME): $(MLX) $(LIB) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 	@printf "$(GREEN)cub3d project built.$(NC)\n"
 
-$(OBJDIR)/%.o: %.c $(HEADERS_DIR)/*.h
+$(OBJDIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	$(eval CURRENT=$(shell echo $$(($(CURRENT) + 1))))
@@ -91,49 +125,52 @@ $(OBJDIR)/%.o: %.c $(HEADERS_DIR)/*.h
 	@if [ $(CURRENT) -eq $(TOTAL) ]; then echo ""; fi
 
 # Clean rule
-clean: lib_clean
+clean:
 	@printf "$(RED)Cleaning objects...$(NC)\n"
 	@rm -rf $(OBJDIR)
+	@make -C $(LIB_DIR) clean
+	@make -C $(MLX_DIR)/build clean
 	@printf "$(RED)Objects cleaned.$(NC)\n"
 
 # Clean and remove executable rule
-fclean: clean lib_fclean
+fclean: clean
 	@printf "$(RED)Removing cub3d project...$(NC)\n"
 	@rm -f $(NAME)
+	@make -C $(LIB_DIR) fclean
 	@printf "$(RED)cub3d project removed.$(NC)\n"
 
 # Rebuild rule
 re: fclean all
 
-lib_make:
+$(LIB):
 	@make -C $(LIB_DIR)
 
-lib_clean:
-	@make -C $(LIB_DIR) clean
-
-lib_fclean:
-	@make -C $(LIB_DIR) fclean
-
-# Clone the MLX42 Repository
-clone_repo:
-	@if [ ! -d "$(REPO_DIR)" ]; then \
-		git clone $(REPO_URL); \
+$(MLX):
+	@if [ ! -d "$(MLX_DIR)/build" ]; then \
+		mkdir -p $(MLX_DIR)/build; \
 	fi
-
-# Build the MLX42 Library
-build_repo:
-	@if [ ! -d "$(REPO_DIR)/build" ]; then \
-		mkdir -p $(REPO_DIR)/build; \
-	fi
-	cd $(REPO_DIR)/build && cmake .. && make
+	cd $(MLX_DIR)/build && cmake .. && make -j4
 
 submodule:
-	@if [ ! -d "./libft/.git" ]; then \
-		echo "Submodule not found. Initializing and updating submodule..."; \
-		git submodule update --init --recursive; \
+	@if [ ! -d "./lib/libft/.git" ]; then \
+		echo "libft submodule not found. Initializing and updating libft submodule..."; \
+		git submodule update --init --recursive lib/libft; \
 	else \
-		echo "Submodule already initialized."; \
-		git submodule update --remote; \
+		echo "libft submodule already initialized."; \
+		git submodule update --remote lib/libft; \
+	fi
+	@if [ ! -d "./lib/MLX42/.git" ]; then \
+		echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
+		git submodule update --init --recursive lib/MLX42; \
+	else \
+		echo "MLX42 submodule already initialized."; \
+		git submodule update --remote lib/MLX42; \
 	fi
 
-.PHONY: all clean fclean re start_build clone_repo build_repo submodule lib_make lib_clean lib_fclean
+sanitize: CFLAGS += -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+sanitize: clean all
+
+leaks: CFLAGS += -g -DLEAKS
+leaks: clean all
+
+.PHONY: all clean fclean re start_build submodule sanitize

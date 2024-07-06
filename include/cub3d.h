@@ -28,4 +28,8 @@
 # include "utils.h"
 # include "parsing.h"
 
+#ifndef LEAKS
+# define LEAKS 0
+#endif
+
 #endif
