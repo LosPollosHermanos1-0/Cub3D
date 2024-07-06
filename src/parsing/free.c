@@ -12,14 +12,14 @@
 
 #include "cub3d.h"
 
-void	ft_free_textures(char ***textures)
+void	ft_free_texture_paths(char **textures)
 {
 	int	i;
 
 	i = -1;
 	while (++i < 5)
-		free((*textures)[i]);
-	free(*textures);
+		free(textures[i]);
+	free(textures);
 }
 
 void	ft_free_rgb(int ***rgb)

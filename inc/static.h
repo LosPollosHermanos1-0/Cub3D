@@ -63,7 +63,7 @@ t_player		*init_player(e_map_elements ***map_ptr);
 void			free_player(t_player **player);
 t_map			*init_map(e_map_elements ***map_ptr);
 void			free_map(t_map **map);
-mlx_texture_t	**init_texture(char ***textures);
+mlx_texture_t	**init_texture(char **textures);
 t_data			*static_data();
 
 void		free_data(t_data **data);

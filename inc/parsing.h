@@ -46,9 +46,8 @@ typedef enum	e_map_elements
 bool				ft_validate_input(int argc, char ***argv);
 
 // load_data
-bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
+bool	ft_load_data(char **filepath, char **texture_paths, int ***rgb_ptr,
 					e_map_elements ***map_ptr);
-
 // map
 bool				ft_get_map(char **content, e_map_elements ***map_ptr);
 
@@ -65,18 +64,18 @@ int					*ft_get_player(char ***map_ptr);
 bool				ft_get_rgb(char **line, int ***rgb_ptr);
 
 // textures
-bool				ft_get_texture(char **line, char ***textures_ptr);
+bool				ft_get_texture(char **line, char **texture_paths);
 bool				ft_check_texture(char **texture);
 
 // textures rgb
-bool				ft_get_textures_rgb(char **content, char ***texture_ptr,
+bool				ft_get_textures_rgb(char **content, char **texture_paths,
 						int ***rgb_ptr);
 
 // helpers
 bool				ft_wrong_char_inside(char **str);
 
 // free
-void				ft_free_textures(char ***textures);
+void				ft_free_texture_paths(char **texture_paths);
 void				ft_free_rgb(int ***rgb);
 
 #endif

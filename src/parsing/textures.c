@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-bool	ft_get_texture(char **line, char ***texture_ptr)
+bool	ft_get_texture(char **line, char **texture_paths)
 {
 	char	*texture;
 	char	direction[3];
@@ -33,9 +33,9 @@ bool	ft_get_texture(char **line, char ***texture_ptr)
 		index = 3;
 	else
 		return (printf("Error: invalid texture direction\n"), false);
-	if ((*texture_ptr)[index])
+	if (texture_paths[index] != NULL)
 		return (printf("Error: same direction encountered twice\n"), false);
-	(*texture_ptr)[index] = texture;
+	texture_paths[index] = texture;
 	return (true);
 }
 

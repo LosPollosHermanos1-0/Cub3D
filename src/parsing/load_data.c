@@ -19,10 +19,10 @@ bool		ft_get_map_char(char **content, char ***map_ptr);
  * Loads the configuration from the file.
  *
  * @param filepath pointer to filepath.
- * @param texture_ptr Pointer to the texture array.
+ * @param texture_paths Pointer to the texture array.
  * @param rgb_ptr Pointer to the rgb array.
  */
-bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
+bool	ft_load_data(char **filepath, char **texture_paths, int ***rgb_ptr,
 		e_map_elements ***map_ptr)
 {
 	int		fd;
@@ -43,7 +43,7 @@ bool	ft_load_data(char **filepath, char ***texture_ptr, int ***rgb_ptr,
 				printf("Error: config is not formatted correctly\n"), false);
 	}
 	close(fd);
-	if (ft_get_textures_rgb(&content, texture_ptr, rgb_ptr) == false)
+	if (ft_get_textures_rgb(&content, texture_paths, rgb_ptr) == false)
 		return (free(content), false);
 	if (ft_get_map(&content, map_ptr) == false)
 		return (free(content), false);
@@ -103,46 +103,3 @@ static int	ft_read_whole_file(char **content, int fd)
 	return (free(line), start);
 }
 
-#include <stdio.h>
-
-bool	test(char *filepath)
-{
-	char			**textures;
-	int				**rgbs;
-	e_map_elements	**map;
-
-	printf("name: %s: ", filepath);
-	textures = ft_calloc(sizeof(char *), 5);
-	rgbs = ft_calloc(sizeof(int *), 3);
-	map = NULL;
-	if (!textures || !rgbs)
-		return (free(textures), free(rgbs), 1);
-	if (ft_load_data(&filepath, &textures, &rgbs, &map) == false)
-		return (1);
-	// printf("textures 0: %s\n", texture_ptr[0]);
-	// printf("textures 1: %s\n", texture_ptr[1]);
-	// printf("textures 2: %s\n", texture_ptr[2]);
-	// printf("textures 3: %s\n", texture_ptr[3]);
-	// printf("rgb: %d\n", rgb_ptr[0][0]);
-	// printf("rgb: %d\n", rgb_ptr[0][1]);
-	// printf("rgb: %d\n", rgb_ptr[0][2]);
-	// printf("rgb: %d\n", rgb_ptr[1][0]);
-	// printf("rgb: %d\n", rgb_ptr[1][1]);
-	// printf("rgb: %d\n", rgb_ptr[1][2]);
-	printf("-------------\n");
-	return (true);
-}
-
-// int	main(void)
-// {
-// 	test("./test_files/correct1.cub");
-// 	// test("./test_files/correct2.cub");
-// 	// test("./test_files/correct3.cub");
-// 	// test("./test_files/correct4.cub");
-// 	// test("./test_files/incorrect1.cub");
-// 	// test("./test_files/incorrect2.cub");
-// 	// test("./test_files/incorrect3.cub");
-// 	// test("./test_files/incorrect4.cub");
-// 	// test("./test_files/incorrect5.cub");
-// 	return (0);
-// }
