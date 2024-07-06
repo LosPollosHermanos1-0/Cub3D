@@ -18,17 +18,32 @@ void	free_player(t_player **player)
 	free(*player);
 }
 
-static t_vector_2d	ft_get_dir(t_map_elements player)
-{
-	if (player == PLAYER_EA)
-		return (ft_vector_init(1, 0));
-	if (player == PLAYER_NO)
-		return (ft_vector_init(0, -1));
-	if (player == PLAYER_SO)
-		return (ft_vector_init(0, 1));
-	if (player == PLAYER_WE)
-		return (ft_vector_init(-1, 0));
-	return (ft_vector_init(-1, -1));
+t_vector_2d get_perpendicular_vector(t_vector_2d dir) {
+	// Rotate 90 degrees to the right and adjust to the desired magnitude
+	// Given the specific input vectors, this simplifies to swapping and negating with adjustment
+	return ft_vector_init(dir.y * 0.66, -dir.x * 0.66);
+}
+
+void	ft_set_dir_and_plane(int dir, t_data *data) {
+	if (dir == PLAYER_EA)
+	{
+		data->player.plane = ft_vector_init(0, 0.66);
+		data->player.dir = ft_vector_init(-1, 0);
+	}
+	else if (dir == PLAYER_NO)
+	{
+		data->player.plane = ft_vector_init(0.66, 0);
+		data->player.dir = ft_vector_init(0, -1);
+	}
+	else if (dir == PLAYER_SO)
+	{
+		data->player.plane = ft_vector_init(-0.66, 0);
+		data->player.dir = ft_vector_init(0, 1);
+	}
+	else if (dir == PLAYER_WE) {
+		data->player.plane = ft_vector_init(0, -0.66);
+		data->player.dir = ft_vector_init(1, 0);
+	}
 }
 
 static void	ft_get_pos_and_dir(t_data *data)
@@ -40,15 +55,15 @@ static void	ft_get_pos_and_dir(t_data *data)
 	while (data->map->map[++row])
 	{
 		col = -1;
-		while (data->map->map[row][++col])
+		while (data->map->map[row][++col] != END)
 		{
 			if (data->map->map[row][col] == PLAYER_EA
 				|| data->map->map[row][col] == PLAYER_NO
 				|| data->map->map[row][col] == PLAYER_SO
 				|| data->map->map[row][col] == PLAYER_WE)
 			{
-				data->player.pos = ft_vector_init(col, row);
-				data->player.dir = ft_get_dir(data->map->map[row][col]);
+				data->player.pos = ft_vector_init(row, col);
+				ft_set_dir_and_plane(data->map->map[row][col], data);
 			}
 		}
 	}
@@ -56,12 +71,8 @@ static void	ft_get_pos_and_dir(t_data *data)
 
 void	init_player(t_data *data)
 {
-	t_player	player;
-
-	player = data->player;
 	ft_get_pos_and_dir(data);
-	player.plane = ft_vector_init(0, 0.66);
-	player.move_speed = MOVE_SPEED;
-	player.rot_speed = ROT_SPEED;
-	player.wall_dist = WALL_DIST;
+	data->player.move_speed = MOVE_SPEED;
+	data->player.rot_speed = ROT_SPEED;
+	data->player.wall_dist = WALL_DIST;
 }

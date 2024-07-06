@@ -54,7 +54,8 @@ static void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
 			rd->map.y += rd->step.y;
 			rd->side = 1;
 		}
-		if (data->map->map[rd->map.x][rd->map.y] > 0)
+
+		if (data->map->map[rd->map.x][rd->map.y] == WALL)
 		{
 			rd->hit = 1;
 		}

@@ -38,7 +38,7 @@ typedef struct	s_player {
 }				t_player;
 
 typedef struct	s_map {
-	t_map_elements	**map;
+	int	**map;
 }				t_map;
 
 typedef enum	e_data_flags
@@ -60,7 +60,7 @@ typedef struct	s_data  {
 void			free_data(t_data **data);
 void			init_player(t_data *data);
 void			free_player(t_player **player);
-t_map			*init_map(t_map_elements ***map_ptr);
+t_map			*init_map(int ***map_ptr);
 void			free_map(t_map **map);
 mlx_texture_t	**init_texture(char **texture_paths);
 t_data			*static_data();

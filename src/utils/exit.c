@@ -23,10 +23,7 @@
 
 void ft_exit()
 {
-	t_data		*data;
 
 	mlx_terminate(static_data()->window->mlx);
-	data = static_data();
-	free_data(&data);
 	exit(0);
 }

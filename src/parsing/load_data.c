@@ -17,7 +17,7 @@ bool		ft_get_map_char(char **content, char ***map_ptr);
 
 
 bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
-		t_map_elements ***map_ptr)
+		int ***map_ptr)
 {
 	int		fd;
 	int		start;

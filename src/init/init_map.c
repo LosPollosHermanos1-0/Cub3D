@@ -12,7 +12,7 @@
 
 # include "cub3d.h"
 
-t_map *init_map(t_map_elements ***map_ptr)
+t_map *init_map(int ***map_ptr)
 {
 	t_map	*map;
 	

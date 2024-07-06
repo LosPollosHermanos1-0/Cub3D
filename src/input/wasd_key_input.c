@@ -32,7 +32,7 @@ void	wasd_key_input(void *data)
 
 	//TODO: remove this
 	if (!g_sprite_initialized) {
-		g_sprite.pos = (t_vector_2d){15, 15};
+		g_sprite.pos = (t_vector_2d){2, 2};
 		g_sprite.texture = 0;
 		g_sprite.last_animation_change = 0;
 		g_sprite.animation_speed = 0.2;
@@ -47,6 +47,7 @@ void	wasd_key_input(void *data)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(d, -d->player.rot_speed);
 
+	printf("player pos: %f, %f\n", d->player.pos.x, d->player.pos.y);
 	// make_window_black();
 	draw_rays();
 	draw_sprite(data, &g_sprite);

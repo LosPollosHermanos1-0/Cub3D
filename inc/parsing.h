@@ -55,9 +55,9 @@ bool				ft_validate_input(int argc, char ***argv);
 
 // load_data
 bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
-					t_map_elements ***map_ptr);
+					int ***map_ptr);
 // map
-bool				ft_get_map(char **content, t_map_elements ***map_ptr);
+bool				ft_get_map(char **content, int ***map_ptr);
 
 // validate_map
 bool				ft_validate_map(char ***map_ptr);
@@ -65,7 +65,7 @@ bool				ft_validate_map(char ***map_ptr);
 // map_utility
 int					ft_map_width(char ***map_ptr);
 int					ft_map_height(char ***map_ptr);
-void				map_char_to_enum(t_map_elements ***map_ptr, char **row_ptr, int i);
+void				map_char_to_enum(int ***map_ptr, char **row_ptr, int i);
 int					*ft_get_player(char ***map_ptr);
 
 // rgb
