@@ -41,7 +41,7 @@ static void	calculate_wall_projection_bounds(const t_data *data,
 		wrd->draw_start = 0;
 	wrd->draw_end = rd->line_height / 2 + data->window->height / 2;
 	if (wrd->draw_end >= data->window->height)
-		wrd->draw_end = data->window->height - 1;
+		wrd->draw_end = data->window->height ;
 }
 
 inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x)

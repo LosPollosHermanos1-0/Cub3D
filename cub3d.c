@@ -6,14 +6,21 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:42:07 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/05 10:38:11 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/06 20:02:55 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
 
+void leak_check()
+{
+	system("leaks cub3D");
+}
+
 int main(int argc, char **argv)
 {
+	if(LEAKS)
+		atexit(leak_check);
 	if (ft_validate_input(argc, &argv) == false)
 		return (1);
 	// mlx_set_setting(MLX_DECORATED, 0);
