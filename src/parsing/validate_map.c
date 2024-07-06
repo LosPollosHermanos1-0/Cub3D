@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "cub3d.h"
 
 static bool	ft_floodfill(char ***map_ptr, int c, int r);
 static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,

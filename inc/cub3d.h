@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
+# include <fcntl.h>
 
 # include "lib.h"
 # include "MLX42.h"

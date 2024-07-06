@@ -16,14 +16,7 @@ t_data	*init_data(void)
 {
 	t_data			*data;
 
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
-		return (printf("Error: data not allocated\n"), NULL);
-	data->player = NULL;
-	data->texture = NULL;
-	data->map = NULL;
-	data->texture = NULL;
-	data->rgb = NULL;
+	data = static_data();
 	return (data);
 }
 

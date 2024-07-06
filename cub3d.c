@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 		return (1);
 	// mlx_set_setting(MLX_DECORATED, 0);
 	t_data *data = static_data();
+
+	// init_data();
 	if (ft_set_data(&(argv[1]), &data) == false)
 		return (printf("Error: data not set\n"), 1);
 	draw_rays();

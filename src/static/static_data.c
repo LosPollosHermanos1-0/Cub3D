@@ -14,10 +14,8 @@
 
 t_data *static_data()
 {
-	static t_data *data = NULL;
+	static t_data data;
 
-	if (data == NULL)
-		data = init_data();
-	return data;
+	return &data;
 }
 

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "cub3d.h"
+
 void	ft_free_textures(char ***textures)
 {
 	int	i;

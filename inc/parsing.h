@@ -13,15 +13,6 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <fcntl.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-// # include "lib.h"
-# include "../libft/include/lib.h"
-
 // enums
 typedef enum	e_map_elements
 {

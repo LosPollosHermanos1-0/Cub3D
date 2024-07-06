@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "cub3d.h"
 
 static bool	ft_validate_textures_rgb(char ***texture_ptr, int ***rgb_ptr);
 

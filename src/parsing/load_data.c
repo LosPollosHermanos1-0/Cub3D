@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "cub3d.h"
 
 static int	ft_read_whole_file(char **content, int fd);
 bool		ft_get_map_char(char **content, char ***map_ptr);
