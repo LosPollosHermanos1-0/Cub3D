@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   static_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:19:15 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 11:50:39 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:35:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 t_data *static_data()
 {
-    static t_data *data = NULL;
+	static t_data data;
 
-    if (data == NULL)
-        data = init_data();
-    return data;
+	return &data;
 }
+
