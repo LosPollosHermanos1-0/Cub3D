@@ -14,21 +14,21 @@
 
 void	calculate_relative_position(t_data *data, t_sprite_data *sprite)
 {
-	sprite->render_data.rela_pos.x = sprite->pos.x - data->player->pos.x;
-	sprite->render_data.rela_pos.y = sprite->pos.y - data->player->pos.y;
+	sprite->render_data.rela_pos.x = sprite->pos.x - data->player.pos.x;
+	sprite->render_data.rela_pos.y = sprite->pos.y - data->player.pos.y;
 }
 
 void	calculate_transformation(t_data *data, t_sprite_data *sprite)
 {
 	double	inv_det;
 
-	inv_det = 1.0 / (data->player->plane.x * data->player->dir.y
-			- data->player->dir.x * data->player->plane.y);
-	sprite->render_data.transform.x = inv_det * (data->player->dir.y
-			* sprite->render_data.rela_pos.x - data->player->dir.x
+	inv_det = 1.0 / (data->player.plane.x * data->player.dir.y
+			- data->player.dir.x * data->player.plane.y);
+	sprite->render_data.transform.x = inv_det * (data->player.dir.y
+			* sprite->render_data.rela_pos.x - data->player.dir.x
 			* sprite->render_data.rela_pos.y);
-	sprite->render_data.transform.y = inv_det * (-data->player->plane.y
-			* sprite->render_data.rela_pos.x + data->player->plane.x
+	sprite->render_data.transform.y = inv_det * (-data->player.plane.y
+			* sprite->render_data.rela_pos.x + data->player.plane.x
 			* sprite->render_data.rela_pos.y);
 }
 

@@ -12,43 +12,34 @@
 
 # include "cub3d.h"
 
-t_data	*init_data(void)
+bool	ft_set_data(char **filepath)
 {
-	t_data			*data;
-
-	data = static_data();
-	return (data);
-}
-
-bool	ft_set_data(char **filepath, t_data **data_ptr)
-{
+	t_data *data;
 	static char			*texture_paths[4];
 	static t_rgb_color	*f_and_c_color[2];
 	t_map_elements		**map;
 
+	data = static_data();
 	if (ft_load_data(filepath, texture_paths, f_and_c_color, &map) == false)
 		return (false);
 	// call only when bonus
 	// when not bonus
-	// (*data_ptr)->rgb = rgb;
-	(*data_ptr)->texture = init_texture(texture_paths);
-	if ((*data_ptr)->texture == NULL)
+	// data->rgb = rgb;
+	data->texture = init_texture(texture_paths);
+	if (data->texture == NULL)
 		return (false);
-	(*data_ptr)->window = init_window();
-	if ((*data_ptr)->window == NULL)
+	data->window = init_window();
+	if (data->window == NULL)
 		return (false);
-	(*data_ptr)->map = init_map(&map);
-	if ((*data_ptr)->map == NULL)
+	data->map = init_map(&map);
+	if (data->map == NULL)
 		return (false);
-	(*data_ptr)->player = init_player(&map);
-	if ((*data_ptr)->player == NULL)
-		return (false);
+	init_player(data);
 	return (true);
 }
 
 void	free_data(t_data **data)
 {
-	free_player(&((*data)->player));
 	free_map(&((*data)->map));
 	free(*data);
 }

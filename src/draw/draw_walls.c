@@ -16,9 +16,9 @@ static void	calculate_wall_intersection_point(const t_data *data,
 		const t_raycast_data *rd, t_wall_rendering_data *wrd)
 {
 	if (rd->side == 0)
-		wrd->wall_x = data->player->pos.y + rd->perp_wall_dist * rd->ray_dir.y;
+		wrd->wall_x = data->player.pos.y + rd->perp_wall_dist * rd->ray_dir.y;
 	else
-		wrd->wall_x = data->player->pos.x + rd->perp_wall_dist * rd->ray_dir.x;
+		wrd->wall_x = data->player.pos.x + rd->perp_wall_dist * rd->ray_dir.x;
 	wrd->wall_x -= floor(wrd->wall_x);
 }
 

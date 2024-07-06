@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	t_data *data = static_data();
 
 	// init_data();
-	if (ft_set_data(&(argv[1]), &data) == false)
+	if (ft_set_data(&(argv[1])) == false)
 		return (printf("Error: data not set\n"), 1);
 	draw_rays();
 

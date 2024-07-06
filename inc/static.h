@@ -48,7 +48,7 @@ typedef enum	e_data_flags
 
 typedef struct	s_data  {
 	t_window		*window;
-	t_player		*player;
+	t_player		player;
 	t_map			*map;
 	mlx_texture_t	**texture;
 	int				**rgb;
@@ -57,9 +57,8 @@ typedef struct	s_data  {
 	double*			z_buffer;
 }				t_data;
 
-t_data			*init_data(void);
 void			free_data(t_data **data);
-t_player		*init_player(t_map_elements ***map_ptr);
+void			init_player(t_data *data);
 void			free_player(t_player **player);
 t_map			*init_map(t_map_elements ***map_ptr);
 void			free_map(t_map **map);
@@ -67,6 +66,6 @@ mlx_texture_t	**init_texture(char **texture_paths);
 t_data			*static_data();
 
 void		free_data(t_data **data);
-bool		ft_set_data(char **filepath, t_data **data_ptr);
+bool		ft_set_data(char **filepath);
 
 #endif

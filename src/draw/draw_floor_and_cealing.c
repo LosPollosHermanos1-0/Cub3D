@@ -47,15 +47,15 @@ bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point) {
 }
 
 inline void draw_floor_and_ceiling(t_data *data, int y) {
-    const t_player *p = data->player;
+    const t_player p = data->player;
     double half_height = data->window->height / 2.0;
     double position = y - half_height;
     double row_distance = half_height / position;
 
-    t_vector_2d ray_dir_left = ft_vector_sub(p->dir, p->plane);
-    t_vector_2d ray_dir_right = ft_vector_add(p->dir, p->plane);
+    t_vector_2d ray_dir_left = ft_vector_sub(p.dir, p.plane);
+    t_vector_2d ray_dir_right = ft_vector_add(p.dir, p.plane);
     t_vector_2d floor_step = ft_vector_div(ft_vector_scale(ft_vector_sub(ray_dir_right, ray_dir_left), row_distance), (t_vector_2d){data->window->width, data->window->width});
-    t_vector_2d floor = ft_vector_add(p->pos, ft_vector_scale(ray_dir_left, row_distance));
+    t_vector_2d floor = ft_vector_add(p.pos, ft_vector_scale(ray_dir_left, row_distance));
 
     for (int x = 0; x < data->window->width; ++x) {
         t_coordinate cell = {(int)floor.x, (int)floor.y};
