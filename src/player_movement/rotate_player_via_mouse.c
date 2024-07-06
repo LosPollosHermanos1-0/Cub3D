@@ -29,7 +29,7 @@ void	set_last_xpos(double xpos)
 
 void	rotate_player_mouse(double xpos, double ypos, void *param)
 {
-	const t_data	*data = param;
+	t_data	*data = param;
 	double			delta_x;
 	double			angle;
 

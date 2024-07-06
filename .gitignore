@@ -9,4 +9,6 @@
 MLX42/
 obj/
 .idea/
+test
+cub3d
 .idea/*

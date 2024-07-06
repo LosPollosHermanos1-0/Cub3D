@@ -14,17 +14,17 @@
 
 t_vector_2d	generate_movement_vector(const t_data *data)
 {
-	const t_player		*p = data->player;
-	const t_vector_2d	perp = ft_vector_perpendicular(p->dir);
+	const t_player		p = data->player;
+	const t_vector_2d	perp = ft_vector_perpendicular(p.dir);
 	mlx_t				*mlx;
 	t_vector_2d			movement;
 
 	mlx = data->window->mlx;
 	movement = ft_vector_init(0, 0);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		movement = ft_vector_add(movement, p->dir);
+		movement = ft_vector_add(movement, p.dir);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		movement = ft_vector_add(movement, ft_vector_scale(p->dir, -1));
+		movement = ft_vector_add(movement, ft_vector_scale(p.dir, -1));
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		movement = ft_vector_add(movement, ft_vector_scale(perp, -1));
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
@@ -32,25 +32,25 @@ t_vector_2d	generate_movement_vector(const t_data *data)
 	if ((mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_S))
 		&& (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_D)))
 		movement = ft_vector_scale(movement, 0.7071);
-	movement = ft_vector_scale(movement, p->move_speed);
+	movement = ft_vector_scale(movement, p.move_speed);
 	return (movement);
 }
 
-void	move_player(const t_data *d)
+void	move_player(t_data *d)
 {
 	const t_vector_2d move = generate_movement_vector(d);
 	const t_movement_check check = check_move_with_wall_dist(move);
 
 	if (check.can_move_x && check.can_move_y && check.can_move_x_and_y)
-		d->player->pos = ft_vector_add(d->player->pos, move);
+		d->player.pos = ft_vector_add(d->player.pos, move);
 	else if (check.can_move_x)
-		d->player->pos.x += move.x;
+		d->player.pos.x += move.x;
 	else if (check.can_move_y)
-		d->player->pos.y += move.y;
+		d->player.pos.y += move.y;
 }
 
-void	rotate_player(const t_data *d, const double angle)
+void	rotate_player(t_data *d, double angle)
 {
-	d->player->dir = ft_vector_rotate(d->player->dir, angle);
-	d->player->plane = ft_vector_rotate(d->player->plane, angle);
+	d->player.dir = ft_vector_rotate(d->player.dir, angle);
+	d->player.plane = ft_vector_rotate(d->player.plane, angle);
 }

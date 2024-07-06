@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/26 14:21:54 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/05 10:46:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
 
-typedef enum e_direction
-{
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
-}							t_direction;
+// typedef enum e_direction
+// {
+// 	NORTH,
+// 	EAST,
+// 	SOUTH,
+// 	WEST
+// }					t_direction;
 
 typedef struct s_coordinate
 {

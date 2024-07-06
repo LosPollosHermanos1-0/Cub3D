@@ -17,23 +17,23 @@ static void	calculate_step_and_side_distance(const t_data *data, t_raycast_data 
 	if (rd->ray_dir.x < 0)
 	{
 		rd->step.x = -1;
-		rd->side_dist.x = (data->player->pos.x - rd->map.x) * rd->delta_dist.x;
+		rd->side_dist.x = (data->player.pos.x - rd->map.x) * rd->delta_dist.x;
 	}
 	else
 	{
 		rd->step.x = 1;
-		rd->side_dist.x = (rd->map.x + 1.0 - data->player->pos.x)
+		rd->side_dist.x = (rd->map.x + 1.0 - data->player.pos.x)
 			* rd->delta_dist.x;
 	}
 	if (rd->ray_dir.y < 0)
 	{
 		rd->step.y = -1;
-		rd->side_dist.y = (data->player->pos.y - rd->map.y) * rd->delta_dist.y;
+		rd->side_dist.y = (data->player.pos.y - rd->map.y) * rd->delta_dist.y;
 	}
 	else
 	{
 		rd->step.y = 1;
-		rd->side_dist.y = (rd->map.y + 1.0 - data->player->pos.y)
+		rd->side_dist.y = (rd->map.y + 1.0 - data->player.pos.y)
 			* rd->delta_dist.y;
 	}
 }
@@ -54,7 +54,8 @@ static void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
 			rd->map.y += rd->step.y;
 			rd->side = 1;
 		}
-		if (data->map->map[rd->map.x][rd->map.y] > 0)
+
+		if (data->map->map[rd->map.x][rd->map.y] == WALL)
 		{
 			rd->hit = 1;
 		}
