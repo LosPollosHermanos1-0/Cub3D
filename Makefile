@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/05 10:54:55 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/08 15:01:54 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ vpath %.c $(SRC_DIRS)
 vpath %.h $(HEADERS_DIR)
 
 # Create obj directory and compile the project
-all:  start_build $(NAME)
+all: submodule start_build $(NAME)
 
 start_build:
 	@echo "$$ASCII_HEADER"
@@ -154,6 +154,7 @@ $(MLX):
 submodule:
 	@if [ ! -d "./lib/libft/.git" ]; then \
 		echo "libft submodule not found. Initializing and updating libft submodule..."; \
+		rm -rf lib/libft; \
 		git submodule update --init --recursive lib/libft; \
 	else \
 		echo "libft submodule already initialized."; \
@@ -161,6 +162,7 @@ submodule:
 	fi
 	@if [ ! -d "./lib/MLX42/.git" ]; then \
 		echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
+		rm -rf lib/MLX42; \
 		git submodule update --init --recursive lib/MLX42; \
 	else \
 		echo "MLX42 submodule already initialized."; \
