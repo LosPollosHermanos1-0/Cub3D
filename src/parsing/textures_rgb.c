@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:51:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:46:31 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool	ft_get_textures_rgb(char **content, char **texture_paths, t_rgb_color **f_a
 	char	**lines;
 
 	lines = ft_split(*content, '\n');
+	if (lines == NULL)
+		return (printf("Error: could not split content\n"), false);
 	i = -1;
 	while (++i < 6)
 	{
@@ -29,18 +31,18 @@ bool	ft_get_textures_rgb(char **content, char **texture_paths, t_rgb_color **f_a
 			|| ft_strncmp(lines[i], "EA ", 3) == 0)
 		{
 			if (ft_get_texture(&lines[i], texture_paths) == false)
-				return (false);
+				return (ft_free_2d_arr((void**)lines), false);
 		}
 		else if (ft_strncmp(lines[i], "F ", 2) == 0 || ft_strncmp(lines[i],
 				"C ", 2) == 0)
 		{
 			if (ft_get_rgb(&lines[i], f_and_c_color) == false)
-				return (false);
+				return (ft_free_2d_arr((void**)lines), false);
 		}
 		else
-			return (printf("Error: invalid line\n"), false);
+			return (ft_free_2d_arr((void**)lines), printf("Error: invalid line\n"), false);
 	}
-	return (ft_validate_textures_rgb(texture_paths, f_and_c_color));
+	return (ft_free_2d_arr((void**)lines), ft_validate_textures_rgb(texture_paths, f_and_c_color));
 }
 
 static bool	ft_validate_textures_rgb(char **texture_paths, t_rgb_color **f_and_c_color)

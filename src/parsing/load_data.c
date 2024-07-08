@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/04 16:35:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 17:28:33 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	ft_read_whole_file(char **content, int fd);
 bool		ft_get_map_char(char **content, char ***map_ptr);
 
 
-bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
-		int ***map_ptr)
+bool	ft_load_data(char **filepath, char **texture_paths,
+		t_rgb_color	**f_and_c_color, int ***map_ptr)
 {
 	int		fd;
 	int		start;
@@ -41,17 +41,6 @@ bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_c
 		return (free(content), false);
 	if (ft_get_map(&content, map_ptr) == false)
 		return (free(content), false);
-	int i = -1;
-	int j;
-	printf("\n");
-	while ((*map_ptr)[++i])
-	{
-		j = -1;
-		printf("{");
-		while ((*map_ptr)[i][++j] != END)
-			printf("%d,", (*map_ptr)[i][j]);
-		printf("END},\n");
-	}
 	return (free(content), true);
 }
 
