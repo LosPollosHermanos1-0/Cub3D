@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 15:17:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 17:27:17 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	ft_validate_map(char ***map_ptr)
 	if (ft_copy_map(map_ptr, &map_copy, ft_map_width(map_ptr),
 			ft_map_height(map_ptr)) == false)
 		return (free(pos), printf("Error: failed to copy map\n"), false);
-	free(*map_ptr);
+	ft_free_2d_arr((void **)(*map_ptr));
 	*map_ptr = map_copy;
 	return (free(pos), true);
 }
