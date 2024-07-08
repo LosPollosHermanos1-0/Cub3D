@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:51:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:48:19 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ bool	ft_get_map(char **content, int ***map_ptr)
 		map_char_to_enum(map_ptr, &(map_char[i]), i);
 		i++;
 	}
-	printf("map succesful\n");
 	return (true);
 }
 
@@ -78,5 +77,5 @@ static bool	ft_get_map_char(char **content, char ***map_ptr)
 			return (ft_free_2d_arr((void **)rows), false);
 		len++;
 	}
-	return (ft_validate_map(map_ptr));
+	return (ft_free_2d_arr((void **)rows), ft_validate_map(map_ptr));
 }
