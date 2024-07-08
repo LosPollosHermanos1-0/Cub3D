@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/08 15:01:54 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/08 16:17:32 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -173,6 +173,7 @@ sanitize: CFLAGS += -g -fsanitize=address -fsanitize=undefined -fno-sanitize-rec
 sanitize: clean all
 
 leaks: CFLAGS += -g -DLEAKS
-leaks: clean all
+# leaks: make all
+leaks: all
 
 .PHONY: all clean fclean re start_build submodule sanitize
