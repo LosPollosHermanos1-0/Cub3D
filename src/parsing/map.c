@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 15:48:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 17:11:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	ft_get_map(char **content, int ***map_ptr)
 	(*map_ptr) = ft_calloc(ft_map_height(&map_char) + 1,
 			sizeof(int *));
 	if (!(*map_ptr))
-		return (false);
+		return (ft_free_2d_arr((void **)map_char), false);
 	i = 0;
 	while (map_char[i])
 	{
@@ -42,7 +42,7 @@ bool	ft_get_map(char **content, int ***map_ptr)
 		map_char_to_enum(map_ptr, &(map_char[i]), i);
 		i++;
 	}
-	return (true);
+	return (ft_free_2d_arr((void **)map_char), true);
 }
 
 /**
