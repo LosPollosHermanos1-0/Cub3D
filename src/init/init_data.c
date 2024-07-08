@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/05 10:34:30 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:51:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ bool	ft_set_data(char **filepath)
 	init_player(data);
 	data->z_buffer = ft_calloc(data->window->width, sizeof(double));
 	ft_memset(data->z_buffer, -1.0, sizeof(double) * data->window->width);
-
 
 	data->sprite_t = malloc(sizeof(mlx_texture_t *) * 2);
 
