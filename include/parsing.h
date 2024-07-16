@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/05 10:58:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 13:23:36 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef enum	e_map_elements
 bool				ft_validate_input(int argc, char ***argv);
 
 // load_data
-bool	ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
-					int ***map_ptr);
+bool				ft_load_data(char **filepath, char **texture_paths, t_rgb_color	**f_and_c_color,
+						int ***map_ptr);
 // map
 bool				ft_get_map(char **content, int ***map_ptr);
 
@@ -83,6 +83,5 @@ bool				ft_wrong_char_inside(char **str);
 
 // free
 void				ft_free_texture_paths(char **texture_paths);
-void				ft_free_rgb(t_rgb_color			**f_and_c_color);
 
 #endif
