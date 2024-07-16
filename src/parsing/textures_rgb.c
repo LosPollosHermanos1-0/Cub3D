@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 13:22:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 13:24:33 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	ft_validate_textures_rgb(char **texture_paths,
 				t_rgb_color **f_and_c_color);
 static bool	ft_get_value(char **lines, char **texture_paths,
-			t_rgb_color **f_and_c_color, int i);
+				t_rgb_color **f_and_c_color, int i);
 
 bool	ft_get_textures_rgb(char **content, char **texture_paths,
 			t_rgb_color **f_and_c_color)
@@ -40,9 +40,10 @@ bool	ft_get_textures_rgb(char **content, char **texture_paths,
 static bool	ft_get_value(char **lines, char **texture_paths,
 			t_rgb_color **f_and_c_color, int i)
 {
-	if (ft_strncmp(lines[i], "NO ", 3) == 0 || ft_strncmp(lines[i], "SO ",
-				3) == 0 || ft_strncmp(lines[i], "WE ", 3) == 0
-			|| ft_strncmp(lines[i], "EA ", 3) == 0)
+	if (ft_strncmp(lines[i], "NO ", 3) == 0
+		|| ft_strncmp(lines[i], "SO ", 3) == 0
+		|| ft_strncmp(lines[i], "WE ", 3) == 0
+		|| ft_strncmp(lines[i], "EA ", 3) == 0)
 	{
 		if (ft_get_texture(&lines[i], texture_paths) == false)
 			return (false);
@@ -57,7 +58,6 @@ static bool	ft_get_value(char **lines, char **texture_paths,
 		return (printf("Error: invalid line\n"), false);
 	return (true);
 }
-
 
 static bool	ft_validate_textures_rgb(char **texture_paths,
 				t_rgb_color **f_and_c_color)
