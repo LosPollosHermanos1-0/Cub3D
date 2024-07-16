@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 11:50:18 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 11:51:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,6 @@ static int	ft_read_whole_file(char **content, int fd)
 	return (free(line), start);
 }
 
-static void	ft_join_helper(char **content, char **line_ptr, int *i)
-{
-	*content = ft_strjoin_in_place(*content, (*line_ptr));
-	(*i)++;
-}
-
 /**
  *
  * @param line_ptr pointer to the current line.
@@ -135,4 +129,10 @@ static int	ft_handle_after_map_start(int fd)
 		line = get_next_line(fd);
 	}
 	return (free(line), 1);
+}
+
+static void	ft_join_helper(char **content, char **line_ptr, int *i)
+{
+	*content = ft_strjoin_in_place(*content, (*line_ptr));
+	(*i)++;
 }
