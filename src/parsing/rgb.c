@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:38 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 14:52:41 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 14:54:55 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	ft_get_rgb(char **line, t_rgb_color **f_and_c_color)
 	else if (ft_strncmp(direction, "C", 1) == 0)
 		index = 1;
 	else
-		return (printf("Error: invalid color direction\n"), false);
+		return (printf("Error: invalid color or direction\n"), false);
 	if (f_and_c_color[index])
 		return (printf("Error: color or direction encountered twice\n"),
 			false);
