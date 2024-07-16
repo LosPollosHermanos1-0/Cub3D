@@ -28,7 +28,8 @@ int main(int argc, char **argv)
 
 	// init_data();
 	if (ft_set_data(&(argv[1])) == false)
-		return (printf("Error: data not set\n"), 1);
+//		return (printf("Error: data not set\n"), 1);
+		return(1);
 	draw_rays();
 
 	mlx_image_to_window(data->window->mlx, data->window->image, 0, 0);
