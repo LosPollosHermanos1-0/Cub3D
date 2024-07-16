@@ -6,15 +6,24 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 17:28:33 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 09:30:06 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	ft_read_whole_file(char **content, int fd);
+static int	ft_handle_after_map_start(int fd);
 bool		ft_get_map_char(char **content, char ***map_ptr);
 
+/**
+ * Loads textures, colors & maps from ther file.
+ * @param filepath Path to the file.
+ * @param texture_paths Array of texture paths.
+ * @param f_and_c_color Array of floor and ceiling colors.
+ * @param map_ptr Pointer to the map.
+ */
+static void ft_check_start(char **line, int i, int *start, bool *look_for_start);
 
 bool	ft_load_data(char **filepath, char **texture_paths,
 		t_rgb_color	**f_and_c_color, int ***map_ptr)
@@ -65,19 +74,17 @@ static int	ft_read_whole_file(char **content, int fd)
 	{
 		if (ft_contains(line, "\t\r\v") == 1)
 			return (free(line), printf("Error: invalid character\n"), -1);
-		if (look_for_start == true && ft_contains_only(line, "1 \n") == 1
-			&& ft_contains(line, "1") == 1)
-		{
-			look_for_start = false;
-			start = i;
-		}
-		if (ft_contains_only(line, " \n") == 0) //&& look_for_start == true)
+		ft_check_start(&line, i, &start, &look_for_start);
+		if (ft_contains_only(line, " \n") == 0)
 		{
 			*content = ft_strjoin_in_place(*content, line);
 			i++;
 		}
 		else if (look_for_start == false && ft_contains_only(line, " \n") == 1)
-			return (free(line), start);
+		{
+			if (ft_handle_after_map_start(fd) == -1)
+				return (free(line), -1);
+		}
 		free(line);
 		if (*content == NULL)
 			return (printf("Error: failed to append next line\n"), -1);
@@ -86,3 +93,42 @@ static int	ft_read_whole_file(char **content, int fd)
 	return (free(line), start);
 }
 
+/**
+ *
+ * @param line_ptr pointer to the current line.
+ * @param i current index.
+ * @param start start of map.
+ * @param look_for_start boolean to check if start is found.
+ */
+static void	ft_check_start(char **line_ptr, int i, int *start, bool *look_for_start)
+{
+	if ((*look_for_start) == true && ft_contains_only((*line_ptr), "1 \n") == 1
+		&& ft_contains((*line_ptr), "1") == 1)
+	{
+		(*look_for_start) = false;
+		(*start) = i;
+	}
+}
+
+/**
+ * Handles the content after the map.
+ * @param fd File descriptor.
+ */
+static int	ft_handle_after_map_start(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while(line)
+	{
+		if (ft_contains(line, "\t\r\v") == 1)
+			return (free(line), printf("Error: invalid character\n"), -1);
+		if (ft_contains_only(line, " \n") == 1 && ft_contains(line, "\n") == 1)
+			;
+		else
+			return (printf("Error: map should be last element!\n"), -1);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (free(line), 1);
+}
