@@ -6,15 +6,19 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:15:45 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 15:46:31 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/16 13:22:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	ft_validate_textures_rgb(char **texture_paths, t_rgb_color **f_and_c_color);
+static bool	ft_validate_textures_rgb(char **texture_paths,
+				t_rgb_color **f_and_c_color);
+static bool	ft_get_value(char **lines, char **texture_paths,
+			t_rgb_color **f_and_c_color, int i);
 
-bool	ft_get_textures_rgb(char **content, char **texture_paths, t_rgb_color **f_and_c_color)
+bool	ft_get_textures_rgb(char **content, char **texture_paths,
+			t_rgb_color **f_and_c_color)
 {
 	int		i;
 	char	**lines;
@@ -26,26 +30,37 @@ bool	ft_get_textures_rgb(char **content, char **texture_paths, t_rgb_color **f_a
 	while (++i < 6)
 	{
 		lines[i] = ft_strtrim_in_place(lines[i], " ");
-		if (ft_strncmp(lines[i], "NO ", 3) == 0 || ft_strncmp(lines[i], "SO ",
-				3) == 0 || ft_strncmp(lines[i], "WE ", 3) == 0
-			|| ft_strncmp(lines[i], "EA ", 3) == 0)
-		{
-			if (ft_get_texture(&lines[i], texture_paths) == false)
-				return (ft_free_2d_arr((void**)lines), false);
-		}
-		else if (ft_strncmp(lines[i], "F ", 2) == 0 || ft_strncmp(lines[i],
-				"C ", 2) == 0)
-		{
-			if (ft_get_rgb(&lines[i], f_and_c_color) == false)
-				return (ft_free_2d_arr((void**)lines), false);
-		}
-		else
-			return (ft_free_2d_arr((void**)lines), printf("Error: invalid line\n"), false);
+		if (ft_get_value(lines, texture_paths, f_and_c_color, i) == false)
+			return (ft_free_2d_arr((void **)lines), false);
 	}
-	return (ft_free_2d_arr((void**)lines), ft_validate_textures_rgb(texture_paths, f_and_c_color));
+	return (ft_free_2d_arr((void **)lines),
+		ft_validate_textures_rgb(texture_paths, f_and_c_color));
 }
 
-static bool	ft_validate_textures_rgb(char **texture_paths, t_rgb_color **f_and_c_color)
+static bool	ft_get_value(char **lines, char **texture_paths,
+			t_rgb_color **f_and_c_color, int i)
+{
+	if (ft_strncmp(lines[i], "NO ", 3) == 0 || ft_strncmp(lines[i], "SO ",
+				3) == 0 || ft_strncmp(lines[i], "WE ", 3) == 0
+			|| ft_strncmp(lines[i], "EA ", 3) == 0)
+	{
+		if (ft_get_texture(&lines[i], texture_paths) == false)
+			return (false);
+	}
+	else if (ft_strncmp(lines[i], "F ", 2) == 0 || ft_strncmp(lines[i],
+			"C ", 2) == 0)
+	{
+		if (ft_get_rgb(&lines[i], f_and_c_color) == false)
+			return (false);
+	}
+	else
+		return (printf("Error: invalid line\n"), false);
+	return (true);
+}
+
+
+static bool	ft_validate_textures_rgb(char **texture_paths,
+				t_rgb_color **f_and_c_color)
 {
 	int	i;
 
