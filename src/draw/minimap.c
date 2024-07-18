@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 14:13:52 by lzipp            ###   ########.fr       */
+/*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
+/*   Updated: 2024/07/18 14:11:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#include "cub3d.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <fcntl.h>
-
-# include "lib.h"
-# include "MLX42.h"
-# include "window.h"
-# include "static.h"
-# include "input.h"
-# include "player.h"
-# include "draw.h"
-# include "utils.h"
-# include "parsing.h"
-
-#ifndef LEAKS
-# define LEAKS 0
-#endif
-
-#endif
+/**
+ * Repeatedly draws background of minimap
+ * @param data
+ */
+inline void	draw_mini_map(t_data *data)
+{
+	mlx_clear_image(data->window->mlx, data->window->mini_image);
+	mlx_draw_rect(data->window->mini_image, 0, 0, data->window->mini_width,
+		data->window->mini_height, 0x000000);
+}
