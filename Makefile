@@ -94,6 +94,14 @@ define ASCII_HEADER
 endef
 export ASCII_HEADER
 
+# Detect the operating system
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LIBS := -lGL -lGLU -lX11 -lXext -lXrandr -lpthread -lm -lglfw
+else ifeq ($(UNAME_S),Darwin)
+	LIBS := -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+endif
+
 # VPATH
 vpath %.c $(SRC_DIRS)
 vpath %.h $(HEADERS_DIR)
@@ -110,7 +118,7 @@ start_build:
 	fi
 
 $(NAME): $(MLX) $(LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MLX_DIR)/build -lmlx42 $(LIBS)
 	@printf "$(GREEN)cub3d project built.$(NC)\n"
 
 $(OBJDIR)/%.o: %.c $(HEADERS)
