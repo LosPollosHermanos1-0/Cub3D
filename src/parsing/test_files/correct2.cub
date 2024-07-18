@@ -1,7 +1,7 @@
-NO ./test_files/north.png
-SO ./test_files/south.png
-WE ./test_files/east.png
-EA ./test_files/west.png
+NO ./src/parsing/test_files/north.png
+SO ./src/parsing/test_files/south.png
+WE ./src/parsing/test_files/east.png
+EA ./src/parsing/test_files/west.png
 
 F 220,100,0
 C 225,30,0
