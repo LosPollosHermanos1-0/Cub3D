@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/08 16:17:32 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/18 13:43:28 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ SRC_FILES := \
 	calculate_rays.c \
 	determine_direction.c \
 	init_raycast_data.c \
-	resize_handler.c
+	resize_handler.c \
+	minimap.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)
