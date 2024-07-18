@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 13:08:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/18 16:40:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct	s_player {
 
 typedef struct	s_map {
 	int	**map;
+	int	width;
+	int	height;
 }				t_map;
 
 typedef struct	s_minimap {
