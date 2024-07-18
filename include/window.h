@@ -19,6 +19,8 @@
 # define MINI_IMAGE_H 100
 # define MINI_IMAGE_W 150
 
+# define MINI_SCALE 10
+
 typedef struct	s_window {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
