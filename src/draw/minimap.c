@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 15:41:33 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 16:11:13 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static void		draw_mini_map_element(t_data **data, int map_x, int map_y,
 static void		draw_mini_player(t_data **data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
 static void		draw_fov(t_data **data);
+static void		clamp_to_mini_image(t_vector_2d *point);
+static void		draw_mini_line(mlx_image_t *img, t_vector_2d start,
+					t_vector_2d end, uint32_t color);
+static void		do_mini_work(t_vector_2d start, t_vector_2d end,
+					t_vector_2d *sign);
 
 /**
  * Repeatedly draws minimap
@@ -108,35 +113,6 @@ static void	draw_mini_player(t_data **data, double scale)
 	draw_fov(data);
 }
 
-// static void	draw_mini_player(t_data **data, double scale)
-// {
-// 	int			pixel_y;
-// 	int			pixel_x;
-
-// 	(*data)->player.pos.y = (*data)->player.pos.y;
-// 	(*data)->player.pos.x = (*data)->player.pos.x;
-// 	double radius = scale / 2;
-// 	double centerX = (*data)->player.pos.x * scale + radius; // Center of the circle in the scaled grid
-// 	double centerY = (*data)->player.pos.y * scale + radius; // Center of the circle in the scaled grid
-// 	pixel_y = -1;
-// 	while (++pixel_y < scale + radius)
-// 	{
-// 		pixel_x = -1;
-// 		while (++pixel_x < scale + radius)
-// 		{
-// 			double distanceX = (centerX - ((*data)->player.pos.x * scale + pixel_x));
-// 			double distanceY = (centerY - ((*data)->player.pos.y * scale + pixel_y));
-// 			if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
-// 			{
-// 				mlx_put_pixel((*data)->window->mini_image,
-// 							(*data)->player.pos.y * scale + pixel_y,
-// 							(*data)->player.pos.x * scale + pixel_x, 0xAAFFFFFF);
-// 			}
-// 		}
-// 	}
-// 	// draw_fov(data);
-// }
-
 static void	draw_fov(t_data **data)
 {
 	double		angle;
@@ -153,8 +129,71 @@ static void	draw_fov(t_data **data)
 	angle = atan2f(player.dir.y, player.dir.x) + (double)(FOV / 2);
 	right_end.x = start.x + cosf(angle) * 10;
 	right_end.y = start.y + sinf(angle) * 10;
-	draw_line((*data)->minimap->minimap, start, left_end, 0xFFFFFFFF);
-	draw_line((*data)->minimap->minimap, start, right_end, 0xFFFFFFFF);
+	draw_mini_line((*data)->minimap->minimap, start, left_end, 0xFFFFFFFF);
+	draw_mini_line((*data)->minimap->minimap, start, right_end, 0xFFFFFFFF);
+}
+
+static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
+		uint32_t color)
+{
+	t_data		*data = static_data();
+	t_vector_2d	delta;
+	t_vector_2d	sign;
+	t_vector_2d	cur;
+	int			error;
+	int			error2;
+
+	clamp_to_mini_image(&start);
+	clamp_to_mini_image(&end);
+
+	delta = ft_vector_init(fabs(end.x - start.x), fabs(end.y - start.y));
+	do_mini_work(start, end, &sign);
+	error = (int)(delta.x - delta.y);
+	cur = start;
+	while (1)
+	{
+		if (cur.x >= 0 && cur.x < data->window->width && cur.y >= 0 && cur.y < data->window->height)
+			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
+		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
+			break ;
+		error2 = error * 2;
+		if (error2 > -(int)delta.y)
+		{
+			error -= (int)delta.y;
+			cur.x += sign.x;
+		}
+		if (error2 < (int)delta.x)
+		{
+			error += (int)delta.x;
+			cur.y += sign.y;
+		}
+	}
+}
+
+static void clamp_to_mini_image(t_vector_2d *point)
+{
+	t_data *data = static_data();
+	if (point->x < 0)
+		point->x = 0;
+	if (point->x >= data->window->mini_width)
+		point->x = data->window->mini_width - 1;
+	if (point->y < 0)
+		point->y = 0;
+	if (point->y >= data->window->mini_height)
+		point->y = data->window->mini_height - 1;
+}
+
+static void	do_mini_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
+{
+	if (start.x < end.x)
+		if (start.y < end.y)
+			*sign = ft_vector_init(1, 1);
+		else
+			*sign = ft_vector_init(1, -1);
+	else if (start.y < end.y)
+		*sign = ft_vector_init(-1, 1);
+	else
+		*sign = ft_vector_init(-1, -1);
 }
 
 // double radius = scale / 2;
