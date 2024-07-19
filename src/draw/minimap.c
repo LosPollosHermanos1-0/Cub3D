@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 16:11:13 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 16:13:19 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 	cur = start;
 	while (1)
 	{
-		if (cur.x >= 0 && cur.x < data->window->width && cur.y >= 0 && cur.y < data->window->height)
+		if (cur.x >= 0 && cur.x < data->window->mini_width && cur.y >= 0 && cur.y < data->window->mini_height)
 			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
 		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
 			break ;
@@ -195,28 +195,6 @@ static void	do_mini_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
 	else
 		*sign = ft_vector_init(-1, -1);
 }
-
-// double radius = scale / 2;
-// double centerX = pos_x * scale + radius; // Center of the circle in the scaled grid
-// double centerY = pos_y * scale + radius; // Center of the circle in the scaled grid
-
-// pixel_y = -1;
-// while (++pixel_y < scale)
-// {
-//     pixel_x = -1;
-//     while (++pixel_x < scale)
-//     {
-//         // Calculate the distance from the center of the circle to the current pixel
-//         double distanceX = (centerX - (pos_y * scale + pixel_y));
-//         double distanceY = (centerY - (pos_x * scale + pixel_x));
-//         // Check if the current pixel is within the circle
-//         if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
-//         {
-//             mlx_put_pixel((*data)->window->mini_image,
-//                           pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
-//         }
-//     }
-// }
 
 /**
  * Returns color of element on minimap
