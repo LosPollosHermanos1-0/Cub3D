@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 10:21:14 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:29:57 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		draw_mini_map_element(t_data **data, int map_x, int map_y,
 					double scale);
-static void		draw_mini_player(t_data *data);
+static void		draw_mini_player(t_data **data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
 
 /**
@@ -76,13 +76,29 @@ static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
  * Draws player on minimap
  * @param data
  */
-static void	draw_mini_player(t_data *data)
+static void	draw_mini_player(t_data **data, double scale)
 {
 	uint32_t	pos_y;
 	uint32_t	pos_x;
+	uint32_t	pixel_y;
+	uint32_t	pixel_x;
 
-	pos_y = data->player.pos.y;
-	pos_x = data->player.pos.x;
+	pos_y = (*data)->player.pos.y;
+	pos_x = (*data)->player.pos.x;
+	pixel_y = -1;
+	while (++pixel_y < scale)
+	{
+		pixel_x = -1;
+		while (++pixel_x < scale)
+		{
+			if (pos_x * scale + pixel_x >= 0
+				&& pos_x * scale + pixel_x < (*data)->map->width * scale
+				&& pos_y * scale + pixel_y >= 0
+				&& pos_y * scale + pixel_y < (*data)->map->height * scale)
+				mlx_put_pixel((*data)->window->mini_image,
+					pos_x * scale + pixel_x, pos_y * scale + pixel_y, 0x0000FFFF);
+		}
+	}
 }
 
 /**
