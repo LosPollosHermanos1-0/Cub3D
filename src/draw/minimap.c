@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 13:22:20 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 15:08:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,79 @@ static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
  * Draws player on minimap
  * @param data
  */
+// static void	draw_mini_player(t_data **data, double scale)
+// {
+// 	uint32_t	pos_y;
+// 	uint32_t	pos_x;
+// 	int			pixel_y;
+// 	int			pixel_x;
+
+// 	pos_y = (*data)->player.pos.y;
+// 	pos_x = (*data)->player.pos.x;
+// 	pixel_y = -1;
+// 	while (++pixel_y < scale)
+// 	{
+// 		pixel_x = -1;
+// 		while (++pixel_x < scale)
+// 		{
+// 			if (pos_y * scale + pixel_x >= 0
+// 				&& pos_y * scale + pixel_x < (*data)->map->width * scale
+// 				&& pos_x * scale + pixel_y >= 0
+// 				&& pos_x * scale + pixel_y < (*data)->map->height * scale)
+// 				mlx_put_pixel((*data)->window->mini_image,
+// 					pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
+// 		}
+// 	}
+// }
+
 static void	draw_mini_player(t_data **data, double scale)
 {
-	uint32_t	pos_y;
-	uint32_t	pos_x;
 	int			pixel_y;
 	int			pixel_x;
 
-	pos_y = (*data)->player.pos.y;
-	pos_x = (*data)->player.pos.x;
+	(*data)->player.pos.y = (*data)->player.pos.y;
+	(*data)->player.pos.x = (*data)->player.pos.x;
+	double radius = scale / 2;
+	double centerX = (*data)->player.pos.x * scale + radius; // Center of the circle in the scaled grid
+	double centerY = (*data)->player.pos.y * scale + radius; // Center of the circle in the scaled grid
 	pixel_y = -1;
 	while (++pixel_y < scale)
 	{
 		pixel_x = -1;
 		while (++pixel_x < scale)
 		{
-			if (pos_y * scale + pixel_x >= 0
-				&& pos_y * scale + pixel_x < (*data)->map->width * scale
-				&& pos_x * scale + pixel_y >= 0
-				&& pos_x * scale + pixel_y < (*data)->map->height * scale)
-				// mlx_put_pixel((*data)->window->mini_image,
-				// 	pos_x * scale + pixel_x, pos_y * scale + pixel_y, 0xAAFFFFFF);
+			double distanceX = (centerX - ((*data)->player.pos.x * scale + pixel_x));
+			double distanceY = (centerY - ((*data)->player.pos.y * scale + pixel_y));
+			if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
+			{
 				mlx_put_pixel((*data)->window->mini_image,
-					pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
+							(*data)->player.pos.y * scale + pixel_y, (*data)->player.pos.x * scale + pixel_x, 0xAAFFFFFF);
+			}
 		}
 	}
 }
+
+// double radius = scale / 2;
+// double centerX = pos_x * scale + radius; // Center of the circle in the scaled grid
+// double centerY = pos_y * scale + radius; // Center of the circle in the scaled grid
+
+// pixel_y = -1;
+// while (++pixel_y < scale)
+// {
+//     pixel_x = -1;
+//     while (++pixel_x < scale)
+//     {
+//         // Calculate the distance from the center of the circle to the current pixel
+//         double distanceX = (centerX - (pos_y * scale + pixel_y));
+//         double distanceY = (centerY - (pos_x * scale + pixel_x));
+//         // Check if the current pixel is within the circle
+//         if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
+//         {
+//             mlx_put_pixel((*data)->window->mini_image,
+//                           pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
+//         }
+//     }
+// }
 
 /**
  * Returns color of element on minimap
