@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:20:33 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 16:45:45 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 13:02:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_map *init_map(int ***map_ptr)
 	i = 0;
 	while (map->map[0][i] != END)
 		i++;
-	map->width = i + 1;
+	map->width = i;
 	i = 0;
 	while (map->map[i])
 		i++;
