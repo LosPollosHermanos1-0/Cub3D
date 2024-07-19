@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 10:29:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 13:22:20 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,13 @@ void	draw_mini_map(t_data **data)
 		x = -1;
 		while (x < (*data)->map->width && (*data)->map->map[y][++x] != END)
 		{
+			printf("map height && width = %d, %d\n", (*data)->map->height, (*data)->map->width);
 			printf("at map[%d][%d] = %d\n", y, x, (*data)->map->map[y][x]);
+			printf("player pos y,x = %d,%d\n", (uint32_t)(*data)->player.pos.x, (uint32_t)(*data)->player.pos.y);
 			draw_mini_map_element(data, x, y, scale1);
+			if ((uint32_t)round((*data)->player.pos.y) == (uint32_t)x && (uint32_t)round((*data)->player.pos.x) == (uint32_t)y)
+				draw_mini_player(data, scale1);
+			// else
 		}
 	}
 }
@@ -80,8 +85,8 @@ static void	draw_mini_player(t_data **data, double scale)
 {
 	uint32_t	pos_y;
 	uint32_t	pos_x;
-	uint32_t	pixel_y;
-	uint32_t	pixel_x;
+	int			pixel_y;
+	int			pixel_x;
 
 	pos_y = (*data)->player.pos.y;
 	pos_x = (*data)->player.pos.x;
@@ -91,12 +96,14 @@ static void	draw_mini_player(t_data **data, double scale)
 		pixel_x = -1;
 		while (++pixel_x < scale)
 		{
-			if (pos_x * scale + pixel_x >= 0
-				&& pos_x * scale + pixel_x < (*data)->map->width * scale
-				&& pos_y * scale + pixel_y >= 0
-				&& pos_y * scale + pixel_y < (*data)->map->height * scale)
+			if (pos_y * scale + pixel_x >= 0
+				&& pos_y * scale + pixel_x < (*data)->map->width * scale
+				&& pos_x * scale + pixel_y >= 0
+				&& pos_x * scale + pixel_y < (*data)->map->height * scale)
+				// mlx_put_pixel((*data)->window->mini_image,
+				// 	pos_x * scale + pixel_x, pos_y * scale + pixel_y, 0xAAFFFFFF);
 				mlx_put_pixel((*data)->window->mini_image,
-					pos_x * scale + pixel_x, pos_y * scale + pixel_y, 0x0000FFFF);
+					pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
 		}
 	}
 }
