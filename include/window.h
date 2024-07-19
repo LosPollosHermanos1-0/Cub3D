@@ -16,8 +16,8 @@
 # define WINDOW_H_INIT 800
 # define WINDOW_W_INIT 1200
 
-# define MINI_IMAGE_H 100
-# define MINI_IMAGE_W 150
+# define MINI_IMAGE_H 300
+# define MINI_IMAGE_W 300
 
 # define MINI_SCALE 10
 

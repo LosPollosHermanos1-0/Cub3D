@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 16:49:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 09:32:10 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ void						draw_walls(const t_data *data,
 								const t_raycast_data *rd, const int x);
 void						draw_floor_and_ceiling(t_data *data, int y);
 void						draw_sprite(t_data *data, t_sprite_data *sprite);
-void						draw_mini_map(t_data *data);
+void						draw_mini_map(t_data **data);
 
 #endif // DRAW_H
