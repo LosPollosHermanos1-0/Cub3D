@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 10:17:21 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/19 10:21:14 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,7 @@ void	draw_mini_map(t_data **data)
 }
 
 /**
- * Fills minimap with black color
- * @param data
- */
-// static void make_mini_black(t_data *data)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = -1;
-// 	while (++y < data->window->mini_height)
-// 	{
-// 		x = -1;
-// 		while (++x < data->window->mini_width)
-// 		{
-// 			mlx_put_pixel(data->window->mini_image, x, y, 0x000000FF);
-// 		}
-// 	}
-// }
-
-/**
- * Draws floor, walls, doors and other elements on minimap except player
+ * Draws static elements on minimap
  * @param data
  */
 static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
