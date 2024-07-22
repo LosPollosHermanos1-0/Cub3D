@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 20:41:03 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 20:51:47 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,41 +75,45 @@ static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
 /**
  * Draws player on minimap
  * @param data
+ * @param scale
  */
 static void	ft_draw_mini_player(t_data **data, double scale)
 {
-	t_vector_2d	triangle[3];
+	t_vector_2d	player[3];
 	int			x;
 	int			y;
 
-	triangle[0] = (t_vector_2d){(*data)->player.pos.x * scale + 2 * (*data)->player.dir.x * scale / 2,
-		(*data)->player.pos.y * scale + 2 * (*data)->player.dir.y * scale/ 2};
-	triangle[1] = (t_vector_2d){(*data)->player.pos.x * scale - (*data)->player.dir.y * scale / 3,
+	player[0] = (t_vector_2d){(*data)->player.pos.x * scale
+		+ 2 * (*data)->player.dir.x * scale / 2,
+		(*data)->player.pos.y * scale + 2 * (*data)->player.dir.y * scale / 2};
+	player[1] = (t_vector_2d){(*data)->player.pos.x * scale
+		- (*data)->player.dir.y * scale / 3,
 		(*data)->player.pos.y * scale + (*data)->player.dir.x * scale / 3};
-	triangle[2] = (t_vector_2d){(*data)->player.pos.x * scale + (*data)->player.dir.y * scale / 3,
+	player[2] = (t_vector_2d){(*data)->player.pos.x * scale
+		+ (*data)->player.dir.y * scale / 3,
 		(*data)->player.pos.y * scale - (*data)->player.dir.x * scale / 3};
 	y = -1;
 	while (++y < (*data)->window->mini_height)
 	{
 		x = -1;
 		while (++x < (*data)->window->mini_width)
-		{
-			if (x >= 0 && x < (*data)->window->mini_width && y >= 0 && y < (*data)->window->mini_height
-				&& ft_is_point_in_triangle((t_vector_2d){x, y}, triangle[0], triangle[1], triangle[2]))
+			if (x >= 0 && x < (*data)->window->mini_width && y >= 0
+				&& y < (*data)->window->mini_height
+				&& ft_is_point_in_triangle((t_vector_2d){x, y}, player[0],
+				player[1], player[2]))
 				mlx_put_pixel((*data)->window->mini_image, y, x, 0xAAFFFFFF);
-		}
 	}
 }
 
 /**
- * Checks if point is in triangle
+ * Checks if point is in player
  * @param point point to check
- * @param a corner a of triangle
- * @param b corner b of triangle
- * @param c corner c of triangle
+ * @param a corner a of player
+ * @param b corner b of player
+ * @param c corner c of player
  */
-static bool	ft_is_point_in_triangle(t_vector_2d point, t_vector_2d a, t_vector_2d b,
-		t_vector_2d c)
+static bool	ft_is_point_in_triangle(t_vector_2d point, t_vector_2d a,
+		t_vector_2d b, t_vector_2d c)
 {
 	double	denominator;
 	double	alpha;
@@ -124,8 +128,6 @@ static bool	ft_is_point_in_triangle(t_vector_2d point, t_vector_2d a, t_vector_2
 	gamma = 1.0 - alpha - beta;
 	return ((alpha > 0) && (beta > 0) && (gamma > 0));
 }
-
-// static void	draw_triangle()
 
 /**
  * Returns color of element on minimap
