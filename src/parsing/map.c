@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 11:50:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/08 17:11:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ static bool	ft_get_map_char(char **content, char ***map_ptr)
 	if (!(*map_ptr))
 		return (ft_free_2d_arr((void **)rows), false);
 	i = 5;
-	len = -1;
+	len = 0;
 	while (rows[++i])
 	{
-		(*map_ptr)[++len] = ft_strdup(rows[i]);
+		(*map_ptr)[len] = ft_strdup(rows[i]);
 		if (!((*map_ptr)[len]))
-			return (ft_free_2d_arr((void **)rows),
-				ft_free_2d_arr((void **)(*map_ptr)), false);
+			return (ft_free_2d_arr((void **)rows), false);
+		len++;
 	}
-	return (ft_free_2d_arr((void **)rows), ft_free_2d_arr((void **)(*map_ptr)),
-		ft_validate_map(map_ptr));
+	return (ft_free_2d_arr((void **)rows), ft_validate_map(map_ptr));
 }

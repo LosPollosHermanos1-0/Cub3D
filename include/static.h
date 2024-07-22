@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/22 08:25:56 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/05 13:00:04 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct	s_player {
 
 typedef struct	s_map {
 	int	**map;
-	int	width;
-	int	height;
 }				t_map;
 
 typedef enum	e_data_flags
@@ -48,7 +46,7 @@ typedef enum	e_data_flags
 	FLAG_MOUSE_LOCKED = 1 << 0,
 }				t_data_flags;
 
-typedef struct	s_data {
+typedef struct	s_data  {
 	t_window		*window;
 	t_player		player;
 	t_map			*map;

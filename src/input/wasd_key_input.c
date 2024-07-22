@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wasd_key_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:58:01 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/19 09:59:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/02 08:58:07 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	wasd_key_input(void *data)
 	// make_window_black();
 	draw_rays();
 	draw_sprite(data, &g_sprite);
-	draw_mini_map(&d);
 }
 
