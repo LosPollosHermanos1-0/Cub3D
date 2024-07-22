@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 17:27:17 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 13:13:41 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static bool	ft_floodfill(char ***map_ptr, int c, int r);
 static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
 				int height);
+static bool	ft_only_valid_chars(char ***map_ptr);
 
 /**
  * Validates the map.
@@ -28,6 +29,8 @@ bool	ft_validate_map(char ***map_ptr)
 	char	**map_copy;
 	char	**map_fill_copy;
 
+	if (ft_only_valid_chars(map_ptr) == false)
+		return (printf("Error: invalid characters in map\n"), false);
 	pos = ft_get_player(map_ptr);
 	if (!pos)
 		return (free(pos), printf("Error: wrong number of players\n"), false);
@@ -112,5 +115,27 @@ static bool	ft_floodfill(char ***map_ptr, int c, int r)
 			+ 1] == 'D'))
 		if (ft_floodfill(map_ptr, c + 1, r) == false)
 			return (false);
+	return (true);
+}
+
+static bool	ft_only_valid_chars(char ***map_ptr)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while ((*map_ptr)[++i])
+	{
+		j = -1;
+		while ((*map_ptr)[i][++j])
+		{
+			if ((*map_ptr)[i][j] != ' ' && (*map_ptr)[i][j] != '1'
+				&& (*map_ptr)[i][j] != '0'
+				&& (*map_ptr)[i][j] != 'N' && (*map_ptr)[i][j] != 'S'
+				&& (*map_ptr)[i][j] != 'E' && (*map_ptr)[i][j] != 'W')
+				// add all other chars here...
+				return (false);
+		}
+	}
 	return (true);
 }
