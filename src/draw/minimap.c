@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 11:28:40 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 13:32:48 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ void	draw_mini_map(t_data **data)
 			printf("player pos y,x = %d,%d\n", (uint32_t)(*data)->player.pos.x, (uint32_t)(*data)->player.pos.y);
 			draw_mini_map_element(data, x, y, scale1);
 			// continue;
-			if ((uint32_t)round((*data)->player.pos.y) == (uint32_t)x && (uint32_t)round((*data)->player.pos.x) == (uint32_t)y)
+			// if ((uint32_t)round((*data)->player.pos.y) == (uint32_t)x && (uint32_t)round((*data)->player.pos.x) == (uint32_t)y)
+			// 	{printf("triggered\n"); draw_mini_player(data, scale1);}
+			if ((int)(*data)->player.pos.y == (int)x && (int)(*data)->player.pos.x == (int)y)
 				{printf("triggered\n"); draw_mini_player(data, scale1);}
-			printf("after draw_mini_player\n");
 			// else
 		}
 	}
