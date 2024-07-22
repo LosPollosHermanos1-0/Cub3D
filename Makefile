@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/18 13:43:28 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/22 08:10:26 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -153,7 +153,7 @@ $(MLX):
 	cd $(MLX_DIR)/build && cmake .. && make -j4
 
 submodule:
-	@if [ ! -d "./lib/libft/.git" ]; then \
+	@if [ ! -f "./lib/libft/.git" ]; then \
 		echo "libft submodule not found. Initializing and updating libft submodule..."; \
 		rm -rf lib/libft; \
 		git submodule update --init --recursive lib/libft; \
@@ -161,7 +161,7 @@ submodule:
 		echo "libft submodule already initialized."; \
 		git submodule update --remote lib/libft; \
 	fi
-	@if [ ! -d "./lib/MLX42/.git" ]; then \
+	@if [ ! -f "./lib/MLX42/.git" ]; then \
 		echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
 		rm -rf lib/MLX42; \
 		git submodule update --init --recursive lib/MLX42; \
