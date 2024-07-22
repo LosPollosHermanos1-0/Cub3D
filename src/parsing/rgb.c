@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:06:38 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 14:54:55 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 13:04:48 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static char	**get_rgb_str(char **line)
 	free(color);
 	if (rgb_str == NULL)
 		return (printf("Error: could not split color\n"), NULL);
-	printf("2\n");
 	if (!ft_is_str_digit(rgb_str[0])
 		|| !ft_is_str_digit(rgb_str[1])
 		|| !ft_is_str_digit(rgb_str[2]))
