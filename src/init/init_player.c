@@ -27,20 +27,20 @@ t_vector_2d get_perpendicular_vector(t_vector_2d dir) {
 void	ft_set_dir_and_plane(int dir, t_data *data) {
 	if (dir == PLAYER_EA)
 	{
-		data->player.plane = ft_vector_init(0, 0.66);
-		data->player.dir = ft_vector_init(-1, 0);
+		data->player.plane = ft_vector_init(0.66, 0);
+		data->player.dir = ft_vector_init(0, 1);
 	}
 	else if (dir == PLAYER_NO)
 	{
-		data->player.plane = ft_vector_init(0.66, 0);
-		data->player.dir = ft_vector_init(0, -1);
+		data->player.plane = ft_vector_init(0, 0.66);
+		data->player.dir = ft_vector_init(-1, 0);
 	}
-	else if (dir == PLAYER_SO)
+	else if (dir == PLAYER_WE)
 	{
 		data->player.plane = ft_vector_init(-0.66, 0);
-		data->player.dir = ft_vector_init(0, 1);
+		data->player.dir = ft_vector_init(0, -1);
 	}
-	else if (dir == PLAYER_WE) {
+	else if (dir == PLAYER_SO) {
 		data->player.plane = ft_vector_init(0, -0.66);
 		data->player.dir = ft_vector_init(1, 0);
 	}
