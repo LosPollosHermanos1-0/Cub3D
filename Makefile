@@ -170,20 +170,18 @@ $(MLX):
 	cd $(MLX_DIR)/build && cmake .. && make -j4
 
 submodule:
-	@if [ ! -d "./lib/libft/.git" ]; then \
+	@if [ ! -f "./lib/libft/.git" ] && [ ! -d "./lib/libft/.git" ]; then \
 		echo "libft submodule not found. Initializing and updating libft submodule..."; \
-		rm -rf lib/libft; \
 		git submodule update --init --recursive lib/libft; \
 	else \
-		echo "libft submodule already initialized."; \
+		echo "libft submodule already initialized. Updating libft submodule..."; \
 		git submodule update --remote lib/libft; \
 	fi
-	@if [ ! -d "./lib/MLX42/.git" ]; then \
+	@if [ ! -f "./lib/MLX42/.git" ] && [ ! -d "./lib/MLX42/.git" ]; then \
 		echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
-		rm -rf lib/MLX42; \
 		git submodule update --init --recursive lib/MLX42; \
 	else \
-		echo "MLX42 submodule already initialized."; \
+		echo "MLX42 submodule already initialized. Updating MLX42 submodule..."; \
 		git submodule update --remote lib/MLX42; \
 	fi
 
