@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/19 16:13:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 08:25:24 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_mini_map(t_data **data)
 		x = -1;
 		while (x < (*data)->map->width && (*data)->map->map[y][++x] != END)
 		{
-			printf("map height && width = %d, %d\n", (*data)->map->height, (*data)->map->width);
+			// printf("map height && width = %d, %d\n", (*data)->map->height, (*data)->map->width);
 			printf("at map[%d][%d] = %d\n", y, x, (*data)->map->map[y][x]);
 			printf("player pos y,x = %d,%d\n", (uint32_t)(*data)->player.pos.x, (uint32_t)(*data)->player.pos.y);
 			draw_mini_map_element(data, x, y, scale1);
@@ -110,6 +110,7 @@ static void	draw_mini_player(t_data **data, double scale)
 					pos_y * scale + pixel_y, pos_x * scale + pixel_x, 0xAAFFFFFF);
 		}
 	}
+	// return ;
 	draw_fov(data);
 }
 
@@ -129,13 +130,18 @@ static void	draw_fov(t_data **data)
 	angle = atan2f(player.dir.y, player.dir.x) + (double)(FOV / 2);
 	right_end.x = start.x + cosf(angle) * 10;
 	right_end.y = start.y + sinf(angle) * 10;
-	draw_mini_line((*data)->minimap->minimap, start, left_end, 0xFFFFFFFF);
-	draw_mini_line((*data)->minimap->minimap, start, right_end, 0xFFFFFFFF);
+	printf("before drawing lines\n");
+	printf("hey\n");
+	draw_mini_line((*data)->window->mini_image, start, left_end, 0xFF00FFFF);
+	printf("first line done\n");
+	draw_mini_line((*data)->window->mini_image, start, right_end, 0xFF00FFFF);
+	printf("second line done\n");
 }
 
 static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		uint32_t color)
 {
+	printf("before grabbing data\n");
 	t_data		*data = static_data();
 	t_vector_2d	delta;
 	t_vector_2d	sign;
@@ -143,15 +149,21 @@ static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 	int			error;
 	int			error2;
 
+	printf("clamping 1\n");
 	clamp_to_mini_image(&start);
+	printf("clamping 2\n");
 	clamp_to_mini_image(&end);
 
 	delta = ft_vector_init(fabs(end.x - start.x), fabs(end.y - start.y));
+	printf("before do_mini_work\n");
 	do_mini_work(start, end, &sign);
+	printf("before error\n");
 	error = (int)(delta.x - delta.y);
 	cur = start;
+	printf("before while\n");
 	while (1)
 	{
+		printf("in while\n");
 		if (cur.x >= 0 && cur.x < data->window->mini_width && cur.y >= 0 && cur.y < data->window->mini_height)
 			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
 		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
@@ -175,12 +187,12 @@ static void clamp_to_mini_image(t_vector_2d *point)
 	t_data *data = static_data();
 	if (point->x < 0)
 		point->x = 0;
-	if (point->x >= data->window->mini_width)
-		point->x = data->window->mini_width - 1;
+	if (point->x >= (double)data->window->mini_width)
+		point->x = (double)data->window->mini_width - 1;
 	if (point->y < 0)
 		point->y = 0;
-	if (point->y >= data->window->mini_height)
-		point->y = data->window->mini_height - 1;
+	if (point->y >= (double)data->window->mini_height)
+		point->y = (double)data->window->mini_height - 1;
 }
 
 static void	do_mini_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
