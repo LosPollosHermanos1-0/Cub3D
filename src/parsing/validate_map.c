@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 15:39:32 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 21:13:46 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,11 @@ static bool	ft_check_doors(char ***map_ptr, int i, int j)
 	if (i == 0 || j == 0
 		|| i == ft_map_height(map_ptr) - 1 || j == ft_map_width(map_ptr) - 1)
 		return (false);
-	else if (i >= 1 && (*map_ptr)[i - 1][j] == '1' && (*map_ptr)[i + 1][j] == '1')
+	else if (i >= 1 && (*map_ptr)[i - 1][j] == '1'
+		&& (*map_ptr)[i + 1][j] == '1')
 		return (true);
-	else if (j >= 1 && (*map_ptr)[i][j - 1] == '1' && (*map_ptr)[i][j + 1] == '1')
+	else if (j >= 1 && (*map_ptr)[i][j - 1] == '1'
+		&& (*map_ptr)[i][j + 1] == '1')
 		return (true);
 	return (false);
 }
