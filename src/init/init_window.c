@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:12:47 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 13:40:37 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 21:26:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_window	*init_window(void)
 		return (printf("Error: window mlx not allocated\n"), NULL);
 	window->image = mlx_new_image(window->mlx, WINDOW_W_INIT, WINDOW_H_INIT);
 	window->mini_image = mlx_new_image(window->mlx,
-		MINI_IMAGE_W, MINI_IMAGE_H);
+			MINI_IMAGE_W, MINI_IMAGE_H);
 	if (window->image == NULL || window->mini_image == NULL)
 		return (printf("Error: window image not allocated\n"), NULL);
 	window->width = WINDOW_W_INIT;
