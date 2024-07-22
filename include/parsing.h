@@ -25,11 +25,12 @@ typedef struct t_rgb_color
 typedef enum	e_map_elements
 {
 	EMPTY,
-	WALL,
 	PLAYER_NO,
 	PLAYER_SO,
 	PLAYER_WE,
 	PLAYER_EA,
+	COLLIDABLE_START,
+	WALL,
 	ITEM,
 	DOOR,
 	OUTSIDE,

@@ -16,7 +16,7 @@ bool	check_possible_move(const t_vector_2d move)
 {
 	const t_map	*map = static_data()->map;
 
-	return (map->map[(int)move.x][(int)move.y] == 0);
+	return (map->map[(int)move.x][(int)move.y] < COLLIDABLE_START);
 }
 
 void	adjust_position(double move, double *new_pos, double wall_dist)
