@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 08:25:24 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 11:28:40 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		draw_mini_line(mlx_image_t *img, t_vector_2d start,
 					t_vector_2d end, uint32_t color);
 static void		do_mini_work(t_vector_2d start, t_vector_2d end,
 					t_vector_2d *sign);
+// void	draw_mini_line(t_data *data, double x_coord, double y_coord);
 
 /**
  * Repeatedly draws minimap
@@ -48,8 +49,10 @@ void	draw_mini_map(t_data **data)
 			printf("at map[%d][%d] = %d\n", y, x, (*data)->map->map[y][x]);
 			printf("player pos y,x = %d,%d\n", (uint32_t)(*data)->player.pos.x, (uint32_t)(*data)->player.pos.y);
 			draw_mini_map_element(data, x, y, scale1);
+			// continue;
 			if ((uint32_t)round((*data)->player.pos.y) == (uint32_t)x && (uint32_t)round((*data)->player.pos.x) == (uint32_t)y)
-				draw_mini_player(data, scale1);
+				{printf("triggered\n"); draw_mini_player(data, scale1);}
+			printf("after draw_mini_player\n");
 			// else
 		}
 	}
@@ -112,6 +115,7 @@ static void	draw_mini_player(t_data **data, double scale)
 	}
 	// return ;
 	draw_fov(data);
+	printf("after draw_fov\n");
 }
 
 static void	draw_fov(t_data **data)
@@ -132,16 +136,15 @@ static void	draw_fov(t_data **data)
 	right_end.y = start.y + sinf(angle) * 10;
 	printf("before drawing lines\n");
 	printf("hey\n");
-	draw_mini_line((*data)->window->mini_image, start, left_end, 0xFF00FFFF);
+	draw_mini_line((*data)->window->mini_image, start, left_end, 0xFFFFFFFF);
 	printf("first line done\n");
-	draw_mini_line((*data)->window->mini_image, start, right_end, 0xFF00FFFF);
+	draw_mini_line((*data)->window->mini_image, start, right_end, 0xFFFFFFFF);
 	printf("second line done\n");
 }
 
 static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		uint32_t color)
 {
-	printf("before grabbing data\n");
 	t_data		*data = static_data();
 	t_vector_2d	delta;
 	t_vector_2d	sign;
@@ -166,7 +169,7 @@ static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		printf("in while\n");
 		if (cur.x >= 0 && cur.x < data->window->mini_width && cur.y >= 0 && cur.y < data->window->mini_height)
 			mlx_put_pixel(img, (int)cur.x, (int)cur.y, color);
-		if ((int)cur.x == (int)end.x && (int)cur.y == (int)end.y)
+		if ((int)cur.x >= (int)end.x || (int)cur.y >= (int)end.y)
 			break ;
 		error2 = error * 2;
 		if (error2 > -(int)delta.y)
@@ -181,6 +184,48 @@ static void	draw_mini_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		}
 	}
 }
+// void	draw_mini_line(t_data *data, double x_coord, double y_coord)
+// {
+// 	int dx;
+// 	int dy;
+// 	int sx;
+// 	int sy;
+// 	int err;
+// 	int e2;
+
+// 	dx = ft_abs((int)x_coord - data->player.pos.x);
+// 	dy = ft_abs((int)y_coord - data->player.pos.y);
+// 	if (data->player.pos.x < (int)x_coord)
+// 		sx = 1;
+// 	else
+// 		sx = -1;
+// 	if (data->player.pos.y < (int)y_coord)
+// 		sy = -1;
+// 	else
+// 		sy = 1;
+// 	err = dx - dy;
+// 	while (1)
+// 	{
+// 		if (data->player.pos.x >= 0 && data->player.pos.x < data->window->mini_width
+// 			&& data->player.pos.y >= 0 && data->player.pos.y < data->window->mini_height)
+// 			mlx_put_pixel(data->window->mini_image, data->player.pos.x,
+// 				data->player.pos.y, 0x00FF00FF);
+// 		if (data->player.pos.x == (int)x_coord
+// 			&& data->player.pos.y == (int)y_coord)
+// 			break;
+// 		e2 = err * 2;
+// 		if (e2 > -dy)
+// 		{
+// 			err -= dy;
+// 			data->player.pos.x += sx;
+// 		}
+// 		if (e2 < dx)
+// 		{
+// 			err += dx;
+// 			data->player.pos.y -= sy;
+// 		}
+// 	}
+// }
 
 static void clamp_to_mini_image(t_vector_2d *point)
 {
@@ -235,3 +280,68 @@ static uint32_t	get_color(t_data *data, int x, int y)
 	// floor
 	return (0x000000FF);
 }
+
+// typedef struct s_line
+// {
+// 	double			dx;
+// 	double			dy;
+// 	double			sx;
+// 	double			sy;
+// 	double			err;
+// 	double			e2;
+// 	uint32_t		x;
+// 	uint32_t		y;
+// }					t_line;
+
+// static void	draw_line(t_vector_2d *start, t_vector_2d *end, mlx_image_t *img, uint32_t color)
+// {
+// 	t_line		*line;
+
+// 	line = init_line(start, end);
+// 	while (!((line->sx > 0 && line->x > (uint32_t)end->x)
+// 			|| (line->sx <= 0 && line->x < (uint32_t)end->x)
+// 			|| (line->sy > 0 && line->y > (uint32_t)end->y)
+// 			|| (line->sy <= 0 && line->y < (uint32_t)end->y)))
+// 	{
+// 		if (line->x <= img->height && line->y <= img->width)
+// 			mlx_put_pixel(img, line->y, line->x, color);
+// 		line->e2 = line->err;
+// 		if (line->e2 > -line->dx)
+// 		{
+// 			line->err -= line->dy;
+// 			line->x += line->sx;
+// 		}
+// 		if (line->e2 < line->dy)
+// 		{
+// 			line->err += line->dx;
+// 			line->y += line->sy;
+// 		}
+// 	}
+// 	free(line);
+// }
+
+// static t_line	*init_line(t_vector_2d *start, t_vector_2d *end)
+// {
+// 	t_line	*line;
+
+// 	line = ft_calloc(1, sizeof(t_line));
+// 	if (!line)
+// 		return (NULL);
+// 	line->dx = fabs(end->x - start->x);
+// 	line->dy = fabs(end->y - start->y);
+// 	if (start->x < end->x)
+// 		line->sx = 1;
+// 	else
+// 		line->sx = -1;
+// 	if (start->y < end->y)
+// 		line->sy = 1;
+// 	else
+// 		line->sy = -1;
+// 	if (line->dx > line->dy)
+// 		line->err = line->dx / 2;
+// 	else
+// 		line->err = -(line->dy / 2);
+// 	line->x = start->x;
+// 	line->y = start->y;
+// 	return (line);
+// }

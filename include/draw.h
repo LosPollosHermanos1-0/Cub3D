@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/19 15:19:50 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 10:00:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
 
-# define FOV 60
+# define FOV 100
 
 // typedef enum e_direction
 // {
@@ -28,6 +28,18 @@
 // 	SOUTH,
 // 	WEST
 // }					t_direction;
+
+// typedef struct s_line
+// {
+// 	double			dx;
+// 	double			dy;
+// 	double			sx;
+// 	double			sy;
+// 	double			err;
+// 	double			e2;
+// 	uint32_t		x;
+// 	uint32_t		y;
+// }					t_line;
 
 typedef struct s_coordinate
 {
@@ -88,8 +100,8 @@ typedef struct s_sprite_data
 	int						texture;
 }							t_sprite_data;
 
-void						draw_line(mlx_image_t *img, t_vector_2d start,
-								t_vector_2d end, uint32_t color);
+// void						draw_line(mlx_image_t *img, t_vector_2d start,
+// 								t_vector_2d end, uint32_t color);
 void						draw_line_vector(mlx_image_t *img,
 								t_vector_2d start, t_vector_2d direction,
 								uint32_t color);
