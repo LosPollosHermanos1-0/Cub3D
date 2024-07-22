@@ -63,12 +63,15 @@ inline void draw_floor_and_ceiling(t_data *data, int y) {
             (int)(TEX_WIDTH_FLOOR * (floor.x - cell.x)) & (TEX_WIDTH_FLOOR - 1),
             (int)(TEX_HEIGHT_FLOOR * (floor.y - cell.y)) & (TEX_HEIGHT_FLOOR - 1)
         };
-        uint32_t floorColor = get_pixel(data->texture[FLOOR], texture.x, texture.y);
 
-        if (is_in_circle((t_vector_2d){20,12}, 0.5, (t_vector_2d){floor.x, floor.y})) {
-            floorColor = blend_two_colors(floorColor, ((uint32_t)255 << 24) | ((uint32_t)255 << 16) | ((uint32_t)0 << 8) | 0xFF, 0.1);
-        }
-        uint32_t ceilingColor = get_pixel(data->texture[CEILING], texture.x, texture.y);
+        float blendFactor = fminf(1.0, fmaxf(0.0, 1.0 - position / half_height));
+
+        uint32_t floorColor = blend_color(get_pixel(data->texture[FLOOR], texture.x, texture.y), blendFactor);
+
+        // if (is_in_circle((t_vector_2d){20,12}, 0.5, (t_vector_2d){floor.x, floor.y})) {
+        //     floorColor = blend_two_colors(floorColor, ((uint32_t)255 << 24) | ((uint32_t)255 << 16) | ((uint32_t)0 << 8) | 0xFF, 0.1);
+        // }
+        uint32_t ceilingColor = blend_color(get_pixel(data->texture[CEILING], texture.x, texture.y), blendFactor);
 
         mlx_put_pixel(data->window->image, x, y, floorColor);
         mlx_put_pixel(data->window->image, x, data->window->height - y - 1, ceilingColor);

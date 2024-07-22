@@ -23,7 +23,7 @@ mlx_texture_t	**init_texture(char **texture_paths)
 	texture[SOUTH] = mlx_load_png(texture_paths[SOUTH]);
 	texture[WEST] = mlx_load_png(texture_paths[WEST]);
 	texture[EAST] = mlx_load_png(texture_paths[EAST]);
-	texture[PILLAR] = mlx_load_png("textures/CEMENT6.png");
+	texture[PILLAR] = mlx_load_png("textures/MARBFACE.png");
 	texture[FLOOR] = mlx_load_png("textures/WOOD.png");
 	texture[CEILING] = mlx_load_png("textures/ICKWALL2.png");
 	texture[END] = NULL;

@@ -64,13 +64,16 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x
 	{
 		wrd.tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
+
+		double maxDistance = 10.0; // Maximum distance at which walls are fully dark, adjust as needed
+		double distanceEffect = fmin(1.0, rd->perp_wall_dist / maxDistance);
+		double blendFactor = fmax(0.0, distanceEffect);
+
 		if(wrd.tex_num == WALL) {
-			color = get_pixel(data->texture[determine_direction(rd->ray_dir, rd->side)], wrd.tex_x, wrd.tex_y);
+			color = blend_color(get_pixel(data->texture[determine_direction(rd->ray_dir, rd->side)], wrd.tex_x, wrd.tex_y), blendFactor);
 		}
 		else if (wrd.tex_num == PILLAR) {
-			color = get_pixel(data->texture[PILLAR], wrd.tex_x, wrd.tex_y);
-			if (rd->side == 1)
-				color = (color >> 1) & 8355711;
+			color = blend_color(get_pixel(data->texture[PILLAR], wrd.tex_x, wrd.tex_y), blendFactor);
 		} else {
 			printf("Error: unknown texture\n");
 		}
