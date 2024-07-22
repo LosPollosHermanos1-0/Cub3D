@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/05 10:46:52 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 10:00:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
 
+# define FOV 100
+
 // typedef enum e_direction
 // {
 // 	NORTH,
@@ -26,6 +28,18 @@
 // 	SOUTH,
 // 	WEST
 // }					t_direction;
+
+// typedef struct s_line
+// {
+// 	double			dx;
+// 	double			dy;
+// 	double			sx;
+// 	double			sy;
+// 	double			err;
+// 	double			e2;
+// 	uint32_t		x;
+// 	uint32_t		y;
+// }					t_line;
 
 typedef struct s_coordinate
 {
@@ -86,8 +100,8 @@ typedef struct s_sprite_data
 	int						texture;
 }							t_sprite_data;
 
-void						draw_line(mlx_image_t *img, t_vector_2d start,
-								t_vector_2d end, uint32_t color);
+// void						draw_line(mlx_image_t *img, t_vector_2d start,
+// 								t_vector_2d end, uint32_t color);
 void						draw_line_vector(mlx_image_t *img,
 								t_vector_2d start, t_vector_2d direction,
 								uint32_t color);
@@ -98,5 +112,6 @@ void						draw_walls(const t_data *data,
 								const t_raycast_data *rd, const int x);
 void						draw_floor_and_ceiling(t_data *data, int y);
 void						draw_sprite(t_data *data, t_sprite_data *sprite);
+void						draw_mini_map(t_data **data);
 
 #endif // DRAW_H
