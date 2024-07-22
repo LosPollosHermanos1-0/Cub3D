@@ -12,19 +12,21 @@
 
 #include "cub3d.h"
 
-
 void	free_player(t_player **player)
 {
 	free(*player);
 }
 
-t_vector_2d get_perpendicular_vector(t_vector_2d dir) {
-	// Rotate 90 degrees to the right and adjust to the desired magnitude
-	// Given the specific input vectors, this simplifies to swapping and negating with adjustment
-	return ft_vector_init(dir.y * 0.66, -dir.x * 0.66);
+// Rotate 90 degrees to the right and adjust to the desired magnitude
+// Given the specific input vectors, this simplifies to swapping
+// and negating with adjustment
+t_vector_2d	get_perpendicular_vector(t_vector_2d dir)
+{
+	return (ft_vector_init(dir.y * 0.66, -dir.x * 0.66));
 }
 
-void	ft_set_dir_and_plane(int dir, t_data *data) {
+void	ft_set_dir_and_plane(int dir, t_data *data)
+{
 	if (dir == PLAYER_EA)
 	{
 		data->player.plane = ft_vector_init(0, 0.66);
@@ -40,7 +42,8 @@ void	ft_set_dir_and_plane(int dir, t_data *data) {
 		data->player.plane = ft_vector_init(-0.66, 0);
 		data->player.dir = ft_vector_init(0, 1);
 	}
-	else if (dir == PLAYER_WE) {
+	else if (dir == PLAYER_WE)
+	{
 		data->player.plane = ft_vector_init(0, -0.66);
 		data->player.dir = ft_vector_init(1, 0);
 	}
