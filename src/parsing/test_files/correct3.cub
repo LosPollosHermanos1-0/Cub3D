@@ -1,7 +1,7 @@
-NO ./test_files/north.png
-WE ./test_files/east.png
-SO ./test_files/south.png
-EA ./test_files/west.png
+NO ./textures/GRAY1.png
+SO ./textures/CEMENT2.png
+WE ./textures/CEMENT3.png
+EA ./textures/GRAY1.png
 
 F 220,100,0
 C 225,30,0

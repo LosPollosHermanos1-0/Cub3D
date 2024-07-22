@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 13:13:41 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 15:39:32 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static bool	ft_floodfill(char ***map_ptr, int c, int r);
 static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
 				int height);
 static bool	ft_only_valid_chars(char ***map_ptr);
+static bool	ft_check_doors(char ***map_ptr, int i, int j);
 
 /**
  * Validates the map.
- *
  * @param map Map to validate.
  * @return true if map is valid, false otherwise.
  */
@@ -130,12 +130,27 @@ static bool	ft_only_valid_chars(char ***map_ptr)
 		while ((*map_ptr)[i][++j])
 		{
 			if ((*map_ptr)[i][j] != ' ' && (*map_ptr)[i][j] != '1'
-				&& (*map_ptr)[i][j] != '0'
+				&& (*map_ptr)[i][j] != '0' && (*map_ptr)[i][j] != 'D'
 				&& (*map_ptr)[i][j] != 'N' && (*map_ptr)[i][j] != 'S'
 				&& (*map_ptr)[i][j] != 'E' && (*map_ptr)[i][j] != 'W')
 				// add all other chars here...
 				return (false);
+			else if ((*map_ptr)[i][j] == 'D'
+				&& ft_check_doors(map_ptr, i, j) == false)
+				return (false);
 		}
 	}
 	return (true);
+}
+
+static bool	ft_check_doors(char ***map_ptr, int i, int j)
+{
+	if (i == 0 || j == 0
+		|| i == ft_map_height(map_ptr) - 1 || j == ft_map_width(map_ptr) - 1)
+		return (false);
+	else if (i >= 1 && (*map_ptr)[i - 1][j] == '1' && (*map_ptr)[i + 1][j] == '1')
+		return (true);
+	else if (j >= 1 && (*map_ptr)[i][j - 1] == '1' && (*map_ptr)[i][j + 1] == '1')
+		return (true);
+	return (false);
 }
