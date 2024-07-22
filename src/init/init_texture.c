@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:41:30 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/08 15:42:45 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/22 21:25:56 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ mlx_texture_t	**init_texture(char **texture_paths)
 	// texture[FLOOR] = mlx_load_png("path/to/texture");
 	// texture[CEILING] = mlx_load_png("path/to/texture");
 	texture[6] = NULL;
-
 	ft_free_texture_paths(texture_paths);
 	return (texture);
 }
