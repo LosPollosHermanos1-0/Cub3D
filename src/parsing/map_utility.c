@@ -72,6 +72,8 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 			(*map_ptr)[i][j] = EMPTY;
 		else if ((*row_ptr)[j] == '1')
 			(*map_ptr)[i][j] = WALL;
+		else if ((*row_ptr)[j] == '2')
+			(*map_ptr)[i][j] = PILLAR;
 		else if ((*row_ptr)[j] == 'N')
 			(*map_ptr)[i][j] = PLAYER_NO;
 		else if ((*row_ptr)[j] == 'S')

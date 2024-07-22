@@ -33,6 +33,7 @@ typedef enum	e_map_elements
 	ITEM,
 	DOOR,
 	OUTSIDE,
+	PILLAR,
 	END
 }				t_map_elements;
 

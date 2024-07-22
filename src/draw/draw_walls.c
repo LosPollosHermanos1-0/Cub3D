@@ -52,7 +52,7 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x
 	double					tex_pos;
 	int						y;
 
-	wrd.tex_num = data->map->map[rd->map.x][rd->map.y] - 1;
+	wrd.tex_num = data->map->map[rd->map.x][rd->map.y];
 	calculate_wall_intersection_point(data, rd, &wrd);
 	adjust_texture_x_coordinate(rd, &wrd);
 	calculate_wall_projection_bounds(data, rd, &wrd);
@@ -64,9 +64,17 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x
 	{
 		wrd.tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
-		color = get_pixel(data->texture[wrd.tex_num], wrd.tex_x, wrd.tex_y);
-		if (rd->side == 1)
-			color = (color >> 1) & 8355711;//TODO remove
+		if(wrd.tex_num == WALL) {
+			color = get_pixel(data->texture[determine_direction(rd->ray_dir, rd->side)], wrd.tex_x, wrd.tex_y);
+		}
+		else if (wrd.tex_num == PILLAR) {
+			color = get_pixel(data->texture[PILLAR], wrd.tex_x, wrd.tex_y);
+			if (rd->side == 1)
+				color = (color >> 1) & 8355711;
+		} else {
+			printf("Error: unknown texture\n");
+		}
+
 		mlx_put_pixel(data->window->image, x, y, color);
 		y++;
 	}

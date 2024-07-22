@@ -15,7 +15,7 @@
 
 void ft_exit();
 
-// t_direction	determine_direction(const t_vector_2d ray_dir, const int side);
+t_textures	determine_direction(const t_vector_2d ray_dir, const int side);
 t_raycast_data	init_raycast_data(const t_data *data, const int x);
 void set_last_xpos(double xpos);
 
