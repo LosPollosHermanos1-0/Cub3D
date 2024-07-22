@@ -13,6 +13,12 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
+#ifdef IS_BONUS
+#define BONUS 1
+#else
+#define BONUS 0
+#endif
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>

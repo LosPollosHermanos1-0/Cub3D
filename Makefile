@@ -106,8 +106,18 @@ endif
 vpath %.c $(SRC_DIRS)
 vpath %.h $(HEADERS_DIR)
 
+# File to track changes in bonus mode
+BONUS_FLAG_FILE := .bonus_mode
+
 # Create obj directory and compile the project
-all: submodule start_build $(NAME)
+all: check_bonus_mode submodule start_build $(NAME)
+
+check_bonus_mode:
+	@if [ -f $(BONUS_FLAG_FILE) ]; then \
+		echo "Cleaning bonus mode..."; \
+		rm -f $(BONUS_FLAG_FILE); \
+		$(MAKE) clean; \
+	fi
 
 start_build:
 	@echo "$$ASCII_HEADER"
@@ -137,7 +147,7 @@ clean:
 	@printf "$(RED)Cleaning objects...$(NC)\n"
 	@rm -rf $(OBJDIR)
 	@make -C $(LIB_DIR) clean
-	@make -C $(MLX_DIR)/build clean
+	@[ ! -d "$(MLX_DIR)/build" ] || make -C $(MLX_DIR)/build clean
 	@printf "$(RED)Objects cleaned.$(NC)\n"
 
 # Clean and remove executable rule
@@ -184,4 +194,12 @@ leaks: CFLAGS += -g -DLEAKS
 # leaks: make all
 leaks: all
 
-.PHONY: all clean fclean re start_build submodule sanitize
+# Bonus rule
+bonus: CFLAGS += -D IS_BONUS
+bonus: fclean $(BONUS_FLAG_FILE) submodule start_build $(NAME)
+
+$(BONUS_FLAG_FILE):
+	@echo "Switching to bonus mode..."
+	@touch $(BONUS_FLAG_FILE)
+
+.PHONY: all check_bonus_mode clean fclean re start_build submodule sanitize leaks bonus
