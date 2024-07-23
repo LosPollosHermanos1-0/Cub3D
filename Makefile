@@ -29,7 +29,7 @@ HEADERS_DIR := include
 
 HEADERS := cub3d.h draw.h input.h parsing.h player.h static.h utils.h window.h
 
-SUB_DIRS := parsing init static draw input player_movement utils
+SUB_DIRS := parsing init static draw input player_movement utils opponent_movement
 SRC_DIRS := $(SRC_DIR) $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
 # Source files
 SRC_FILES := \
@@ -68,6 +68,7 @@ SRC_FILES := \
 	minimap.c \
 	draw_door_icon.c \
 	init_sprites.c \
+	move_opponent.c \
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)

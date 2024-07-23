@@ -36,6 +36,7 @@ void	init_sprites(t_data *data)
                 data->sprites[sprite_count].texture = 0;
                 data->sprites[sprite_count].last_animation_change = 0;
                 data->sprites[sprite_count].animation_speed = 0.2;
+                data->sprites[sprite_count].move_speed = 0.02;
                 sprite_count++;
             }
             x++;

@@ -32,3 +32,7 @@ t_textures	determine_direction(const t_vector_2d ray_dir, const int side)
     }
     return (direction);
 }
+
+double calculate_distance(t_vector_2d point1, t_vector_2d point2) {
+    return sqrt((point2.x - point1.x) * (point2.x - point1.x) + (point2.y - point1.y) * (point2.y - point1.y));
+}

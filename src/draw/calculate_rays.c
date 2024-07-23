@@ -53,10 +53,6 @@ static void set_door_flags(t_data *data, bool isCenterRay, bool hitClosedDoor, b
 }
 
 
-double calculate_distance(t_vector_2d point1, t_vector_2d point2) {
-	return sqrt((point2.x - point1.x) * (point2.x - point1.x) + (point2.y - point1.y) * (point2.y - point1.y));
-}
-
 static void handle_collision(t_data *data, t_raycast_data *rd, bool *hitClosedDoor, bool *hitOpenDoor) {
 	char cell = data->map->map[rd->map.x][rd->map.y];
 	double distance = calculate_distance(data->player.pos, (t_vector_2d){rd->map.x + 0.5, rd->map.y + 0.5});

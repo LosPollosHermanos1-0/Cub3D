@@ -37,6 +37,7 @@ void	wasd_key_input(void *data)
 	draw_rays();
 	for (int i = 0; i < d->opponent_count; ++i) {
 		draw_sprite(data, &d->sprites[i]);
+		move_opponent(d, &d->sprites[i]);
 	}
 	draw_mini_map(d);
 	draw_door_icon(d);
