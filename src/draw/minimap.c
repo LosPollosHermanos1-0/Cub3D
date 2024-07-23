@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 15:05:13 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:37:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,12 @@ static uint32_t	get_color(t_data *data, int x, int y)
 	// doors
 	// else if (data->map->map[y][x] == DOOR_CLOSED) //newer
 	else if (data->map->map[y][x] == DOOR_CLOSED)
-		return (0xA52A2AFF);
+		return (0x8B4513FF);
 	// sprites
-	else if (data->map->map[y][x] == SPRITE)
-		return (0xFFFF0000);
-	// else if (data->map->map[y][x] ==DOOR_OPEN)
-	// 	return (0xAA00AAFF);
+	else if (data->map->map[y][x] == DOOR_OPEN)
+		return (0xA0522DFF);
+	else if (data->map->map[y][x] == OPPONENT)
+		return (0xA52A2AFF);
 	// floor
 	return (0x000000FF);
 }

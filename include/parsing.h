@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 09:13:20 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:28:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ typedef enum e_map_elements
 	PLAYER_SO,
 	PLAYER_WE,
 	PLAYER_EA,
-	SPRITE,
+	OPPONENT,
 	ITEM,
 	DOOR_CLOSED,
+	DOOR_OPEN,
 	OUTSIDE,
 	END
 }				t_map_elements;
