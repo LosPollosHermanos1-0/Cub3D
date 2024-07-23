@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 20:51:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 08:58:04 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void		draw_mini_map_element(t_data **data, int map_x, int map_y,
 					double scale);
 static void		ft_draw_mini_player(t_data **data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
-static bool		ft_is_point_in_triangle(t_vector_2d point, t_vector_2d a,
-					t_vector_2d b, t_vector_2d c);
+static bool		ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
+					t_vector_2d *b, t_vector_2d *c);
 
 /**
  * Repeatedly draws minimap
@@ -46,7 +46,10 @@ void	draw_mini_map(t_data **data)
 
 /**
  * Draws static elements on minimap
- * @param data
+ * @param data app data
+ * @param map_x x coordinate of element on map
+ * @param map_y y coordinate of element on map
+ * @param scale scale of minimap
  */
 static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
 				double scale)
@@ -99,8 +102,8 @@ static void	ft_draw_mini_player(t_data **data, double scale)
 		while (++x < (*data)->window->mini_width)
 			if (x >= 0 && x < (*data)->window->mini_width && y >= 0
 				&& y < (*data)->window->mini_height
-				&& ft_is_point_in_triangle((t_vector_2d){x, y}, player[0],
-				player[1], player[2]))
+				&& ft_is_point_in_triangle(&(t_vector_2d){x, y}, &player[0],
+				&player[1], &player[2]))
 				mlx_put_pixel((*data)->window->mini_image, y, x, 0xAAFFFFFF);
 	}
 }
@@ -112,19 +115,20 @@ static void	ft_draw_mini_player(t_data **data, double scale)
  * @param b corner b of player
  * @param c corner c of player
  */
-static bool	ft_is_point_in_triangle(t_vector_2d point, t_vector_2d a,
-		t_vector_2d b, t_vector_2d c)
+static bool	ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
+		t_vector_2d *b, t_vector_2d *c)
 {
 	double	denominator;
 	double	alpha;
 	double	beta;
 	double	gamma;
 
-	denominator = ((b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y));
-	alpha = ((b.y - c.y) * (point.x - c.x) + (c.x - b.x) * (point.y - c.y))
-		/ denominator;
-	beta = ((c.y - a.y) * (point.x - c.x) + (a.x - c.x) * (point.y - c.y))
-		/ denominator;
+	denominator = ((b->y - c->y) * (a->x - c->x)
+			+ (c->x - b->x) * (a->y - c->y));
+	alpha = ((b->y - c->y) * (point->x - c->x)
+			+ (c->x - b->x) * (point->y - c->y)) / denominator;
+	beta = ((c->y - a->y) * (point->x - c->x)
+			+ (a->x - c->x) * (point->y - c->y)) / denominator;
 	gamma = 1.0 - alpha - beta;
 	return ((alpha > 0) && (beta > 0) && (gamma > 0));
 }
