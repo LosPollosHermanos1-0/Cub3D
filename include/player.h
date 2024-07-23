@@ -20,7 +20,7 @@ typedef struct movement_check
 	bool			can_move_x_and_y;
 }					t_movement_check;
 
-t_movement_check	check_move_with_wall_dist(t_vector_2d move);
+t_movement_check	check_move_with_wall_dist(const t_vector_2d move, const t_vector_2d player_pos, const double wall_dist);
 void				move_player(t_data *d);
 void				rotate_player(t_data *d, double angle);
 void				rotate_player_mouse(double xpos, double ypos, void *param);

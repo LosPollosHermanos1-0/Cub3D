@@ -27,21 +27,19 @@ void	adjust_position(double move, double *new_pos, double wall_dist)
 		*new_pos -= wall_dist;
 }
 
-t_movement_check	check_move_with_wall_dist(const t_vector_2d move)
+t_movement_check	check_move_with_wall_dist(const t_vector_2d move, const t_vector_2d player_pos, const double wall_dist)
 {
-	const t_player		player = static_data()->player;
-	const t_vector_2d	new_pos = ft_vector_add(player.pos, move);
-	t_vector_2d			adjusted_pos_x;
-	t_vector_2d			adjusted_pos_y;
-	t_vector_2d			adjusted_pos_xy;
+	t_vector_2d	adjusted_pos_x;
+	t_vector_2d	adjusted_pos_y;
+	t_vector_2d	adjusted_pos_xy;
 
-	adjusted_pos_x = (t_vector_2d){new_pos.x, player.pos.y};
-	adjusted_pos_y = (t_vector_2d){player.pos.x, new_pos.y};
-	adjusted_pos_xy = (t_vector_2d){new_pos.x, new_pos.y};
-	adjust_position(move.x, &adjusted_pos_x.x, player.wall_dist);
-	adjust_position(move.y, &adjusted_pos_y.y, player.wall_dist);
-	adjust_position(move.x, &adjusted_pos_xy.x, player.wall_dist);
-	adjust_position(move.y, &adjusted_pos_xy.y, player.wall_dist);
+	adjusted_pos_x = (t_vector_2d){player_pos.x + move.x, player_pos.y};
+	adjusted_pos_y = (t_vector_2d){player_pos.x, player_pos.y + move.y};
+	adjusted_pos_xy = (t_vector_2d){player_pos.x + move.x, player_pos.y + move.y};
+	adjust_position(move.x, &adjusted_pos_x.x, wall_dist);
+	adjust_position(move.y, &adjusted_pos_y.y, wall_dist);
+	adjust_position(move.x, &adjusted_pos_xy.x, wall_dist);
+	adjust_position(move.y, &adjusted_pos_xy.y, wall_dist);
 	return ((t_movement_check){check_possible_move(adjusted_pos_x),
 		check_possible_move(adjusted_pos_y),
 		check_possible_move(adjusted_pos_xy)});

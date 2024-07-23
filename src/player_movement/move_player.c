@@ -39,7 +39,7 @@ t_vector_2d	generate_movement_vector(const t_data *data)
 void	move_player(t_data *d)
 {
 	const t_vector_2d move = generate_movement_vector(d);
-	const t_movement_check check = check_move_with_wall_dist(move);
+	const t_movement_check check = check_move_with_wall_dist(move, d->player.pos, d->player.wall_dist);
 
 	if (check.can_move_x && check.can_move_y && check.can_move_x_and_y)
 		d->player.pos = ft_vector_add(d->player.pos, move);
