@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:34:36 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 17:34:55 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/23 09:08:42 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void	mouse_move_callback(const double xpos, const double ypos, void *param)
 void	mouse_click_handler(const mouse_key_t button, const action_t action,
 		const modifier_key_t mods, void *p)
 {
-	const t_data *data = p;
+	const t_data	*data = p;
+
 	(void)mods;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
-		if(!(data->flags & FLAG_MOUSE_LOCKED))
+		if (!(data->flags & FLAG_MOUSE_LOCKED))
 			toogle_mouselock_and_visability(p);
 }

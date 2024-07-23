@@ -12,23 +12,23 @@
 
 #include "cub3d.h"
 
-// t_direction	determine_direction(const t_vector_2d ray_dir, const int side)
-// {
-//     t_direction	direction;
+t_textures	determine_direction(const t_vector_2d ray_dir, const int side)
+{
+    t_textures	direction;
 
-//     if (side == 0)
-//     {
-//         if (ray_dir.x < 0)
-//             direction = WEST;
-//         else
-//             direction = EAST;
-//     }
-//     else
-//     {
-//         if (ray_dir.y < 0)
-//             direction = NORTH;
-//         else
-//             direction = SOUTH;
-//     }
-//     return (direction);
-// }
+    if (side == 0)
+    {
+        if (ray_dir.x < 0)
+            direction = WEST;
+        else
+            direction = EAST;
+    }
+    else
+    {
+        if (ray_dir.y < 0)
+            direction = NORTH;
+        else
+            direction = SOUTH;
+    }
+    return (direction);
+}

@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	// mlx_set_setting(MLX_HEADLESS, true);
 	if (LEAKS)
 		atexit(leak_check);
 	if (ft_validate_input(argc, &argv) == false)

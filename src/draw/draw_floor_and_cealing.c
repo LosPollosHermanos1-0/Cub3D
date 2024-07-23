@@ -20,7 +20,7 @@ uint32_t blend_color(uint32_t originalColor, float blendFactor) {
     r *= (1 - blendFactor);
     g *= (1 - blendFactor);
     b *= (1 - blendFactor);
-    return (r << 24) | (g << 16) | (b << 8) | 0xFF; // Assuming alpha is always 255
+    return ((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | 0xFF; // Assuming alpha is always 255
 }
 
 uint32_t blend_two_colors(uint32_t color1, uint32_t color2, float blendFactor) {
@@ -39,7 +39,7 @@ uint32_t blend_two_colors(uint32_t color1, uint32_t color2, float blendFactor) {
     uint8_t bResult = (uint8_t)(b1 + (b2 - b1) * blendFactor);
 
     // Combining the components back into a single uint32_t color
-    return (rResult << 24) | (gResult << 16) | (bResult << 8) | 0xFF; // Assuming alpha is always 255
+    return ((uint32_t)rResult << 24) | ((uint32_t)gResult << 16) | ((uint32_t)bResult << 8) | 0xFF; // Assuming alpha is always 255
 }
 
 bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point) {
@@ -63,13 +63,11 @@ inline void draw_floor_and_ceiling(t_data *data, int y) {
             (int)(TEX_WIDTH_FLOOR * (floor.x - cell.x)) & (TEX_WIDTH_FLOOR - 1),
             (int)(TEX_HEIGHT_FLOOR * (floor.y - cell.y)) & (TEX_HEIGHT_FLOOR - 1)
         };
-        uint32_t floorColor = get_pixel(data->texture[1], texture.x, texture.y);
-        // printf("floor.x: %f, floor.y: %f\n", floor.x, floor.y);
 
-        if (is_in_circle((t_vector_2d){20,12}, 0.5, (t_vector_2d){floor.x, floor.y})) {
-            floorColor = blend_two_colors(floorColor, (255 << 24) | (255 << 16) | (0 << 8) | 0xFF, 0.1);
-        }
-        uint32_t ceilingColor = get_pixel(data->texture[1], texture.x, texture.y); // For simplicity, using the same texture for ceiling. Adjust if different texture is needed.
+        float blendFactor = fminf(1.0, fmaxf(0.0, 1.0 - position / half_height));
+
+        uint32_t floorColor = blend_color(get_pixel(data->texture[FLOOR], texture.x, texture.y), blendFactor);
+        uint32_t ceilingColor = blend_color(get_pixel(data->texture[CEILING], texture.x, texture.y), blendFactor);
 
         mlx_put_pixel(data->window->image, x, y, floorColor);
         mlx_put_pixel(data->window->image, x, data->window->height - y - 1, ceilingColor);

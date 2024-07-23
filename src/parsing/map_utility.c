@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:52:41 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:51:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:35:57 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 			(*map_ptr)[i][j] = EMPTY;
 		else if ((*row_ptr)[j] == '1')
 			(*map_ptr)[i][j] = WALL;
+		else if ((*row_ptr)[j] == '2')
+			(*map_ptr)[i][j] = PILLAR;
 		else if ((*row_ptr)[j] == 'N')
 			(*map_ptr)[i][j] = PLAYER_NO;
 		else if ((*row_ptr)[j] == 'S')
@@ -81,7 +83,9 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 		else if ((*row_ptr)[j] == 'E')
 			(*map_ptr)[i][j] = PLAYER_EA;
 		else if ((*row_ptr)[j] == 'D')
-			(*map_ptr)[i][j] = DOOR;
+			(*map_ptr)[i][j] = DOOR_CLOSED;
+		else if ((*row_ptr)[j] == 'O')
+			(*map_ptr)[i][j] = OPPONENT;
 		else if ((*row_ptr)[j] == ' ')
 			(*map_ptr)[i][j] = OUTSIDE;
 	}

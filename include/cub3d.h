@@ -6,12 +6,18 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 12:12:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 09:11:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
+
+#ifdef IS_BONUS
+#define BONUS 1
+#else
+#define BONUS 0
+#endif
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -28,8 +34,8 @@
 # include "utils.h"
 # include "parsing.h"
 
-#ifndef LEAKS
-# define LEAKS 0
-#endif
+# ifndef LEAKS
+#  define LEAKS 0
+# endif
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 11:51:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:16:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static int	ft_read_whole_file(char **content, int fd)
 		if (ft_contains(line, "\t\r\v") == 1)
 			return (free(line), printf("Error: invalid character\n"), -1);
 		ft_adjust_start(&line, i, &start, &look_for_start);
-		if (ft_contains_only(line, " \n") == 0)
+		if (ft_contains_only(line, "\n") == 0)
 			ft_join_helper(content, &line, &i);
-		else if (look_for_start == false && ft_contains_only(line, " \n") == 1
+		else if (look_for_start == false && ft_contains_only(line, "\n") == 1
 			&& ft_handle_after_map_start(fd) == -1)
 			return (free(line), -1);
 		free(line);
@@ -100,7 +100,8 @@ static void	ft_adjust_start(char **line_ptr, int i, int *start,
 							bool *look_for_start)
 {
 	if ((*look_for_start) == true && ft_contains_only((*line_ptr), "1 \n") == 1
-		&& ft_contains((*line_ptr), "1") == 1)
+		&& (ft_contains((*line_ptr), "1") == 1
+			|| ft_contains((*line_ptr), " ") == 1))
 	{
 		(*look_for_start) = false;
 		(*start) = i;

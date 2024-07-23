@@ -17,10 +17,13 @@ RUN apt-get update && apt-get install -y \
     libreadline-dev \
     python3-pip \
     python-dev-is-python3 \
-    python3.10-venv
+    python3.10-venv \
+    xvfb \
+    xdotool \
+    libglfw3 \
+    libglfw3-dev \
+    libglu1-mesa-dev
 
 # Upgrade pip and setuptools, and install norminette
 RUN python3 -m pip install --upgrade pip setuptools && \
     python3 -m pip install norminette
-
-CMD [ "zsh" ]
