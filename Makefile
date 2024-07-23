@@ -1,19 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/22 08:10:26 by lzipp            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
 
 NAME := cub3D
 
 CC := cc
-
+	
 CFLAGS := -Wextra -Wall -Werror -Ofast # -fsanitize=address -g
 
 # Directories
@@ -95,23 +85,41 @@ define ASCII_HEADER
 endef
 export ASCII_HEADER
 
+# Detect the operating system
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LIBS := -lGL -lGLU -lX11 -lXext -lXrandr -lpthread -lm -lglfw
+else ifeq ($(UNAME_S),Darwin)
+	LIBS := -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+endif
+
 # VPATH
 vpath %.c $(SRC_DIRS)
 vpath %.h $(HEADERS_DIR)
 
+# File to track changes in bonus mode
+BONUS_FLAG_FILE := .bonus_mode
+
 # Create obj directory and compile the project
-all: submodule start_build $(NAME)
+all: check_bonus_mode submodule start_build $(NAME)
+
+check_bonus_mode:
+	@if [ -f $(BONUS_FLAG_FILE) ]; then \
+	   echo "Cleaning bonus mode..."; \
+	   rm -f $(BONUS_FLAG_FILE); \
+	   $(MAKE) clean; \
+	fi
 
 start_build:
 	@echo "$$ASCII_HEADER"
 	@if [ -n "`find $(SRC_DIR) -name '*.c' -newer $(NAME) 2>/dev/null`" ] || [ ! -f "$(NAME)" ]; then \
-		printf "$(YELLOW)Building cub3d project...$(NC)\n"; \
+	   printf "$(YELLOW)Building cub3d project...$(NC)\n"; \
 	else \
-		printf "$(GREEN)cub3d project is up to date. Nothing to build.$(NC)\n"; \
+	   printf "$(GREEN)cub3d project is up to date. Nothing to build.$(NC)\n"; \
 	fi
 
 $(NAME): $(MLX) $(LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MLX_DIR)/build -lmlx42 -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIB_DIR) -lft -L$(MLX_DIR)/build -lmlx42 $(LIBS)
 	@printf "$(GREEN)cub3d project built.$(NC)\n"
 
 $(OBJDIR)/%.o: %.c $(HEADERS)
@@ -130,7 +138,7 @@ clean:
 	@printf "$(RED)Cleaning objects...$(NC)\n"
 	@rm -rf $(OBJDIR)
 	@make -C $(LIB_DIR) clean
-	@make -C $(MLX_DIR)/build clean
+	@[ ! -d "$(MLX_DIR)/build" ] || make -C $(MLX_DIR)/build clean
 	@printf "$(RED)Objects cleaned.$(NC)\n"
 
 # Clean and remove executable rule
@@ -148,26 +156,24 @@ $(LIB):
 
 $(MLX):
 	@if [ ! -d "$(MLX_DIR)/build" ]; then \
-		mkdir -p $(MLX_DIR)/build; \
+	   mkdir -p $(MLX_DIR)/build; \
 	fi
 	cd $(MLX_DIR)/build && cmake .. && make -j4
 
 submodule:
-	@if [ ! -f "./lib/libft/.git" ]; then \
-		echo "libft submodule not found. Initializing and updating libft submodule..."; \
-		rm -rf lib/libft; \
-		git submodule update --init --recursive lib/libft; \
+	@if [ ! -f "./lib/libft/.git" ] && [ ! -d "./lib/libft/.git" ]; then \
+	   echo "libft submodule not found. Initializing and updating libft submodule..."; \
+	   git submodule update --init --recursive lib/libft; \
 	else \
-		echo "libft submodule already initialized."; \
-		git submodule update --remote lib/libft; \
+	   echo "libft submodule already initialized. Updating libft submodule..."; \
+	   git submodule update --remote lib/libft; \
 	fi
-	@if [ ! -f "./lib/MLX42/.git" ]; then \
-		echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
-		rm -rf lib/MLX42; \
-		git submodule update --init --recursive lib/MLX42; \
+	@if [ ! -f "./lib/MLX42/.git" ] && [ ! -d "./lib/MLX42/.git" ]; then \
+	   echo "MLX42 submodule not found. Initializing and updating MLX42 submodule..."; \
+	   git submodule update --init --recursive lib/MLX42; \
 	else \
-		echo "MLX42 submodule already initialized."; \
-		git submodule update --remote lib/MLX42; \
+	   echo "MLX42 submodule already initialized. Updating MLX42 submodule..."; \
+	   git submodule update --remote lib/MLX42; \
 	fi
 
 sanitize: CFLAGS += -g -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
@@ -177,4 +183,12 @@ leaks: CFLAGS += -g -DLEAKS
 # leaks: make all
 leaks: all
 
-.PHONY: all clean fclean re start_build submodule sanitize
+# Bonus rule
+bonus: CFLAGS += -D IS_BONUS
+bonus: fclean $(BONUS_FLAG_FILE) submodule start_build $(NAME)
+
+$(BONUS_FLAG_FILE):
+	@echo "Switching to bonus mode..."
+	@touch $(BONUS_FLAG_FILE)
+
+.PHONY: all check_bonus_mode clean fclean re start_build submodule sanitize leaks bonus
