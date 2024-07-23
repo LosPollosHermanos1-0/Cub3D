@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 08:58:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 09:05:26 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ static bool	ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
 /**
  * Returns color of element on minimap
  * @param data
+ * @param x
  */
 static uint32_t	get_color(t_data *data, int x, int y)
 {
@@ -151,12 +152,12 @@ static uint32_t	get_color(t_data *data, int x, int y)
 		return (0xFFFFFFFF);
 	// doors
 	// else if (data->map->map[y][x] == DOOR_CLOSED) //newer
-	else if (data->map->map[y][x] == DOOR)
-		return (0xFFA52A2A);
+	else if (data->map->map[y][x] == DOOR_CLOSED)
+		{printf("door\n"); return (0xA52A2AFF);}
 	// sprites
 	else if (data->map->map[y][x] == SPRITE)
 		return (0xFFFF0000);
-	// else if (data->map->map[y][x] == OPEN_DOOR)
+	// else if (data->map->map[y][x] ==DOOR_OPEN)
 	// 	return (0xAA00AAFF);
 	// floor
 	return (0x000000FF);

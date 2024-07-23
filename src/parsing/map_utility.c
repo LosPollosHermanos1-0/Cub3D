@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:52:41 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/03 16:51:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 09:04:36 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 		else if ((*row_ptr)[j] == 'E')
 			(*map_ptr)[i][j] = PLAYER_EA;
 		else if ((*row_ptr)[j] == 'D')
-			(*map_ptr)[i][j] = DOOR;
+			(*map_ptr)[i][j] = DOOR_CLOSED;
 		else if ((*row_ptr)[j] == ' ')
 			(*map_ptr)[i][j] = OUTSIDE;
 	}
