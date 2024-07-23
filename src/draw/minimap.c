@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 09:05:26 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 15:05:13 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static uint32_t	get_color(t_data *data, int x, int y)
 	// doors
 	// else if (data->map->map[y][x] == DOOR_CLOSED) //newer
 	else if (data->map->map[y][x] == DOOR_CLOSED)
-		{printf("door\n"); return (0xA52A2AFF);}
+		return (0xA52A2AFF);
 	// sprites
 	else if (data->map->map[y][x] == SPRITE)
 		return (0xFFFF0000);
