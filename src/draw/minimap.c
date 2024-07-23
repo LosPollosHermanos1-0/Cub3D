@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-static void		draw_mini_map_element(t_data **data, int map_x, int map_y,
+static void		draw_mini_map_element(t_data *data, int map_x, int map_y,
 					double scale);
-static void		ft_draw_mini_player(t_data **data, double scale);
+static void		ft_draw_mini_player(t_data *data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
 static bool		ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
 					t_vector_2d *b, t_vector_2d *c);
@@ -23,22 +23,22 @@ static bool		ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
  * Repeatedly draws minimap
  * @param data
  */
-void	draw_mini_map(t_data **data)
+void	draw_mini_map(t_data *data)
 {
 	double		scale;
 	double		scale2;
 	int			x;
 	int			y;
 
-	scale = (*data)->window->mini_height / (*data)->map->height;
-	scale2 = (*data)->window->mini_width / (*data)->map->width;
+	scale = data->window->mini_height / data->map->height;
+	scale2 = data->window->mini_width / data->map->width;
 	if (scale > scale2)
 		scale = scale2;
 	y = -1;
-	while (++y < (*data)->map->height)
+	while (++y < data->map->height)
 	{
 		x = -1;
-		while (x < (*data)->map->width && (*data)->map->map[y][++x] != END)
+		while (x < data->map->width && data->map->map[y][++x] != END)
 			draw_mini_map_element(data, x, y, scale);
 	}
 	ft_draw_mini_player(data, scale);
@@ -51,14 +51,14 @@ void	draw_mini_map(t_data **data)
  * @param map_y y coordinate of element on map
  * @param scale scale of minimap
  */
-static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
+static void	draw_mini_map_element(t_data *data, int map_x, int map_y,
 				double scale)
 {
 	uint32_t	color;
 	int			pixel_x;
 	int			pixel_y;
 
-	color = get_color((*data), map_x, map_y);
+	color = get_color(data, map_x, map_y);
 	pixel_y = -1;
 	while (++pixel_y < scale)
 	{
@@ -66,10 +66,10 @@ static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
 		while (++pixel_x < scale)
 		{
 			if (map_x * scale + pixel_x >= 0
-				&& map_x * scale + pixel_x < (*data)->map->width * scale
+				&& map_x * scale + pixel_x < data->map->width * scale
 				&& map_y * scale + pixel_y >= 0
-				&& map_y * scale + pixel_y < (*data)->map->height * scale)
-				mlx_put_pixel((*data)->window->mini_image,
+				&& map_y * scale + pixel_y < data->map->height * scale)
+				mlx_put_pixel(data->window->mini_image,
 					map_x * scale + pixel_x, map_y * scale + pixel_y, color);
 		}
 	}
@@ -80,31 +80,31 @@ static void	draw_mini_map_element(t_data **data, int map_x, int map_y,
  * @param data
  * @param scale
  */
-static void	ft_draw_mini_player(t_data **data, double scale)
+static void	ft_draw_mini_player(t_data *data, double scale)
 {
 	t_vector_2d	player[3];
 	int			x;
 	int			y;
 
-	player[0] = (t_vector_2d){(*data)->player.pos.x * scale
-		+ 2 * (*data)->player.dir.x * scale / 2,
-		(*data)->player.pos.y * scale + 2 * (*data)->player.dir.y * scale / 2};
-	player[1] = (t_vector_2d){(*data)->player.pos.x * scale
-		- (*data)->player.dir.y * scale / 3,
-		(*data)->player.pos.y * scale + (*data)->player.dir.x * scale / 3};
-	player[2] = (t_vector_2d){(*data)->player.pos.x * scale
-		+ (*data)->player.dir.y * scale / 3,
-		(*data)->player.pos.y * scale - (*data)->player.dir.x * scale / 3};
+	player[0] = (t_vector_2d){data->player.pos.x * scale
+		+ 2 * data->player.dir.x * scale / 2,
+		data->player.pos.y * scale + 2 * data->player.dir.y * scale / 2};
+	player[1] = (t_vector_2d){data->player.pos.x * scale
+		- data->player.dir.y * scale / 3,
+		data->player.pos.y * scale + data->player.dir.x * scale / 3};
+	player[2] = (t_vector_2d){data->player.pos.x * scale
+		+ data->player.dir.y * scale / 3,
+		data->player.pos.y * scale - data->player.dir.x * scale / 3};
 	y = -1;
-	while (++y < (*data)->window->mini_height)
+	while (++y < data->window->mini_height)
 	{
 		x = -1;
-		while (++x < (*data)->window->mini_width)
-			if (x >= 0 && x < (*data)->window->mini_width && y >= 0
-				&& y < (*data)->window->mini_height
+		while (++x < data->window->mini_width)
+			if (x >= 0 && x < data->window->mini_width && y >= 0
+				&& y < data->window->mini_height
 				&& ft_is_point_in_triangle(&(t_vector_2d){x, y}, &player[0],
 				&player[1], &player[2]))
-				mlx_put_pixel((*data)->window->mini_image, y, x, 0xAAFFFFFF);
+				mlx_put_pixel(data->window->mini_image, y, x, 0xAAFFFFFF);
 	}
 }
 

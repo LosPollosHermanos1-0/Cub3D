@@ -97,7 +97,7 @@ void						draw_walls(const t_data *data,
 								const t_raycast_data *rd, const int x);
 void						draw_floor_and_ceiling(t_data *data, int y);
 void						draw_sprite(t_data *data, t_sprite_data *sprite);
-void						draw_mini_map(t_data **data);
+void						draw_mini_map(t_data *data);
 uint32_t blend_color(uint32_t originalColor, float blendFactor);
 bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point);
 
