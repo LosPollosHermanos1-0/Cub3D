@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/16 11:51:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 12:28:53 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static int	ft_read_whole_file(char **content, int fd)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_contains(line, "\t\r\v") == 1)
+		if (ft_contains(line, "\t\r\v") == 1 || (look_for_start == true
+				&& ft_contains_only(line, " \n") == 1))
 			return (free(line), printf("Error: invalid character\n"), -1);
 		ft_adjust_start(&line, i, &start, &look_for_start);
 		if (ft_contains_only(line, " \n") == 0)
