@@ -6,6 +6,7 @@
 !*/*.c
 !Makefile
 !maps
+!*/*.cub
 
 lib/MLX42/
 obj/
