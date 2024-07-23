@@ -64,7 +64,7 @@ static void	ft_get_pos_and_dir(t_data *data)
 				|| data->map->map[row][col] == PLAYER_SO
 				|| data->map->map[row][col] == PLAYER_WE)
 			{
-				data->player.pos = ft_vector_init(row, col);
+				data->player.pos = ft_vector_init(row + 0.5, col +0.5);
 				ft_set_dir_and_plane(data->map->map[row][col], data);
 			}
 		}
