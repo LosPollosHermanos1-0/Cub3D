@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:42:07 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/18 15:03:59 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:17:58 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	// mlx_set_setting(MLX_HEADLESS, true);
 	if (LEAKS)
 		atexit(leak_check);
 	if (ft_validate_input(argc, &argv) == false)
