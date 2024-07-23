@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 16:32:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:45:28 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,16 @@ static bool	ft_floodfill(char ***map_ptr, int c, int r)
 				|| (*map_ptr)[r][c + 1] == ' '
 				|| (*map_ptr)[r][c + 1] == '\0')))
 		return (false);
-	if (r > 0 && ((*map_ptr)[r - 1][c] == '0' || (*map_ptr)[r - 1][c] == 'D' || (*map_ptr)[r - 1][c] == 'O'))
+	if (r > 0 && is_fillable((*map_ptr)[r - 1][c]))
 		if (ft_floodfill(map_ptr, c, r - 1) == false)
 			return (false);
-	if ((*map_ptr)[r + 1] && ((*map_ptr)[r + 1][c] == '0' || (*map_ptr)[r
-			+ 1][c] == 'D' || (*map_ptr)[r + 1][c] == 'O'))
+	if ((*map_ptr)[r + 1] && is_fillable((*map_ptr)[r + 1][c]))
 		if (ft_floodfill(map_ptr, c, r + 1) == false)
 			return (false);
-	if (c > 0 && ((*map_ptr)[r][c - 1] == '0' || (*map_ptr)[r][c - 1] == 'D' || (*map_ptr)[r][c - 1] == 'O'))
+	if (c > 0 && is_fillable((*map_ptr)[r][c - 1]))
 		if (ft_floodfill(map_ptr, c - 1, r) == false)
 			return (false);
-	if ((*map_ptr)[r][c + 1] && ((*map_ptr)[r][c + 1] == '0' || (*map_ptr)[r][c
-			+ 1] == 'D' || (*map_ptr)[r][c + 1] == 'O'))
+	if ((*map_ptr)[r][c + 1] && is_fillable((*map_ptr)[r][c + 1]))
 		if (ft_floodfill(map_ptr, c + 1, r) == false)
 			return (false);
 	return (true);
@@ -134,7 +132,6 @@ static bool	ft_only_valid_chars(char ***map_ptr)
 				&& (*map_ptr)[i][j] != 'N' && (*map_ptr)[i][j] != 'S'
 				&& (*map_ptr)[i][j] != 'E' && (*map_ptr)[i][j] != 'W'
 				&& (*map_ptr)[i][j] != 'O')
-				// add all other chars here...
 				return (printf("Error: invalid characters in map\n"), false);
 			else if ((*map_ptr)[i][j] == 'D'
 				&& ft_check_doors(map_ptr, i, j) == false)
@@ -157,3 +154,8 @@ static bool	ft_check_doors(char ***map_ptr, int i, int j)
 		return (true);
 	return (false);
 }
+
+// static bool	is_fillable(char input)
+// {
+// 	return (input == '0' || input == 'D' || input == 'O');
+// }
