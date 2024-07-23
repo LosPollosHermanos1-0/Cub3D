@@ -35,6 +35,8 @@ void	wasd_key_input(void *data)
 		rotate_player(d, -d->player.rot_speed);
 
 	draw_rays();
+
+	sort_sprites(d);
 	for (int i = 0; i < d->opponent_count; ++i) {
 		draw_sprite(data, &d->sprites[i]);
 		move_opponent(d, &d->sprites[i]);

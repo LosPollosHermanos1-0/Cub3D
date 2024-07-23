@@ -52,3 +52,29 @@ void	move_opponent(t_data *data, t_sprite_data *opponent)
     else if (check.can_move_y)
         opponent->pos.y += move.y;
 }
+
+void calculate_distance_to_player(t_data *data)
+{
+    for (int i = 0; i < data->opponent_count; i++)
+    {
+        data->sprites[i].distance_to_player = calculate_distance(data->player.pos, data->sprites[i].pos);
+    }
+}
+
+
+void sort_sprites(t_data *data)
+{
+    calculate_distance_to_player(data);
+    for (int i = 0; i < data->opponent_count; i++)
+    {
+        for (int j = 0; j < data->opponent_count - i - 1; j++)
+        {
+            if (data->sprites[j].distance_to_player < data->sprites[j + 1].distance_to_player)
+            {
+                t_sprite_data temp = data->sprites[j];
+                data->sprites[j] = data->sprites[j + 1];
+                data->sprites[j + 1] = temp;
+            }
+        }
+    }
+}

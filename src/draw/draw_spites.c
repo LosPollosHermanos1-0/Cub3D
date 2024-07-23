@@ -53,18 +53,27 @@ void calculate_sprite_screen_position_and_size(t_data *data, t_sprite_data *spri
 
 void calculate_drawing_start_and_end(t_data *data, t_sprite_data *sprite)
 {
+    // Adjust these values to control how high the sprite appears
+    double height_adjustment_factor = 0.25; // Example: Move sprite up by 25% of its height
+
+    int height_adjustment = sprite->render_data.sprite_height * height_adjustment_factor;
+
     sprite->render_data.draw_start_y = -sprite->render_data.sprite_height / 2
-        + data->window->height / 2;
+        + data->window->height / 2 - height_adjustment;
     if (sprite->render_data.draw_start_y < 0)
         sprite->render_data.draw_start_y = 0;
+
     sprite->render_data.draw_end_y = sprite->render_data.sprite_height / 2
-        + data->window->height / 2;
+        + data->window->height / 2 - height_adjustment;
     if (sprite->render_data.draw_end_y >= data->window->height)
         sprite->render_data.draw_end_y = data->window->height - 1;
+
+    // No changes needed for X-axis calculations
     sprite->render_data.draw_start_x = -sprite->render_data.sprite_width / 2
         + sprite->render_data.sprite_screen_x;
     if (sprite->render_data.draw_start_x < 0)
         sprite->render_data.draw_start_x = 0;
+
     sprite->render_data.draw_end_x = sprite->render_data.sprite_width / 2
         + sprite->render_data.sprite_screen_x;
     if (sprite->render_data.draw_end_x >= data->window->width)
@@ -83,14 +92,18 @@ void draw_sprite(t_data *data, t_sprite_data *sprite)
     calculate_sprite_screen_position_and_size(data, sprite);
     calculate_drawing_start_and_end(data, sprite);
 
-    // Step 4: Drawing loop
+    // Adjust these values to control how high the sprite appears
+    double height_adjustment_factor = 0.25; // Example: Move sprite up by 25% of its height
+    int height_adjustment = sprite->render_data.sprite_height * height_adjustment_factor;
+
+    // Drawing loop
     int stripe = sprite->render_data.draw_start_x;
     while (stripe < sprite->render_data.draw_end_x) {
         sprite->render_data.tex_x = (stripe - (-sprite->render_data.sprite_width / 2 + sprite->render_data.sprite_screen_x)) * TEX_WIDTH_FLOOR / sprite->render_data.sprite_width;
         if (sprite->render_data.transform.y > 0 && stripe > 0 && stripe < data->window->width && sprite->render_data.transform.y < data->z_buffer[stripe]) {
             int y = sprite->render_data.draw_start_y;
             while (y < sprite->render_data.draw_end_y) {
-                sprite->render_data.d = (y) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128;
+                sprite->render_data.d = (y + height_adjustment) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128; // Adjusted for height
                 sprite->render_data.tex_y = ((sprite->render_data.d * TEX_HEIGHT_FLOOR) / sprite->render_data.sprite_height) / 256;
                 uint32_t color = get_pixel(data->sprite_t[sprite->texture], sprite->render_data.tex_x, sprite->render_data.tex_y);
                 if ((color & 0x00FFFFFF) != 0)

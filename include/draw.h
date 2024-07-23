@@ -86,6 +86,7 @@ typedef struct s_sprite_data
 	double					animation_speed;
 	int						texture;
 	double					move_speed;
+	double					distance_to_player;
 }							t_sprite_data;
 
 void						draw_line_vector(mlx_image_t *img,
@@ -103,5 +104,6 @@ uint32_t blend_color(uint32_t originalColor, float blendFactor);
 bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point);
 void	draw_door_icon(t_data *data);
 void	move_opponent(t_data *data, t_sprite_data *opponent);
+void sort_sprites(t_data *data);
 
 #endif // DRAW_H
