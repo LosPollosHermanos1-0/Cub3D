@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 10:02:24 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 14:42:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 16:16:08 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ static void	ft_adjust_start(char **line_ptr, int i, int *start,
 	{
 		(*look_for_start) = false;
 		(*start) = i;
-		printf("Start: %d\n", *start);
 	}
 }
 
