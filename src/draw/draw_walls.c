@@ -74,8 +74,8 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x
 		}
 		else if (wrd.tex_num == PILLAR) {
 			color = blend_color(get_pixel(data->texture[PILLAR], wrd.tex_x, wrd.tex_y), blendFactor);
-		} else if (wrd.tex_num == DOOR) {
-			color = blend_color(get_pixel(data->texture[DOOR], wrd.tex_x, wrd.tex_y), blendFactor);
+		} else if (wrd.tex_num == DOOR_CLOSED) {
+			color = blend_color(get_pixel(data->texture[DOOR_CLOSED], wrd.tex_x, wrd.tex_y), blendFactor);
 		}else {
 			printf("Error: unknown texture\n");
 		}

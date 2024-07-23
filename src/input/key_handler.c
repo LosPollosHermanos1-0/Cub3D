@@ -25,7 +25,7 @@ void	key_handler(const mlx_key_data_t keydata, void *param)
 	}
 	if(keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS) {
 		if (data->flags & FLAG_FACING_OPEN_DOOR) {
-			data->map->map[(int)data->last_faced_closed_door.x][(int)data->last_faced_closed_door.y] = DOOR;
+			data->map->map[(int)data->last_faced_closed_door.x][(int)data->last_faced_closed_door.y] = DOOR_CLOSED;
 			// printf("Door closed\n");
 			// data->flags &= ~FLAG_FACING_OPEN_DOOR;
 		}

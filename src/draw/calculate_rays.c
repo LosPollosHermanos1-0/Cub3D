@@ -59,9 +59,9 @@ static void	processe_ray_collision(t_data *data, t_raycast_data *rd, int rayInde
 			rd->side = 1;
 		}
 
-		if (data->map->map[rd->map.x][rd->map.y] == WALL || data->map->map[rd->map.x][rd->map.y] == PILLAR || data->map->map[rd->map.x][rd->map.y] == DOOR)
+		if (data->map->map[rd->map.x][rd->map.y] == WALL || data->map->map[rd->map.x][rd->map.y] == PILLAR || data->map->map[rd->map.x][rd->map.y] == DOOR_CLOSED)
 		{
-			if (isCenterRay && data->map->map[rd->map.x][rd->map.y] == DOOR) {
+			if (isCenterRay && data->map->map[rd->map.x][rd->map.y] == DOOR_CLOSED) {
 				data->last_faced_closed_door = (t_vector_2d){rd->map.x, rd->map.y};
 				data->flags |= FLAG_FACING_CLOSED_DOOR;
 				has_hit_closed_door = true;
