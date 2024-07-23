@@ -100,5 +100,6 @@ void						draw_sprite(t_data *data, t_sprite_data *sprite);
 void						draw_mini_map(t_data *data);
 uint32_t blend_color(uint32_t originalColor, float blendFactor);
 bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point);
+void	draw_door_icon(t_data *data);
 
 #endif // DRAW_H

@@ -21,6 +21,9 @@
 
 # define MINI_SCALE 10
 
+# define DOOR_ICON_H 50
+# define DOOR_ICON_W 50
+
 typedef struct s_window {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
@@ -29,6 +32,10 @@ typedef struct s_window {
 	mlx_image_t	*mini_image;
 	int32_t		mini_width;
 	int32_t		mini_height;
+	mlx_image_t	*door_icon_open;
+	mlx_image_t	*door_icon_close;
+	int32_t		door_icon_width;
+	int32_t		door_icon_height;
 }				t_window;
 
 t_window	*init_window(void);
