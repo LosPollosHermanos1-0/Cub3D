@@ -52,6 +52,29 @@ static void set_door_flags(t_data *data, bool isCenterRay, bool hitClosedDoor, b
 	}
 }
 
+
+double calculate_distance(t_vector_2d point1, t_vector_2d point2) {
+	return sqrt((point2.x - point1.x) * (point2.x - point1.x) + (point2.y - point1.y) * (point2.y - point1.y));
+}
+
+static void handle_collision(t_data *data, t_raycast_data *rd, bool *hitClosedDoor, bool *hitOpenDoor) {
+	char cell = data->map->map[rd->map.x][rd->map.y];
+	double distance = calculate_distance(data->player.pos, (t_vector_2d){rd->map.x + 0.5, rd->map.y + 0.5});
+	if (cell == WALL || cell == PILLAR) {
+		rd->hit = 1;
+	} else if (cell == DOOR_CLOSED) {
+		if(distance <= DOOR_INTERACTION_DIST && !*hitClosedDoor) {
+			data->last_faced_closed_door = (t_vector_2d){rd->map.x, rd->map.y};
+			*hitClosedDoor = true;
+		}
+		rd->hit = 1;
+	} else if (cell == DOOR_OPEN && distance <= DOOR_INTERACTION_DIST) {
+		if(!*hitOpenDoor)
+			data->last_faced_open_door = (t_vector_2d){rd->map.x, rd->map.y};
+		*hitOpenDoor = true;
+	}
+}
+
 static void processe_ray_collision(t_data *data, t_raycast_data *rd, int ray_index) {
 	bool isCenterRay = (ray_index == data->window->width / 2);
 	bool hitClosedDoor = false;
@@ -67,19 +90,7 @@ static void processe_ray_collision(t_data *data, t_raycast_data *rd, int ray_ind
 			rd->map.y += rd->step.y;
 			rd->side = 1;
 		}
-		char cell = data->map->map[rd->map.x][rd->map.y];
-		if (cell == WALL || cell == PILLAR) {
-			rd->hit = 1;
-		} else if (cell == DOOR_CLOSED) {
-			if(!hitClosedDoor)
-				data->last_faced_closed_door = (t_vector_2d){rd->map.x, rd->map.y};
-			hitClosedDoor = true;
-			rd->hit = 1;
-		} else if (cell == DOOR_OPEN) {
-			if(!hitOpenDoor)
-				data->last_faced_open_door = (t_vector_2d){rd->map.x, rd->map.y};
-			hitOpenDoor = true;
-		}
+		handle_collision(data, rd, &hitClosedDoor, &hitOpenDoor);
 	}
 	set_door_flags(data, isCenterRay, hitClosedDoor, hitOpenDoor);
 }
