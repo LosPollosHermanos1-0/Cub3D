@@ -64,17 +64,17 @@ typedef struct s_sprite_rendering_data
 	t_vector_2d				transform;
 	t_vector_2d				rela_pos;
 	double					distance;
-	int						sprite_screen_x;
-	int						sprite_height;
-	int						draw_start_y;
-	int						draw_end_y;
-	int						sprite_width;
-	int						draw_start_x;
-	int						draw_end_x;
-	int						tex_x;
-	int						tex_y;
-	int						color;
-	int						d;
+	long long						sprite_screen_x;
+	long long						sprite_height;
+	long long						draw_start_y;
+	long long						draw_end_y;
+	long long						sprite_width;
+	long long						draw_start_x;
+	long long						draw_end_x;
+	long long						tex_x;
+	long long						tex_y;
+	long long						color;
+	long long						d;
 }							t_sprite_rendering_data;
 
 typedef struct s_sprite_data
