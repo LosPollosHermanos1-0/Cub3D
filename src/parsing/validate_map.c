@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/22 21:13:46 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/23 08:40:39 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	ft_validate_map(char ***map_ptr)
 	char	**map_fill_copy;
 
 	if (ft_only_valid_chars(map_ptr) == false)
-		return (printf("Error: invalid characters in map\n"), false);
+		return (false);
 	pos = ft_get_player(map_ptr);
 	if (!pos)
 		return (free(pos), printf("Error: wrong number of players\n"), false);
@@ -134,10 +134,10 @@ static bool	ft_only_valid_chars(char ***map_ptr)
 				&& (*map_ptr)[i][j] != 'N' && (*map_ptr)[i][j] != 'S'
 				&& (*map_ptr)[i][j] != 'E' && (*map_ptr)[i][j] != 'W')
 				// add all other chars here...
-				return (false);
+				return (printf("Error: invalid characters in map\n"), false);
 			else if ((*map_ptr)[i][j] == 'D'
 				&& ft_check_doors(map_ptr, i, j) == false)
-				return (false);
+				return (printf("Error: doors not correct\n"), false);
 		}
 	}
 	return (true);
