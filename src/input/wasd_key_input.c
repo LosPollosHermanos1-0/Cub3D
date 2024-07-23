@@ -51,5 +51,6 @@ void	wasd_key_input(void *data)
 	// make_window_black();
 	draw_rays();
 	draw_sprite(data, &g_sprite);
+	draw_mini_map(&d);
 }
 
