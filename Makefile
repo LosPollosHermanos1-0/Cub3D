@@ -64,7 +64,8 @@ SRC_FILES := \
 	calculate_rays.c \
 	determine_direction.c \
 	init_raycast_data.c \
-	resize_handler.c
+	resize_handler.c \
+	minimap.c
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)

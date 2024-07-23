@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_rays.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 23:52:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 02:56:49 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:11:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	calculate_step_and_side_distance(const t_data *data, t_raycast_data *rd)
+static void	calculate_step_and_side_distance(const t_data *data,
+				t_raycast_data *rd)
 {
 	if (rd->ray_dir.x < 0)
 	{
@@ -82,7 +83,8 @@ static void	processe_ray_collision(t_data *data, t_raycast_data *rd, int rayInde
 	}
 }
 
-static void	calculate_perpendicular_wall_distance(const t_data *data, t_raycast_data *rd, int x)
+static void	calculate_perpendicular_wall_distance(const t_data *data,
+				t_raycast_data *rd, int x)
 {
 	if (rd->side == 0)
 		rd->perp_wall_dist = rd->side_dist.x - rd->delta_dist.x;
@@ -90,17 +92,23 @@ static void	calculate_perpendicular_wall_distance(const t_data *data, t_raycast_
 		rd->perp_wall_dist = rd->side_dist.y - rd->delta_dist.y;
 	data->z_buffer[x] = rd->perp_wall_dist;
 }
+
 void	draw_rays(void)
 {
 	t_data			*data;
 	t_raycast_data	rd;
+	int				y;
+	int				x;
 
 	data = static_data();
-	for (int y = data->window->height / 2 + 1; y < data->window->height; y++) {
+	y = data->window->height / 2 + 1;
+	while (y < data->window->height)
+	{
 		draw_floor_and_ceiling(data, y);
+		y++;
 	}
-
-	for (int x = 0; x < data->window->width; ++x)
+	x = 0;
+	while (x < data->window->width)
 	{
 		rd = init_raycast_data(data, x);
 		calculate_step_and_side_distance(data, &rd);
@@ -108,5 +116,6 @@ void	draw_rays(void)
 		calculate_perpendicular_wall_distance(data, &rd, x);
 		rd.line_height = (int)(data->window->height / rd.perp_wall_dist);
 		draw_walls(data, &rd, x);
+		x++;
 	}
 }
