@@ -22,7 +22,7 @@ void make_window_black() {
 }
 
 //TODO: remove this
-static t_sprite_data g_sprite = {.pos = {0, 0}, .texture = 0, .last_animation_change = 0, .animation_speed = 0};
+static t_sprite_data g_sprite = {.pos = {0, 0},.dir = {0,0}, .texture = 0, .last_animation_change = 0, .animation_speed = 0,};
 static int g_sprite_initialized = 0;
 
 void	wasd_key_input(void *data)
@@ -33,6 +33,7 @@ void	wasd_key_input(void *data)
 	//TODO: remove this
 	if (!g_sprite_initialized) {
 		g_sprite.pos = (t_vector_2d){2, 2};
+		g_sprite.dir = (t_vector_2d){1, 0};
 		g_sprite.texture = 0;
 		g_sprite.last_animation_change = 0;
 		g_sprite.animation_speed = 0.2;

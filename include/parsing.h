@@ -29,6 +29,7 @@ typedef enum	e_map_elements
 	PLAYER_SO,
 	PLAYER_WE,
 	PLAYER_EA,
+	DOOR_OPEN,
 	COLLIDABLE_START,
 	WALL,
 	ITEM,

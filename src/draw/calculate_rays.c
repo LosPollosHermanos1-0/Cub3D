@@ -38,8 +38,11 @@ static void	calculate_step_and_side_distance(const t_data *data, t_raycast_data 
 	}
 }
 
-static void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
+static void	processe_ray_collision(t_data *data, t_raycast_data *rd, int rayIndex)
 {
+	bool isCenterRay = (rayIndex == data->window->width / 2);
+	bool has_hit_closed_door = false;
+	bool has_hit_open_door = false;
 	while (rd->hit == 0)
 	{
 		if (rd->side_dist.x < rd->side_dist.y)
@@ -55,10 +58,27 @@ static void	processe_ray_collision(const t_data *data, t_raycast_data *rd)
 			rd->side = 1;
 		}
 
-		if (data->map->map[rd->map.x][rd->map.y] == WALL || data->map->map[rd->map.x][rd->map.y] == PILLAR)
+		if (data->map->map[rd->map.x][rd->map.y] == WALL || data->map->map[rd->map.x][rd->map.y] == PILLAR || data->map->map[rd->map.x][rd->map.y] == DOOR)
 		{
+			if (isCenterRay && data->map->map[rd->map.x][rd->map.y] == DOOR) {
+				data->last_faced_closed_door = (t_vector_2d){rd->map.x, rd->map.y};
+				data->flags |= FLAG_FACING_CLOSED_DOOR;
+				has_hit_closed_door = true;
+			}
 			rd->hit = 1;
 		}
+
+		if (isCenterRay && data->map->map[rd->map.x][rd->map.y] == DOOR_OPEN && !(data->flags & FLAG_FACING_OPEN_DOOR)) {
+			data->last_faced_open_door = (t_vector_2d){rd->map.x, rd->map.y};
+			data->flags |= FLAG_FACING_OPEN_DOOR;
+			has_hit_open_door = true;
+		}
+	}
+	if (isCenterRay && !has_hit_closed_door && data->flags & FLAG_FACING_CLOSED_DOOR) {
+		data->flags &= ~FLAG_FACING_CLOSED_DOOR;
+	}
+	if (isCenterRay && !has_hit_open_door && data->flags & FLAG_FACING_OPEN_DOOR) {
+		data->flags &= ~FLAG_FACING_OPEN_DOOR;
 	}
 }
 
@@ -84,7 +104,7 @@ void	draw_rays(void)
 	{
 		rd = init_raycast_data(data, x);
 		calculate_step_and_side_distance(data, &rd);
-		processe_ray_collision(data, &rd);
+		processe_ray_collision(data, &rd, x);
 		calculate_perpendicular_wall_distance(data, &rd, x);
 		rd.line_height = (int)(data->window->height / rd.perp_wall_dist);
 		draw_walls(data, &rd, x);

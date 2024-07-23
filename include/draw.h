@@ -75,11 +75,13 @@ typedef struct s_sprite_rendering_data
 	int						tex_y;
 	int						color;
 	int						d;
+	double 				perp_dist;
 }							t_sprite_rendering_data;
 
 typedef struct s_sprite_data
 {
 	t_vector_2d				pos;
+	t_vector_2d				dir;
 	t_sprite_rendering_data	render_data;
 	double					last_animation_change;
 	double					animation_speed;

@@ -44,6 +44,8 @@ typedef struct	s_map {
 typedef enum	e_data_flags
 {
 	FLAG_MOUSE_LOCKED = 1 << 0,
+	FLAG_FACING_CLOSED_DOOR = 1 << 1,
+	FLAG_FACING_OPEN_DOOR = 1 << 2,
 }				t_data_flags;
 
 typedef struct	s_data  {
@@ -55,6 +57,8 @@ typedef struct	s_data  {
 	mlx_texture_t	**sprite_t;
 	t_data_flags	flags;
 	double*			z_buffer;
+	t_vector_2d		last_faced_open_door;
+	t_vector_2d		last_faced_closed_door;
 }				t_data;
 
 void			free_data(t_data **data);

@@ -23,4 +23,16 @@ void	key_handler(const mlx_key_data_t keydata, void *param)
 	{
 		toogle_mouselock_and_visability(data);
 	}
+	if(keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS) {
+		if (data->flags & FLAG_FACING_OPEN_DOOR) {
+			data->map->map[(int)data->last_faced_closed_door.x][(int)data->last_faced_closed_door.y] = DOOR;
+			// printf("Door closed\n");
+			// data->flags &= ~FLAG_FACING_OPEN_DOOR;
+		}
+		else if (data->flags & FLAG_FACING_CLOSED_DOOR) {
+			data->map->map[(int)data->last_faced_closed_door.x][(int)data->last_faced_closed_door.y] = DOOR_OPEN;
+			// printf("Door opened\n");
+			// data->flags &= ~FLAG_FACING_CLOSED_DOOR;
+		}
+	}
 }

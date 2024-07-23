@@ -26,6 +26,7 @@ mlx_texture_t	**init_texture(char **texture_paths)
 	texture[PILLAR] = mlx_load_png("textures/MARBFACE.png");
 	texture[FLOOR] = mlx_load_png("textures/WOOD.png");
 	texture[CEILING] = mlx_load_png("textures/ICKWALL2.png");
+	texture[DOOR] = mlx_load_png("textures/BIGDOOR6.png");
 	texture[END] = NULL;
 
 	ft_free_texture_paths(texture_paths);
