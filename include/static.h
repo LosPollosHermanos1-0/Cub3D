@@ -16,8 +16,10 @@
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
 # define WALL_DIST 0.1
+# define DOOR_INTERACTION_DIST 2.5
 
 typedef enum e_map_elements	t_map_elements;
+typedef struct s_sprite_data	t_sprite_data;
 
 typedef enum e_textures {
 	NORTH,
@@ -61,6 +63,8 @@ typedef struct s_data {
 	double			*z_buffer;
 	t_vector_2d		last_faced_open_door;
 	t_vector_2d		last_faced_closed_door;
+	int				opponent_count;
+	t_sprite_data	*sprites;
 }				t_data;
 
 void			free_data(t_data **data);
@@ -73,5 +77,6 @@ t_data			*static_data(void);
 
 void			free_data(t_data **data);
 bool			ft_set_data(char **filepath);
+void			init_sprites(t_data *data);
 
 #endif

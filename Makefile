@@ -66,7 +66,8 @@ SRC_FILES := \
 	init_raycast_data.c \
 	resize_handler.c \
 	minimap.c \
-	draw_door_icon.c
+	draw_door_icon.c \
+	init_sprites.c \
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)

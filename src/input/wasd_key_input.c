@@ -21,24 +21,10 @@ void make_window_black() {
 	}
 }
 
-//TODO: remove this
-static t_sprite_data g_sprite = {.pos = {0, 0},.dir = {0,0}, .texture = 0, .last_animation_change = 0, .animation_speed = 0,};
-static int g_sprite_initialized = 0;
-
 void	wasd_key_input(void *data)
 {
 	t_data	*d = data;
 	mlx_t *mlx = d->window->mlx;
-
-	//TODO: remove this
-	if (!g_sprite_initialized) {
-		g_sprite.pos = (t_vector_2d){2, 2};
-		g_sprite.dir = (t_vector_2d){1, 0};
-		g_sprite.texture = 0;
-		g_sprite.last_animation_change = 0;
-		g_sprite.animation_speed = 0.2;
-		g_sprite_initialized = 1;
-	}
 
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_A)
 		|| mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_D))
@@ -48,9 +34,10 @@ void	wasd_key_input(void *data)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(d, -d->player.rot_speed);
 
-	// make_window_black();
 	draw_rays();
-	draw_sprite(data, &g_sprite);
+	for (int i = 0; i < d->opponent_count; ++i) {
+		draw_sprite(data, &d->sprites[i]);
+	}
 	draw_mini_map(d);
 	draw_door_icon(d);
 }

@@ -84,8 +84,10 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 			(*map_ptr)[i][j] = PLAYER_EA;
 		else if ((*row_ptr)[j] == 'D')
 			(*map_ptr)[i][j] = DOOR_CLOSED;
-		else if ((*row_ptr)[j] == 'O')
+		else if ((*row_ptr)[j] == 'O') {
+			static_data()->opponent_count++;
 			(*map_ptr)[i][j] = OPPONENT;
+		}
 		else if ((*row_ptr)[j] == ' ')
 			(*map_ptr)[i][j] = OUTSIDE;
 	}

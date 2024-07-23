@@ -40,6 +40,7 @@ bool	ft_set_data(char **filepath)
 	data->sprite_t = malloc(sizeof(mlx_texture_t *) * 2);
 	data->sprite_t[0] = mlx_load_png("textures/LostSoul.png");
 	data->sprite_t[1] = mlx_load_png("textures/LostSoul2.png");
+	init_sprites(data);
 	return (true);
 }
 
