@@ -5,6 +5,7 @@
 !*/
 !*/*.c
 !Makefile
+!maps
 
 lib/MLX42/
 obj/
