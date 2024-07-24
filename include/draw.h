@@ -19,14 +19,6 @@
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
 
-// typedef enum e_direction
-// {
-// 	NORTH,
-// 	EAST,
-// 	SOUTH,
-// 	WEST
-// }					t_direction;
-
 typedef struct s_coordinate
 {
 	int						x;
@@ -84,9 +76,13 @@ typedef struct s_sprite_data
 	t_sprite_rendering_data	render_data;
 	double					last_animation_change;
 	double					animation_speed;
+	double					last_idle;
+	double                  last_move;
 	int						texture;
 	double					move_speed;
 	double					distance_to_player;
+	t_opponent_state        state;
+
 }							t_sprite_data;
 
 void						draw_line_vector(mlx_image_t *img,

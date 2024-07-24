@@ -24,6 +24,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
+# include "opponent.h"
 # include "lib.h"
 # include "MLX42.h"
 # include "window.h"
