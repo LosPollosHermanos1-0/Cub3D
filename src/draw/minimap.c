@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 16:37:38 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/24 13:46:37 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ static void		ft_draw_mini_player(t_data *data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
 static bool		ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
 					t_vector_2d *b, t_vector_2d *c);
+static void		ft_draw_mini_opponent(t_data *data, int i, double scale);
+static bool		ft_is_point_in_circle(t_vector_2d center, double radius,
+					t_vector_2d point);
 
 /**
  * Repeatedly draws minimap
@@ -42,6 +45,10 @@ void	draw_mini_map(t_data *data)
 			draw_mini_map_element(data, x, y, scale);
 	}
 	ft_draw_mini_player(data, scale);
+	y = -1;
+	while (++y < data->opponent_count)
+		ft_draw_mini_opponent(data, y, scale);
+		// if (data->sprites[y].pos.x >= 0 && data->sprites[y].pos.y >= 0
 }
 
 /**
@@ -104,7 +111,34 @@ static void	ft_draw_mini_player(t_data *data, double scale)
 				&& y < data->window->mini_height
 				&& ft_is_point_in_triangle(&(t_vector_2d){x, y}, &player[0],
 				&player[1], &player[2]))
-				mlx_put_pixel(data->window->mini_image, y, x, 0xAAFFFFFF);
+				mlx_put_pixel(data->window->mini_image, y, x, 0x000000FF);
+	}
+}
+
+/**
+ * Draws opponents on minimap
+ * @param data
+ * @param scale
+ */
+static void	ft_draw_mini_opponent(t_data *data, int i, double scale)
+{
+	int				x;
+	int				y;
+	t_vector_2d		opponent;
+
+	opponent = (t_vector_2d){data->sprites[i].pos.x * scale
+		+ 2 * data->sprites[i].dir.x * scale / 2,
+		data->sprites[i].pos.y * scale + 2 * data->sprites[i].dir.y * scale / 2};
+	y = -1;
+	while (++y < data->window->mini_height)
+	{
+		x = -1;
+		while (++x < data->window->mini_width)
+			if (x >= 0 && x < data->window->mini_width && y >= 0
+				&& y < data->window->mini_height
+				&& ft_is_point_in_circle((t_vector_2d){opponent.x, opponent.y},
+					scale * 0.375, (t_vector_2d){x, y}))
+				mlx_put_pixel(data->window->mini_image, y, x, 0xA52A2AFF);
 	}
 }
 
@@ -133,6 +167,13 @@ static bool	ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
 	return ((alpha > 0) && (beta > 0) && (gamma > 0));
 }
 
+static bool	ft_is_point_in_circle(t_vector_2d center, double radius,
+		t_vector_2d point)
+{
+	return (pow(point.x - center.x, 2) + pow(point.y - center.y, 2)
+		<= pow(radius, 2));
+}
+
 /**
  * Returns color of element on minimap
  * @param data
@@ -140,25 +181,22 @@ static bool	ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
  */
 static uint32_t	get_color(t_data *data, int x, int y)
 {
-	// everything that is not an element
 	if ((x < 0 || y < 0 || x >= data->map->width
 			|| y >= data->map->height)
 		|| data->map->map[y][x] == EMPTY
 		|| data->map->map[y][x] == END
-		|| data->map->map[y][x] == OUTSIDE)
-		return (0x000000FF);
-	// walls
+		|| data->map->map[y][x] == OUTSIDE
+		|| data->map->map[y][x] == PLAYER_NO
+		|| data->map->map[y][x] == PLAYER_SO
+		|| data->map->map[y][x] == PLAYER_WE
+		|| data->map->map[y][x] == PLAYER_EA
+		|| data->map->map[y][x] == OPPONENT)
+		return (0xF5F5DCFF);
 	else if (data->map->map[y][x] == WALL)
-		return (0xFFFFFFFF);
-	// doors
-	// else if (data->map->map[y][x] == DOOR_CLOSED) //newer
+		return (0x808080FF);
 	else if (data->map->map[y][x] == DOOR_CLOSED)
 		return (0x8B4513FF);
-	// sprites
 	else if (data->map->map[y][x] == DOOR_OPEN)
 		return (0xA0522DFF);
-	else if (data->map->map[y][x] == OPPONENT)
-		return (0xA52A2AFF);
-	// floor
 	return (0x000000FF);
 }
