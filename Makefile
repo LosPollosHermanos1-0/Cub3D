@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/08 16:17:32 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/25 08:57:12 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC_FILES := \
 	init_raycast_data.c \
 	resize_handler.c \
 	minimap.c \
+	minimap_helpers.c \
 	draw_door_icon.c \
 	init_sprites.c \
 	move_opponent.c \
