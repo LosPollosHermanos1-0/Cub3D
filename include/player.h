@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:16:41 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/02 10:16:47 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 16:13:03 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
+
+# include "cub3d.h"
 
 typedef struct movement_check
 {

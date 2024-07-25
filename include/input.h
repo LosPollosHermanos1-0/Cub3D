@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 14:51:34 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/06/27 14:51:39 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 16:12:50 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
 # define INPUT_H
+
+# include "cub3d.h"
 
 void	arrow_key_hook(mlx_key_data_t keydata, void *param);
 void	wasd_key_input(void *data);

@@ -13,6 +13,8 @@
 #ifndef WINDOW_H
 # define WINDOW_H
 
+# include "cub3d.h"
+
 # define WINDOW_H_INIT 800
 # define WINDOW_W_INIT 1200
 

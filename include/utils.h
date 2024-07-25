@@ -6,12 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:19:48 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/23 09:17:37 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:13:10 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
+
+# include "cub3d.h"
 
 void			ft_exit(void);
 

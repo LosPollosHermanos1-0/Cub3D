@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 14:29:21 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:15:25 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
+
+# include "cub3d.h"
 
 typedef struct s_coordinate
 {
@@ -77,12 +79,11 @@ typedef struct s_sprite_data
 	double					last_animation_change;
 	double					animation_speed;
 	double					last_idle;
-	double                  last_move;
+	double					last_move;
 	int						texture;
 	double					move_speed;
 	double					distance_to_player;
-	t_opponent_state        state;
-
+	t_opponent_state		state;
 }							t_sprite_data;
 
 // void		draw_line_vector(mlx_image_t *img,
