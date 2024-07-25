@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:20:08 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/02 10:20:45 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 17:08:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ t_vector_2d	generate_movement_vector(const t_data *data)
 
 void	move_player(t_data *d)
 {
-	const t_vector_2d move = generate_movement_vector(d);
-	const t_movement_check check = check_move_with_wall_dist(move, d->player.pos, d->player.wall_dist);
+	const t_vector_2d		move = generate_movement_vector(d);
+	const t_movement_check	check = check_move_with_wall_dist(move,
+			d->player.pos, d->player.wall_dist);
 
 	if (check.can_move_x && check.can_move_y && check.can_move_x_and_y)
 		d->player.pos = ft_vector_add(d->player.pos, move);

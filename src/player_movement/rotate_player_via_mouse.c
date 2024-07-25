@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_movement.c                                   :+:      :+:    :+:   */
+/*   rotate_player_via_mouse.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:53:06 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 17:09:24 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 17:09:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void	set_last_xpos(double xpos)
 
 void	rotate_player_mouse(double xpos, double ypos, void *param)
 {
-	t_data	*data = param;
+	t_data			*data;
 	double			delta_x;
 	double			angle;
 
 	(void)ypos;
+	data = param;
 	if (!(data->flags & FLAG_MOUSE_LOCKED))
 		return ;
 	if (*get_last_xpos() == -1)
