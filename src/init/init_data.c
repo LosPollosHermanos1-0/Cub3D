@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/22 21:19:59 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:04:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ bool	ft_set_data(char **filepath)
 	data = static_data();
 	if (ft_load_data(filepath, texture_paths, f_and_c_color, &map) == false)
 		return (false);
-	// call only when bonus
-	// when not bonus
-	// data->rgb = rgb;
 	data->texture = init_texture(texture_paths);
 	if (data->texture == NULL)
 		return (false);
