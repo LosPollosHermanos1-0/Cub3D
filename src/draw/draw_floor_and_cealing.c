@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:05:52 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 14:09:32 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:26:19 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ inline void	draw_floor_and_ceiling(t_data *data, int y)
 	floor_step = ft_vector_div(ft_vector_scale(ft_vector_sub(ray_dir_right, ray_dir_left), row_distance), (t_vector_2d){data->window->width, data->window->width});
 	floor = ft_vector_add(data->player.pos, ft_vector_scale(ray_dir_left, row_distance));
 
-	// t_coordinate		cell[2];
-	// t_coordinate		texture[2];
 	float				blendFactor;
 	int				x;
 	x = -1;

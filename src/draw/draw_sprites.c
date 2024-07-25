@@ -6,11 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:10:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 14:44:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:36:47 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	fill_vars(t_data *data, t_sprite_data *sprite,
+	double *height_adj_factor, int *height_adj);
 
 void	calculate_relative_position(t_data *data, t_sprite_data *sprite)
 {
@@ -58,18 +61,18 @@ void	calculate_sprite_screen_position_and_size(t_data *data,
 
 void	calculate_drawing_start_and_end(t_data *data, t_sprite_data *sprite)
 {
-	double	height_adjustment_factor;
-	int		height_adjustment;
+	double	height_adj_factor;
+	int		height_adj;
 
-	height_adjustment_factor = 0.25;
-	height_adjustment = sprite->render_data.sprite_height
-		* height_adjustment_factor;
+	height_adj_factor = 0.25;
+	height_adj = sprite->render_data.sprite_height
+		* height_adj_factor;
 	sprite->render_data.draw_start_y = -sprite->render_data.sprite_height / 2
-		+ data->window->height / 2 - height_adjustment;
+		+ data->window->height / 2 - height_adj;
 	if (sprite->render_data.draw_start_y < 0)
 		sprite->render_data.draw_start_y = 0;
 	sprite->render_data.draw_end_y = sprite->render_data.sprite_height / 2
-		+ data->window->height / 2 - height_adjustment;
+		+ data->window->height / 2 - height_adj;
 	if (sprite->render_data.draw_end_y >= data->window->height)
 		sprite->render_data.draw_end_y = data->window->height - 1;
 	sprite->render_data.draw_start_x = -sprite->render_data.sprite_width / 2
@@ -84,10 +87,36 @@ void	calculate_drawing_start_and_end(t_data *data, t_sprite_data *sprite)
 
 void	draw_sprite(t_data *data, t_sprite_data *sprite)
 {
-	double	height_adjustment_factor;
-	int		height_adjustment;
-	int		stripe;
+	double		height_adj_factor;
+	int			height_adj;
+	int			stripe;
+	int			y;
+	uint32_t	color;
 
+	fill_vars(data, sprite, &height_adj_factor, &height_adj);
+	stripe = sprite->render_data.draw_start_x;
+	while (stripe < sprite->render_data.draw_end_x)
+	{
+		sprite->render_data.tex_x = (stripe - (-sprite->render_data.sprite_width / 2 + sprite->render_data.sprite_screen_x)) * TEX_WIDTH_FLOOR / sprite->render_data.sprite_width;
+		if (sprite->render_data.transform.y > 0 && stripe > 0 && stripe < data->window->width && sprite->render_data.transform.y < data->z_buffer[stripe]) {
+			y = sprite->render_data.draw_start_y;
+			while (y < sprite->render_data.draw_end_y)
+			{
+				sprite->render_data.d = (y + height_adj) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128; // Adjusted for height
+				sprite->render_data.tex_y = ((sprite->render_data.d * TEX_HEIGHT_FLOOR) / sprite->render_data.sprite_height) / 256;
+				color = get_pixel(data->sprite_t[sprite->texture], sprite->render_data.tex_x, sprite->render_data.tex_y);
+				if ((color & 0x00FFFFFF) != 0)
+					mlx_put_pixel(data->window->image, stripe, y, color);
+				y++;
+			}
+		}
+		stripe++;
+	}
+}
+
+static void	fill_vars(t_data *data, t_sprite_data *sprite,
+	double *height_adj_factor, int *height_adj)
+{
 	if (mlx_get_time() > sprite->last_animation_change
 		+ sprite->animation_speed)
 	{
@@ -98,26 +127,7 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 	calculate_transformation(data, sprite);
 	calculate_sprite_screen_position_and_size(data, sprite);
 	calculate_drawing_start_and_end(data, sprite);
-	height_adjustment_factor = 0.25;
-	height_adjustment = sprite->render_data.sprite_height
-		* height_adjustment_factor;
-	stripe = sprite->render_data.draw_start_x;
-	while (stripe < sprite->render_data.draw_end_x)
-	{
-		sprite->render_data.tex_x = (stripe - (-sprite->render_data.sprite_width / 2 + sprite->render_data.sprite_screen_x)) * TEX_WIDTH_FLOOR / sprite->render_data.sprite_width;
-		if (sprite->render_data.transform.y > 0 && stripe > 0 && stripe < data->window->width && sprite->render_data.transform.y < data->z_buffer[stripe]) {
-			int y = sprite->render_data.draw_start_y;
-			while (y < sprite->render_data.draw_end_y)
-			{
-				sprite->render_data.d = (y + height_adjustment) * 256 - data->window->height * 128 + sprite->render_data.sprite_height * 128; // Adjusted for height
-				sprite->render_data.tex_y = ((sprite->render_data.d * TEX_HEIGHT_FLOOR) / sprite->render_data.sprite_height) / 256;
-				uint32_t color = get_pixel(data->sprite_t[sprite->texture], sprite->render_data.tex_x, sprite->render_data.tex_y);
-				if ((color & 0x00FFFFFF) != 0)
-					mlx_put_pixel(data->window->image, stripe, y, color);
-				y++;
-			}
-		}
-		stripe++;
-	}
+	(*height_adj_factor) = 0.25;
+	(*height_adj) = sprite->render_data.sprite_height
+		* (*height_adj_factor);
 }
-

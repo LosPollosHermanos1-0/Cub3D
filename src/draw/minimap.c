@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 12:08:21 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/25 08:56:54 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:55:09 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ static void		draw_mini_map_element(t_data *data, int map_x, int map_y,
 					double scale);
 static void		ft_draw_mini_player(t_data *data, double scale);
 static uint32_t	get_color(t_data *data, int x, int y);
-// static bool		ft_is_point_in_triangle(t_vector_2d *point, t_vector_2d *a,
-// 					t_vector_2d *b, t_vector_2d *c);
 static void		ft_draw_mini_opponent(t_data *data, int i, double scale);
-// static bool		ft_is_point_in_circle(t_vector_2d center, double radius,
-// 					t_vector_2d point);
 
 /**
  * Repeatedly draws minimap
