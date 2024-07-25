@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:10:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 17:43:33 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:51:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 
 static void	fill_vars(t_data *data, t_sprite_data *sprite,
 				double *height_adj_factor, int *height_adj);
-
-void	calculate_transformation(t_data *data, t_sprite_data *sprite)
-{
-	double	inv_det;
-
-	inv_det = 1.0 / (data->player.plane.x * data->player.dir.y
-			- data->player.dir.x * data->player.plane.y);
-	sprite->render_data.transform.x = inv_det * (data->player.dir.y
-			* sprite->render_data.rela_pos.x - data->player.dir.x
-			* sprite->render_data.rela_pos.y);
-	sprite->render_data.transform.y = inv_det * (-data->player.plane.y
-			* sprite->render_data.rela_pos.x + data->player.plane.x
-			* sprite->render_data.rela_pos.y);
-}
 
 void	calculate_sprite_screen_position_and_size(t_data *data,
 			t_sprite_data *sprite)
@@ -88,8 +74,8 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 	uint32_t	color;
 
 	fill_vars(data, sprite, &height_adj_factor, &height_adj);
-	stripe = sprite->render_data.draw_start_x;
-	while (stripe < sprite->render_data.draw_end_x)
+	stripe = sprite->render_data.draw_start_x - 1;
+	while (++stripe < sprite->render_data.draw_end_x)
 	{
 		sprite->render_data.tex_x = (stripe - (-sprite->render_data.sprite_width
 					/ 2 + sprite->render_data.sprite_screen_x))
@@ -98,8 +84,8 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 			< data->window->width && sprite->render_data.transform.y
 			< data->z_buffer[stripe])
 		{
-			y = sprite->render_data.draw_start_y;
-			while (y < sprite->render_data.draw_end_y)
+			y = sprite->render_data.draw_start_y - 1;
+			while (++y < sprite->render_data.draw_end_y)
 			{
 				sprite->render_data.d = (y + height_adj) * 256
 					- data->window->height * 128
@@ -111,16 +97,16 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 						sprite->render_data.tex_x, sprite->render_data.tex_y);
 				if ((color & 0x00FFFFFF) != 0)
 					mlx_put_pixel(data->window->image, stripe, y, color);
-				y++;
 			}
 		}
-		stripe++;
 	}
 }
 
 static void	fill_vars(t_data *data, t_sprite_data *sprite,
 	double *height_adj_factor, int *height_adj)
 {
+	double	inv_det;
+
 	if (mlx_get_time() > sprite->last_animation_change
 		+ sprite->animation_speed)
 	{
@@ -129,7 +115,14 @@ static void	fill_vars(t_data *data, t_sprite_data *sprite,
 	}
 	sprite->render_data.rela_pos.x = sprite->pos.x - data->player.pos.x;
 	sprite->render_data.rela_pos.y = sprite->pos.y - data->player.pos.y;
-	calculate_transformation(data, sprite);
+	inv_det = 1.0 / (data->player.plane.x * data->player.dir.y
+			- data->player.dir.x * data->player.plane.y);
+	sprite->render_data.transform.x = inv_det * (data->player.dir.y
+			* sprite->render_data.rela_pos.x - data->player.dir.x
+			* sprite->render_data.rela_pos.y);
+	sprite->render_data.transform.y = inv_det * (-data->player.plane.y
+			* sprite->render_data.rela_pos.x + data->player.plane.x
+			* sprite->render_data.rela_pos.y);
 	calculate_sprite_screen_position_and_size(data, sprite);
 	calculate_drawing_start_and_end(data, sprite);
 	(*height_adj_factor) = 0.25;
