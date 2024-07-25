@@ -37,6 +37,10 @@ void	init_sprites(t_data *data)
                 data->sprites[sprite_count].last_animation_change = 0;
                 data->sprites[sprite_count].animation_speed = 0.2;
                 data->sprites[sprite_count].move_speed = 0.02;
+                data->sprites[sprite_count].last_idle = mlx_get_time();
+                data->sprites[sprite_count].last_move = mlx_get_time();
+                data->sprites[sprite_count].state = OPPONENT_IDLE;
+
                 sprite_count++;
             }
             x++;
