@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/25 14:32:42 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/25 15:56:54 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,16 @@ LIB_INCLUDES := $(LIB_DIR)/include
 SRC_DIR := src
 HEADERS_DIR := include
 
-HEADERS := cub3d.h draw.h input.h parsing.h player.h static.h utils.h window.h
+HEADERS := \
+	cub3d.h \
+	draw.h \
+	input.h \
+	opponent.h \
+	parsing.h \
+	player.h \
+	static.h \
+	utils.h \
+	window.h \
 
 SUB_DIRS := parsing init static draw input player_movement utils opponent_movement
 SRC_DIRS := $(SRC_DIR) $(addprefix $(SRC_DIR)/,$(SUB_DIRS))
@@ -70,6 +79,7 @@ SRC_FILES := \
 	draw_door_icon.c \
 	init_sprites.c \
 	move_opponent.c \
+	move_opponent2.c \
 
 # Include directory for headers
 INCLUDES := -I$(LIB_INCLUDES) -I$(HEADERS_DIR) -I$(MLX_INCLUDES)
