@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:15:36 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:51:21 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include "cub3d.h"
 
-typedef enum e_map_elements	t_map_elements;
+typedef enum e_map_elements		t_map_elements;
 typedef struct s_sprite_data	t_sprite_data;
 
 typedef enum e_textures {

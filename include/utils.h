@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:19:48 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:13:10 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:52:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 void			ft_exit(void);
 
-t_textures	determine_direction(const t_vector_2d ray_dir, const int side);
+t_textures		determine_direction(const t_vector_2d ray_dir, const int side);
 t_raycast_data	init_raycast_data(const t_data *data, const int x);
 void			set_last_xpos(double xpos);
-double calculate_distance(t_vector_2d point1, t_vector_2d point2);
+double			calculate_distance(t_vector_2d point1, t_vector_2d point2);
 
 #endif

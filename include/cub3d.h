@@ -6,18 +6,18 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 10:49:56 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:14:13 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:49:42 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#ifdef IS_BONUS
-#define BONUS 1
-#else
-#define BONUS 0
-#endif
+# ifdef IS_BONUS
+#  define BONUS 1
+# else
+#  define BONUS 0
+# endif
 
 # include <stdlib.h>
 # include <stdio.h>
