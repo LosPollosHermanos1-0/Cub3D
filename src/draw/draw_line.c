@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:20:06 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 14:30:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:22:11 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,41 +79,3 @@ void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 		}
 	}
 }
-
-// void draw_line_vector(mlx_image_t *img, t_vector_2d start,
-// 	t_vector_2d direction, uint32_t color)
-// {
-// 	int x0 = (int)round(start.x);
-// 	int y0 = (int)round(start.y);
-// 	int x1 = (int)round(start.x + direction.x);
-// 	int y1 = (int)round(start.y + direction.y);
-
-// 	int dx = abs(x1 - x0);
-// 	int dy = abs(y1 - y0);
-
-// 	int sx = (x0 < x1) ? 1 : -1;
-// 	int sy = (y0 < y1) ? 1 : -1;
-
-// 	int err = dx - dy;
-// 	int e2;
-
-// 	while (1) {
-// 		mlx_put_pixel(img, x0, y0, color);
-
-// 		if (x0 == x1 && y0 == y1) {
-// 			break;
-// 		}
-
-// 		e2 = 2 * err;
-
-// 		if (e2 > -dy) {
-// 			err -= dy;
-// 			x0 += sx;
-// 		}
-
-// 		if (e2 < dx) {
-// 			err += dx;
-// 			y0 += sy;
-// 		}
-// 	}
-// }
