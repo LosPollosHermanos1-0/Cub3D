@@ -3,43 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   draw_floor_and_cealing.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:05:52 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 22:07:59 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 13:34:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-uint32_t blend_color(uint32_t originalColor, float blendFactor) {
-    uint8_t r = (originalColor >> 24) & 0xFF;
-    uint8_t g = (originalColor >> 16) & 0xFF;
-    uint8_t b = (originalColor >> 8) & 0xFF;
-    // Darken the color based on blendFactor
-    r *= (1 - blendFactor);
-    g *= (1 - blendFactor);
-    b *= (1 - blendFactor);
-    return ((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | 0xFF; // Assuming alpha is always 255
+uint32_t blend_color(uint32_t originalColor, float blendFactor)
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+
+	r = (originalColor >> 24) & 0xFF;
+	g = (originalColor >> 16) & 0xFF;
+	b = (originalColor >> 8) & 0xFF;
+	r *= (1 - blendFactor);
+	g *= (1 - blendFactor);
+	b *= (1 - blendFactor);
+	return (((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8)
+		| 0xFF);
 }
 
-uint32_t blend_two_colors(uint32_t color1, uint32_t color2, float blendFactor) {
-    // Extracting RGB components from both colors
-    uint8_t r1 = (color1 >> 24) & 0xFF;
-    uint8_t g1 = (color1 >> 16) & 0xFF;
-    uint8_t b1 = (color1 >> 8) & 0xFF;
+uint32_t blend_two_colors(uint32_t color1, uint32_t color2, float blendFactor)
+{
+	// Extracting RGB components from both colors
+	uint8_t		rgb1[3];
+	uint8_t		rgb2[3];
+	uint8_t		r_result;
+	uint8_t		g_result;
+	uint8_t		b_result;
 
-    uint8_t r2 = (color2 >> 24) & 0xFF;
-    uint8_t g2 = (color2 >> 16) & 0xFF;
-    uint8_t b2 = (color2 >> 8) & 0xFF;
-
-    // Linearly interpolating each component
-    uint8_t rResult = (uint8_t)(r1 + (r2 - r1) * blendFactor);
-    uint8_t gResult = (uint8_t)(g1 + (g2 - g1) * blendFactor);
-    uint8_t bResult = (uint8_t)(b1 + (b2 - b1) * blendFactor);
-
-    // Combining the components back into a single uint32_t color
-    return ((uint32_t)rResult << 24) | ((uint32_t)gResult << 16) | ((uint32_t)bResult << 8) | 0xFF; // Assuming alpha is always 255
+	rgb1[0] = (color1 >> 24) & 0xFF;
+	rgb1[1] = (color1 >> 16) & 0xFF;
+	rgb1[2] = (color1 >> 8) & 0xFF;
+	rgb2[0] = (color2 >> 24) & 0xFF;
+	rgb2[1] = (color2 >> 16) & 0xFF;
+	rgb2[2] = (color2 >> 8) & 0xFF;
+	r_result = (uint8_t)(rgb1[0] + (rgb2[0] - rgb1[0]) * blendFactor);
+	g_result = (uint8_t)(rgb1[1] + (rgb2[1] - rgb1[1]) * blendFactor);
+	b_result = (uint8_t)(rgb1[2] + (rgb2[2] - rgb1[2]) * blendFactor);
+	return (((uint32_t)r_result << 24) | ((uint32_t)g_result << 16)
+		| ((uint32_t)b_result << 8) | 0xFF);
 }
 
 bool is_in_circle(t_vector_2d center, double radius, t_vector_2d point) {
