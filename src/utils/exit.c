@@ -6,10 +6,9 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:15:48 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/04 16:35:27 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:10:54 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -20,10 +19,8 @@
 //     free(data);
 // }
 
-
-void ft_exit()
+void	ft_exit(void)
 {
-
 	mlx_terminate(static_data()->window->mlx);
 	exit(0);
 }
