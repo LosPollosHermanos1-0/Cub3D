@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:20:06 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:48:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:51:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	do_work2(t_draw_line_data *line_data, t_vector_2d *start);
+static void	adjust_values(t_draw_line_data *line_data, t_vector_2d *start);
 
 void	do_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
 {
@@ -102,7 +102,7 @@ void	draw_line(mlx_image_t *img, t_vector_2d start, t_vector_2d end,
 			mlx_put_pixel(img, (int)start.x, (int)start.y, color);
 		if ((int)start.x == (int)end.x && (int)start.y == (int)end.y)
 			break ;
-		do_work2(&line_data, &start);
+		adjust_values(&line_data, &start);
 	}
 }
 
