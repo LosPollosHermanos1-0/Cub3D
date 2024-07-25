@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:15:25 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 16:41:02 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,14 @@ typedef struct s_sprite_data
 	double					distance_to_player;
 	t_opponent_state		state;
 }							t_sprite_data;
+
+typedef struct s_draw_line_data
+{
+	t_vector_2d				delta;
+	t_vector_2d				sign;
+	int						error;
+	int						error2;
+}							t_draw_line_data;
 
 // void		draw_line_vector(mlx_image_t *img,
 // 				t_vector_2d start, t_vector_2d direction,
