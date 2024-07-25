@@ -6,7 +6,7 @@
 #    By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 11:23:35 by lzipp             #+#    #+#              #
-#    Updated: 2024/07/25 08:57:12 by lzipp            ###   ########.fr        #
+#    Updated: 2024/07/25 14:32:42 by lzipp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC_FILES := \
 	init_player.c \
 	init_map.c \
 	draw_floor_and_cealing.c \
-	draw_spites.c \
+	draw_sprites.c \
 	draw_line.c \
 	draw_walls.c \
 	wasd_key_input.c \

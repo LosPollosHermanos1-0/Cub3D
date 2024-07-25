@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 08:57:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 14:29:21 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ typedef struct s_sprite_data
 
 }							t_sprite_data;
 
-void		draw_line_vector(mlx_image_t *img,
-				t_vector_2d start, t_vector_2d direction,
-				uint32_t color);
+// void		draw_line_vector(mlx_image_t *img,
+// 				t_vector_2d start, t_vector_2d direction,
+// 				uint32_t color);
 void		draw_rays(void);
 uint32_t	get_pixel(const mlx_texture_t *texture, uint32_t x,
 				uint32_t y);
