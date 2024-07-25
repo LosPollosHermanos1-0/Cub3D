@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoritz <jmoritz@student.42heilbronn.de>   +#+  +:+       +#+        */
+/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 02:41:42 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/03 02:42:09 by jmoritz          ###   ########.fr       */
+/*   Updated: 2024/07/25 14:39:51 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	calculate_wall_projection_bounds(const t_data *data,
 		wrd->draw_end = data->window->height ;
 }
 
-inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x)
+inline void	draw_walls(const t_data *data, const t_raycast_data *rd,
+	const int x)
 {
 	u_int32_t				color;
 	t_wall_rendering_data	wrd;
@@ -64,11 +65,9 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd, const int x
 	{
 		wrd.tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 		tex_pos += step;
-
 		double maxDistance = 10.0; // Maximum distance at which walls are fully dark, adjust as needed
 		double distanceEffect = fmin(1.0, rd->perp_wall_dist / maxDistance);
 		double blendFactor = fmax(0.0, distanceEffect);
-
 		if(wrd.tex_num == WALL) {
 			color = blend_color(get_pixel(data->texture[determine_direction(rd->ray_dir, rd->side)], wrd.tex_x, wrd.tex_y), blendFactor);
 		}

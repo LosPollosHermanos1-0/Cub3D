@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:10:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 14:38:03 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 14:44:23 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	calculate_sprite_screen_position_and_size(t_data *data,
 {
 	double		scale_factor;
 
-	sacle_factor = 0.5;
+	scale_factor = 0.5;
 	if (sprite->render_data.transform.y == 0)
 	{
 		sprite->render_data.sprite_screen_x = 0;
