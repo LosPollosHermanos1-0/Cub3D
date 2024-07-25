@@ -14,3 +14,5 @@ obj/
 test
 cub3d
 .idea/*
+.vscode
+.devcontainer
