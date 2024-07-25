@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:10:02 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 17:51:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 17:57:47 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	fill_vars(t_data *data, t_sprite_data *sprite,
 				double *height_adj_factor, int *height_adj);
+static void	draw_sprite_stripe(t_data *data, t_sprite_data *sprite,
+				int stripe, int height_adj);
 
 void	calculate_sprite_screen_position_and_size(t_data *data,
 			t_sprite_data *sprite)
@@ -70,8 +72,6 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 	double		height_adj_factor;
 	int			height_adj;
 	int			stripe;
-	int			y;
-	uint32_t	color;
 
 	fill_vars(data, sprite, &height_adj_factor, &height_adj);
 	stripe = sprite->render_data.draw_start_x - 1;
@@ -84,20 +84,29 @@ void	draw_sprite(t_data *data, t_sprite_data *sprite)
 			< data->window->width && sprite->render_data.transform.y
 			< data->z_buffer[stripe])
 		{
-			y = sprite->render_data.draw_start_y - 1;
-			while (++y < sprite->render_data.draw_end_y)
-			{
-				sprite->render_data.d = (y + height_adj) * 256
-					- data->window->height * 128
-					+ sprite->render_data.sprite_height * 128;
-				sprite->render_data.tex_y = ((sprite->render_data.d
-							* TEX_HEIGHT_FLOOR)
-						/ sprite->render_data.sprite_height) / 256;
-				color = get_pixel(data->sprite_t[sprite->texture],
-						sprite->render_data.tex_x, sprite->render_data.tex_y);
-				if ((color & 0x00FFFFFF) != 0)
-					mlx_put_pixel(data->window->image, stripe, y, color);
-			}
+			draw_sprite_stripe(data, sprite, stripe, height_adj);
+		}
+	}
+}
+
+static void	draw_sprite_stripe(t_data *data, t_sprite_data *sprite,
+				int stripe, int height_adj)
+{
+	int		y;
+	int		color;
+
+	y = sprite->render_data.draw_start_y - 1;
+	while (++y < sprite->render_data.draw_end_y)
+	{
+		sprite->render_data.d = (y + height_adj) * 256 - data->window->height
+			* 128 + sprite->render_data.sprite_height * 128;
+		sprite->render_data.tex_y = ((sprite->render_data.d * TEX_HEIGHT_FLOOR)
+				/ sprite->render_data.sprite_height) / 256;
+		color = get_pixel(data->sprite_t[sprite->texture],
+				sprite->render_data.tex_x, sprite->render_data.tex_y);
+		if ((color & 0x00FFFFFF) != 0)
+		{
+			mlx_put_pixel(data->window->image, stripe, y, color);
 		}
 	}
 }
