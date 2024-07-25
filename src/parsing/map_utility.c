@@ -6,13 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:52:41 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 16:35:57 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 09:16:04 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	ft_is_player(char c);
+static void	map_player_to_enum(int ***map_ptr, char c, int i, int j);
 
 /**
  * Returns the width of the map.
@@ -74,17 +74,13 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 			(*map_ptr)[i][j] = WALL;
 		else if ((*row_ptr)[j] == '2')
 			(*map_ptr)[i][j] = PILLAR;
-		else if ((*row_ptr)[j] == 'N')
-			(*map_ptr)[i][j] = PLAYER_NO;
-		else if ((*row_ptr)[j] == 'S')
-			(*map_ptr)[i][j] = PLAYER_SO;
-		else if ((*row_ptr)[j] == 'W')
-			(*map_ptr)[i][j] = PLAYER_WE;
-		else if ((*row_ptr)[j] == 'E')
-			(*map_ptr)[i][j] = PLAYER_EA;
+		else if ((*row_ptr)[j] == 'N' || (*row_ptr)[j] == 'S'
+			|| (*row_ptr)[j] == 'W' || (*row_ptr)[j] == 'E')
+			map_player_to_enum(map_ptr, (*row_ptr)[j], i, j);
 		else if ((*row_ptr)[j] == 'D')
 			(*map_ptr)[i][j] = DOOR_CLOSED;
-		else if ((*row_ptr)[j] == 'O') {
+		else if ((*row_ptr)[j] == 'O')
+		{
 			static_data()->opponent_count++;
 			(*map_ptr)[i][j] = OPPONENT;
 		}
@@ -94,41 +90,14 @@ void	map_char_to_enum(int ***map_ptr, char **row_ptr, int i)
 	(*map_ptr)[i][j] = END;
 }
 
-/**
- * Returns the players position.
- *
- * @param map_ptr Map to search player in.
- * @return row-col position if 1 player found, else NULL.
- */
-int	*ft_get_player(char ***map_ptr)
+static void	map_player_to_enum(int ***map_ptr, char c, int i, int j)
 {
-	int		*pos;
-	int		row;
-	int		col;
-
-	pos = NULL;
-	row = -1;
-	while ((*map_ptr)[++row])
-	{
-		col = -1;
-		while ((*map_ptr)[row][++col])
-		{
-			if (ft_is_player((*map_ptr)[row][col]) && pos)
-				return (free(pos), NULL);
-			else if (ft_is_player((*map_ptr)[row][col]))
-			{
-				pos = malloc(2 * sizeof(int));
-				if (!pos)
-					return (NULL);
-				pos[0] = row;
-				pos[1] = col;
-			}
-		}
-	}
-	return (pos);
-}
-
-static bool	ft_is_player(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+	if (c == 'N')
+		(*map_ptr)[i][j] = PLAYER_NO;
+	else if (c == 'S')
+		(*map_ptr)[i][j] = PLAYER_SO;
+	else if (c == 'W')
+		(*map_ptr)[i][j] = PLAYER_WE;
+	else if (c == 'E')
+		(*map_ptr)[i][j] = PLAYER_EA;
 }

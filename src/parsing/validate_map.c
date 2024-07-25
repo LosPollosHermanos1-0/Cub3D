@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 16:45:28 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 09:02:52 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,3 @@ static bool	ft_check_doors(char ***map_ptr, int i, int j)
 		return (true);
 	return (false);
 }
-
-// static bool	is_fillable(char input)
-// {
-// 	return (input == '0' || input == 'D' || input == 'O');
-// }

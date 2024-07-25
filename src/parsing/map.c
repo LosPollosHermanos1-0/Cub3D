@@ -6,13 +6,14 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/23 16:44:50 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/25 09:13:04 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static bool	ft_get_map_char(char **content, char ***map_ptr);
+static bool	ft_is_player(char c);
 
 /**
  * Gets the map from the content.
@@ -84,4 +85,43 @@ static bool	ft_get_map_char(char **content, char ***map_ptr)
 bool	is_fillable(char input)
 {
 	return (input == '0' || input == 'D' || input == 'O');
+}
+
+/**
+ * Returns the players position.
+ *
+ * @param map_ptr Map to search player in.
+ * @return row-col position if 1 player found, else NULL.
+ */
+int	*ft_get_player(char ***map_ptr)
+{
+	int		*pos;
+	int		row;
+	int		col;
+
+	pos = NULL;
+	row = -1;
+	while ((*map_ptr)[++row])
+	{
+		col = -1;
+		while ((*map_ptr)[row][++col])
+		{
+			if (ft_is_player((*map_ptr)[row][col]) && pos)
+				return (free(pos), NULL);
+			else if (ft_is_player((*map_ptr)[row][col]))
+			{
+				pos = malloc(2 * sizeof(int));
+				if (!pos)
+					return (NULL);
+				pos[0] = row;
+				pos[1] = col;
+			}
+		}
+	}
+	return (pos);
+}
+
+static bool	ft_is_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
