@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vscode <vscode@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 02:41:42 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:44:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:06:57 by vscode           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd,
 			dwd.color = blend_color(get_pixel(data->texture[DOOR_CLOSED],
 						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blend_factor);
 		else
-			printf("Error: unknown texture\n");
+			dwd.color = 0;
 		mlx_put_pixel(data->window->image, x, dwd.y, dwd.color);
 	}
 }

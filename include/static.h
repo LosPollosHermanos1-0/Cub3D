@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:44:05 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:51:21 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 16:50:14 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ typedef struct s_data {
 	t_sprite_data	*sprites;
 }				t_data;
 
-void			free_data(t_data **data);
+// void			free_data(t_data *data);
 void			init_player(t_data *data);
 void			free_player(t_player **player);
 t_map			*init_map(int ***map_ptr);
 void			free_map(t_map **map);
+void			free_int_map(int **map);
 mlx_texture_t	**init_texture(char **texture_paths);
 t_data			*static_data(void);
 
-void			free_data(t_data **data);
 bool			ft_set_data(char **filepath);
 void			init_sprites(t_data *data);
 

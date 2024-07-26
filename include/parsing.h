@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/25 16:13:02 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 16:26:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,6 @@ typedef enum e_map_elements
 	PILLAR,
 	END
 }				t_map_elements;
-
-// structs
-// typedef struct s_config
-// {
-// 	char			**textures;
-// 	int				**rgb;
-// }					t_config;
-
-// typedef struct s_map
-// {
-// 	e_map_elements	**map;
-// 	int				width;
-// 	int				height;
-// }					t_map;
 
 // validate input
 bool				ft_validate_input(int argc, char ***argv);

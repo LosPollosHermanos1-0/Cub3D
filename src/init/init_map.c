@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:20:33 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/22 21:20:56 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 16:50:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,15 @@ void	free_map(t_map **map)
 	while ((*map)->map[++i])
 		free((*map)->map[i]);
 	free((*map)->map);
+	free(*map);
+}
+
+void	free_int_map(int **map)
+{
+	int	i;
+
+	i = -1;
+	while (map[++i])
+		free(map[i]);
 	free(*map);
 }
