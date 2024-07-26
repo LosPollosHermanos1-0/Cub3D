@@ -6,11 +6,13 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:05:52 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 17:26:19 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:41:18 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	put_pixels(t_draw_floor_and_ceiling_data *fcd, t_data *data, int y);
 
 uint32_t	blend_color(uint32_t originalColor, float blendFactor)
 {
@@ -58,41 +60,39 @@ bool	is_in_circle(t_vector_2d center, double radius, t_vector_2d point)
 
 inline void	draw_floor_and_ceiling(t_data *data, int y)
 {
-	double			half_height;
-	double			position;
-	double			row_distance;
+	t_draw_floor_and_ceiling_data	fcd;
 
-	half_height = data->window->height / 2.0;
-	position = y - half_height;
-	row_distance = half_height / position;
-
-	t_vector_2d		ray_dir_left;
-	t_vector_2d		ray_dir_right;
-	t_vector_2d		floor_step;
-	t_vector_2d		floor;
-	ray_dir_left = ft_vector_sub(data->player.dir, data->player.plane);
-	ray_dir_right = ft_vector_add(data->player.dir, data->player.plane);
-	floor_step = ft_vector_div(ft_vector_scale(ft_vector_sub(ray_dir_right, ray_dir_left), row_distance), (t_vector_2d){data->window->width, data->window->width});
-	floor = ft_vector_add(data->player.pos, ft_vector_scale(ray_dir_left, row_distance));
-
-	float				blendFactor;
-	int				x;
-	x = -1;
-	while (++x < data->window->width)
+	fcd.half_height = data->window->height / 2.0;
+	fcd.position = y - fcd.half_height;
+	fcd.row_distance = fcd.half_height / fcd.position;
+	fcd.ray_dir_left = ft_vector_sub(data->player.dir, data->player.plane);
+	fcd.ray_dir_right = ft_vector_add(data->player.dir, data->player.plane);
+	fcd.floor_step = ft_vector_div(ft_vector_scale(ft_vector_sub(
+					fcd.ray_dir_right, fcd.ray_dir_left), fcd.row_distance),
+			(t_vector_2d){data->window->width, data->window->width});
+	fcd.floor = ft_vector_add(data->player.pos,
+			ft_vector_scale(fcd.ray_dir_left, fcd.row_distance));
+	fcd.x = -1;
+	while (++fcd.x < data->window->width)
 	{
-		t_coordinate	cell = {(int)floor.x, (int)floor.y};
-		t_coordinate	texture = {(int)(TEX_WIDTH_FLOOR * (floor.x - cell.x)) & (TEX_WIDTH_FLOOR - 1),
-		(int)(TEX_HEIGHT_FLOOR * (floor.y - cell.y)) & (TEX_HEIGHT_FLOOR - 1)
-		};
-
-		blendFactor = fminf(1.0, fmaxf(0.0, 1.0 - position / half_height));
-
-		// uint32_t floorColor = blend_color(get_pixel(data->texture[FLOOR], texture.x, texture.y), blendFactor);
-		// uint32_t ceilingColor = blend_color(get_pixel(data->texture[CEILING], texture.x, texture.y), blendFactor);
-
-		mlx_put_pixel(data->window->image, x, y, blend_color(get_pixel(data->texture[FLOOR], texture.x, texture.y), blendFactor));
-		mlx_put_pixel(data->window->image, x, data->window->height - y - 1, blend_color(get_pixel(data->texture[CEILING], texture.x, texture.y), blendFactor));
-
-		floor = ft_vector_add(floor, floor_step);
+		fcd.cell = (t_coordinate){(int)fcd.floor.x, (int)fcd.floor.y};
+		fcd.texture = (t_coordinate){(int)(TEX_WIDTH_FLOOR
+				* (fcd.floor.x - fcd.cell.x)) & (TEX_WIDTH_FLOOR - 1),
+			(int)(TEX_HEIGHT_FLOOR * (fcd.floor.y - fcd.cell.y))
+			& (TEX_HEIGHT_FLOOR - 1)};
+		fcd.blendFactor = fminf(1.0, fmaxf(0.0, 1.0 - fcd.position
+					/ fcd.half_height));
+		put_pixels(&fcd, data, y);
+		fcd.floor = ft_vector_add(fcd.floor, fcd.floor_step);
 	}
+}
+
+static void	put_pixels(t_draw_floor_and_ceiling_data *fcd, t_data *data, int y)
+{
+	mlx_put_pixel(data->window->image, fcd->x, y,
+		blend_color(get_pixel(data->texture[FLOOR], fcd->texture.x,
+				fcd->texture.y), fcd->blendFactor));
+	mlx_put_pixel(data->window->image, fcd->x, data->window->height - y - 1,
+		blend_color(get_pixel(data->texture[CEILING], fcd->texture.x,
+				fcd->texture.y), fcd->blendFactor));
 }

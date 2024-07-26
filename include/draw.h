@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:07:13 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:33:16 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,20 @@ typedef struct s_draw_walls_data {
 	double					distanceEffect;
 	double					blendFactor;
 }							t_draw_walls_data;
+
+typedef struct s_draw_floor_and_ceiling_data {
+	double					half_height;
+	double					position;
+	double					row_distance;
+	t_vector_2d				ray_dir_left;
+	t_vector_2d				ray_dir_right;
+	t_vector_2d				floor_step;
+	t_vector_2d				floor;
+	float					blendFactor;
+	int						x;
+	t_coordinate			cell;
+	t_coordinate			texture;
+}							t_draw_floor_and_ceiling_data;
 
 
 // void		draw_line_vector(mlx_image_t *img,
