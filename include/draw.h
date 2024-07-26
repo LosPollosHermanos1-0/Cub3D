@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:33:16 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:44:51 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ typedef struct s_draw_walls_data {
 	double					step;
 	double					tex_pos;
 	int						y;
-	double					maxDistance;
-	double					distanceEffect;
-	double					blendFactor;
+	double					max_distance;
+	double					distance_effect;
+	double					blend_factor;
 }							t_draw_walls_data;
 
 typedef struct s_draw_floor_and_ceiling_data {
@@ -115,16 +115,12 @@ typedef struct s_draw_floor_and_ceiling_data {
 	t_vector_2d				ray_dir_right;
 	t_vector_2d				floor_step;
 	t_vector_2d				floor;
-	float					blendFactor;
+	float					blend_factor;
 	int						x;
 	t_coordinate			cell;
 	t_coordinate			texture;
 }							t_draw_floor_and_ceiling_data;
 
-
-// void		draw_line_vector(mlx_image_t *img,
-// 				t_vector_2d start, t_vector_2d direction,
-// 				uint32_t color);
 void		draw_rays(void);
 uint32_t	get_pixel(const mlx_texture_t *texture, uint32_t x,
 				uint32_t y);
@@ -133,7 +129,7 @@ void		draw_walls(const t_data *data,
 void		draw_floor_and_ceiling(t_data *data, int y);
 void		draw_sprite(t_data *data, t_sprite_data *sprite);
 void		draw_mini_map(t_data *data);
-uint32_t	blend_color(uint32_t originalColor, float blendFactor);
+uint32_t	blend_color(uint32_t originalColor, float blend_factor);
 bool		is_in_circle(t_vector_2d center, double radius, t_vector_2d point);
 void		draw_door_icon(t_data *data);
 void		move_opponent(t_data *data, t_sprite_data *opponent);

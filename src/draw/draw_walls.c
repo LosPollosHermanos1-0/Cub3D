@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 02:41:42 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:14:08 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:44:39 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ inline void	draw_walls(const t_data *data, const t_raycast_data *rd,
 	{
 		dwd.wrd.tex_y = (int)dwd.tex_pos & (TEX_HEIGHT - 1);
 		dwd.tex_pos += dwd.step;
-		dwd.distanceEffect = fmin(1.0, rd->perp_wall_dist / dwd.maxDistance);
-		dwd.blendFactor = fmax(0.0, dwd.distanceEffect);
+		dwd.distance_effect = fmin(1.0, rd->perp_wall_dist / dwd.max_distance);
+		dwd.blend_factor = fmax(0.0, dwd.distance_effect);
 		if (dwd.wrd.tex_num == WALL)
 			dwd.color = blend_color(get_pixel(data->texture[
 						determine_direction(rd->ray_dir, rd->side)],
-						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blendFactor);
+						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blend_factor);
 		else if (dwd.wrd.tex_num == PILLAR)
 			dwd.color = blend_color(get_pixel(data->texture[PILLAR],
-						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blendFactor);
+						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blend_factor);
 		else if (dwd.wrd.tex_num == DOOR_CLOSED)
 			dwd.color = blend_color(get_pixel(data->texture[DOOR_CLOSED],
-						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blendFactor);
+						dwd.wrd.tex_x, dwd.wrd.tex_y), dwd.blend_factor);
 		else
 			printf("Error: unknown texture\n");
 		mlx_put_pixel(data->window->image, x, dwd.y, dwd.color);
@@ -86,5 +86,5 @@ static void	init_some_dwd_values(t_draw_walls_data *dwd,
 	dwd->tex_pos = (dwd->wrd.draw_start - data->window->height / 2
 			+ rd->line_height / 2) * dwd->step;
 	dwd->y = dwd->wrd.draw_start - 1;
-	dwd->maxDistance = MAX_DARK;
+	dwd->max_distance = MAX_DARK;
 }
