@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/25 16:41:02 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:01:23 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,18 @@ typedef struct s_draw_line_data
 	int						error;
 	int						error2;
 }							t_draw_line_data;
+
+typedef struct s_draw_walls_data {
+	uint32_t				color;
+	t_wall_rendering_data	wrd;
+	double					step;
+	double					tex_pos;
+	int						y;
+	double					maxDistance;
+	double					distanceEffect;
+	double					blendFactor;
+}							t_draw_walls_data;
+
 
 // void		draw_line_vector(mlx_image_t *img,
 // 				t_vector_2d start, t_vector_2d direction,
