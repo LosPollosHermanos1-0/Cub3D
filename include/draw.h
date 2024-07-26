@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:21:49 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:01:23 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/26 15:07:13 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define TEX_WIDTH_FLOOR 64
 # define TEX_HEIGHT_FLOOR 64
+
+# define MAX_DARK 10.0
 
 # include "cub3d.h"
 
