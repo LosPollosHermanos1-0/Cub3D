@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:42:07 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/27 17:30:01 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:41:05 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	leak_check(void)
 {
-    system("leaks cub3D");
+	system("leaks cub3D");
 }
 
-void add_hooks_to_mlx(t_data *data) {
+void	add_hooks_to_mlx(t_data *data)
+{
 	mlx_loop_hook(data->window->mlx, wasd_key_input, data);
 	mlx_set_cursor_mode(data->window->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(data->window->mlx, WINDOW_H_INIT / 2, WINDOW_W_INIT / 2);
@@ -31,18 +32,14 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	// mlx_set_setting(MLX_HEADLESS, true);
 	if (LEAKS)
 		atexit(leak_check);
 	if (ft_validate_input(argc, &argv) == false)
 		return (1);
-	// mlx_set_setting(MLX_DECORATED, 0);
 	data = static_data();
-	// init_data();
 	if (ft_set_data(&(argv[1])) == false)
 		return (1);
 	draw_rays();
-
 	add_hooks_to_mlx(data);
 	mlx_loop(data->window->mlx);
 	mlx_terminate(data->window->mlx);

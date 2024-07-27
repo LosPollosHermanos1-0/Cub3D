@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:20:06 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 17:15:48 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:39:27 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	do_work(t_vector_2d start, t_vector_2d end, t_vector_2d *sign)
 	else if (start.y < end.y)
 		*sign = ft_vector_init(-1, 1);
 	else
-		*sign = ft_vector_init(-1, -1);    
+		*sign = ft_vector_init(-1, -1);
 }
 
 void	clamp_to_window(t_vector_2d *point)

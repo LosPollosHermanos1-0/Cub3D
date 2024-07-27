@@ -27,19 +27,19 @@
 # define DOOR_ICON_W 50
 
 typedef struct s_window {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-	int32_t		width;
-	int32_t		height;
-	mlx_image_t	*mini_image;
-	int32_t		mini_width;
-	int32_t		mini_height;
-	mlx_image_t	*door_icon_open;
-	mlx_image_t	*door_icon_close;
-	int32_t		door_icon_width;
-	int32_t		door_icon_height;
-    mlx_texture_t *open_texture;
-    mlx_texture_t *close_texture;
+	mlx_t			*mlx;
+	mlx_image_t		*image;
+	int32_t			width;
+	int32_t			height;
+	mlx_image_t		*mini_image;
+	int32_t			mini_width;
+	int32_t			mini_height;
+	mlx_image_t		*door_icon_open;
+	mlx_image_t		*door_icon_close;
+	int32_t			door_icon_width;
+	int32_t			door_icon_height;
+	mlx_texture_t	*open_texture;
+	mlx_texture_t	*close_texture;
 }				t_window;
 
 t_window	*init_window(void);

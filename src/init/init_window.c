@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:12:47 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 17:26:15 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:34:38 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ t_window	*init_window(void)
 	if (window->image == NULL || window->mini_image == NULL)
 		return (printf("Error: window image not allocated\n"), NULL);
 	window->close_texture = mlx_load_png("textures/door-close-icon.png");
-	window->door_icon_open = mlx_texture_to_image(window->mlx, window->close_texture);
-    window->open_texture  = mlx_load_png("textures/door-open-icon.png");
-	window->door_icon_close = mlx_texture_to_image(window->mlx, window->open_texture);
+	window->door_icon_open = mlx_texture_to_image(window->mlx,
+			window->close_texture);
+	window->open_texture = mlx_load_png("textures/door-open-icon.png");
+	window->door_icon_close = mlx_texture_to_image(window->mlx,
+			window->open_texture);
 	if (window->door_icon_open == NULL || window->door_icon_close == NULL)
 		return (printf("Error: door icon not allocated\n"), NULL);
 	fill_window_values(window);
