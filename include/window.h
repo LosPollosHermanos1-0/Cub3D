@@ -38,6 +38,8 @@ typedef struct s_window {
 	mlx_image_t	*door_icon_close;
 	int32_t		door_icon_width;
 	int32_t		door_icon_height;
+    mlx_texture_t *open_texture;
+    mlx_texture_t *close_texture;
 }				t_window;
 
 t_window	*init_window(void);

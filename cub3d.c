@@ -14,7 +14,7 @@
 
 void	leak_check(void)
 {
-	system("leaks cub3D");
+    system("valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./cub3D maps/correct1.cub");
 }
 
 void add_hooks_to_mlx(t_data *data) {

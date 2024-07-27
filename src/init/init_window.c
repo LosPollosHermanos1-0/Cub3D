@@ -31,8 +31,6 @@ void	add_images_to_window(t_window *window)
 t_window	*init_window(void)
 {
 	t_window		*window;
-	mlx_texture_t	*closed;
-	mlx_texture_t	*open;
 
 	window = malloc(sizeof(t_window));
 	window->mlx = mlx_init(WINDOW_W_INIT, WINDOW_H_INIT, "Cub3D", true);
@@ -43,12 +41,10 @@ t_window	*init_window(void)
 			MINI_IMAGE_W, MINI_IMAGE_H);
 	if (window->image == NULL || window->mini_image == NULL)
 		return (printf("Error: window image not allocated\n"), NULL);
-	closed = mlx_load_png("textures/door-close-icon.png");
-	window->door_icon_open = mlx_texture_to_image(window->mlx, closed);
-	open = mlx_load_png("textures/door-open-icon.png");
-	window->door_icon_close = mlx_texture_to_image(window->mlx, open);
-	free(closed);
-	free(open);
+	window->close_texture = mlx_load_png("textures/door-close-icon.png");
+	window->door_icon_open = mlx_texture_to_image(window->mlx, window->close_texture);
+    window->open_texture  = mlx_load_png("textures/door-open-icon.png");
+	window->door_icon_close = mlx_texture_to_image(window->mlx, window->open_texture);
 	if (window->door_icon_open == NULL || window->door_icon_close == NULL)
 		return (printf("Error: door icon not allocated\n"), NULL);
 	fill_window_values(window);

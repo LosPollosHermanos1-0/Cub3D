@@ -17,9 +17,8 @@ void	ft_free_texture_paths(char **textures)
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		free(textures[i++]);
-		i++;
 	}
 }

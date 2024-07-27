@@ -61,5 +61,5 @@ bool	ft_check_texture(char **texture)
 	fd = open(*texture, O_DIRECTORY);
 	if (fd != -1)
 		return (printf("Error: texture must be a file\n"), false);
-	return (close(fd), true);
+	return (true);
 }
