@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:42:07 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 17:10:01 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:30:01 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	leak_check(void)
 {
-    system("valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./cub3D maps/correct1.cub");
+    system("leaks cub3D");
 }
 
 void add_hooks_to_mlx(t_data *data) {

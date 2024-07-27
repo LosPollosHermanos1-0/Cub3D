@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:21:14 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/26 16:55:47 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/27 17:29:07 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_texture_paths(char **textures)
 	int	i;
 
 	i = 0;
-	while (i < 5)
+	while (i < 4)
 	{
 		free(textures[i++]);
 	}
