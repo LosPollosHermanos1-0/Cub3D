@@ -15,7 +15,7 @@
 
 # include "cub3d.h"
 
-typedef struct t_rgb_color
+typedef struct s_rgb_color
 {
 	int		r;
 	int		g;

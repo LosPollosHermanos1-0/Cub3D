@@ -6,13 +6,21 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 11:36:32 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/27 17:39:09 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 10:31:55 by jmoritz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static mlx_texture_t	**init_sprite_helper(void);
+
+uint32_t	rgb_to_uint32(t_rgb_color *color)
+{
+	const uint32_t	result = (color->r << 16) | (color->g << 8) | color->b;
+
+	free(color);
+	return (result);
+}
 
 bool	ft_set_data(char **filepath)
 {
@@ -24,8 +32,8 @@ bool	ft_set_data(char **filepath)
 	data = static_data();
 	if (ft_load_data(filepath, texture_paths, f_and_c_color, &map) == false)
 		return (false);
-	free(f_and_c_color[0]);
-	free(f_and_c_color[1]);
+	data->c_color = rgb_to_uint32(f_and_c_color[0]);
+	data->f_color = rgb_to_uint32(f_and_c_color[1]);
 	data->texture = init_texture(texture_paths);
 	if (data->texture == NULL)
 		return (false);

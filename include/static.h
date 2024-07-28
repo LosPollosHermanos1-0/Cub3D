@@ -22,6 +22,7 @@
 
 typedef enum e_map_elements		t_map_elements;
 typedef struct s_sprite_data	t_sprite_data;
+typedef struct s_rgb_color		t_rgb_color;
 
 typedef enum e_textures {
 	NORTH,
@@ -59,7 +60,6 @@ typedef struct s_data {
 	t_player		player;
 	t_map			*map;
 	mlx_texture_t	**texture;
-	int				**rgb;
 	mlx_texture_t	**sprite_t;
 	t_data_flags	flags;
 	double			*z_buffer;
@@ -67,6 +67,8 @@ typedef struct s_data {
 	t_vector_2d		last_faced_closed_door;
 	int				opponent_count;
 	t_sprite_data	*sprites;
+	uint32_t		c_color;
+	uint32_t		f_color;
 }				t_data;
 
 // void			free_data(t_data *data);
