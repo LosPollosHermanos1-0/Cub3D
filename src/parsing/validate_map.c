@@ -6,15 +6,12 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/28 12:55:12 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 13:04:20 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	ft_floodfill(char ***map_ptr, int c, int r);
-static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
-				int height);
 static bool	ft_only_valid_chars(char ***map_ptr);
 static bool	ft_check_doors(char ***map_ptr, int i, int j);
 
@@ -59,7 +56,7 @@ bool	ft_validate_map(char ***map_ptr)
  * @param height Height of the map.
  * @return true if map was copied successfully, false otherwise.
  */
-static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
+bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
 		int height)
 {
 	int	i;
@@ -92,7 +89,7 @@ static bool	ft_copy_map(char ***map_ptr, char ***map_copy_ptr, int width,
  * @param r Row to start floodfill.
  * @return true if map is valid, false otherwise.
  */
-static bool	ft_floodfill(char ***map_ptr, int c, int r)
+bool	ft_floodfill(char ***map_ptr, int c, int r)
 {
 	(*map_ptr)[r][c] = '.';
 	if (((r < 1 || (*map_ptr)[r - 1][c] == ' '

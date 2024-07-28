@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:48:56 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/26 16:26:07 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 13:04:03 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ bool				ft_wrong_char_inside(char **str);
 void				ft_free_texture_paths(char **texture_paths);
 
 bool				is_fillable(char input);
+
+bool				ft_copy_map(char ***map_ptr, char ***map_copy_ptr,
+						int width, int height);
+bool				ft_floodfill(char ***map_ptr, int c, int r);
 
 #endif
