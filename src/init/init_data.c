@@ -16,8 +16,8 @@ static mlx_texture_t	**init_sprite_helper(void);
 
 uint32_t	rgb_to_uint32(t_rgb_color *color)
 {
-	const uint32_t	result = (color->r << 24)
-		| (color->g << 16) | (color->b << 8) | 0xFF;
+	const uint32_t	result = ((uint32_t)color->r << 24)
+		| ((uint32_t)color->g << 16) | ((uint32_t)color->b << 8) | 0xFF;
 
 	free(color);
 	return (result);
