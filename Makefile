@@ -134,6 +134,14 @@ check_bonus_mode:
 		$(MAKE) clean; \
 	fi
 
+
+check_normal_mode:
+	@if [ ! -f $(BONUS_FLAG_FILE) ]; then \
+		echo "Cleaning bonus mode..."; \
+		rm -f $(BONUS_FLAG_FILE); \
+		$(MAKE) clean; \
+	fi
+
 start_build:
 	@echo "$$ASCII_HEADER"
 	@if [ -n "`find $(SRC_DIR) -name '*.c' -newer $(NAME) 2>/dev/null`" ] || [ ! -f "$(NAME)" ]; then \
@@ -209,10 +217,10 @@ leaks: all
 
 # Bonus rule
 bonus: CFLAGS += -D IS_BONUS
-bonus: fclean $(BONUS_FLAG_FILE) submodule start_build $(NAME)
+bonus: check_normal_mode $(BONUS_FLAG_FILE) submodule start_build $(NAME)
 
 $(BONUS_FLAG_FILE):
 	@echo "Switching to bonus mode..."
 	@touch $(BONUS_FLAG_FILE)
 
-.PHONY: all check_bonus_mode clean fclean re start_build submodule sanitize leaks bonus
+.PHONY: all check_bonus_mode clean fclean re start_build submodule sanitize leaks bonus check_normal_mode

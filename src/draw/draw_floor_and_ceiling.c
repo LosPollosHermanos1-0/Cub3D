@@ -100,8 +100,9 @@ static void	put_pixels(t_draw_floor_and_ceiling_data *fcd, t_data *data, int y)
 	}
 	else
 	{
-		mlx_put_pixel(data->window->image, fcd->x, y, data->f_color);
+		mlx_put_pixel(data->window->image, fcd->x, y,
+			blend_color(data->c_color, fcd->blend_factor));
 		mlx_put_pixel(data->window->image, fcd->x, data->window->height - y - 1,
-			data->c_color);
+			blend_color(data->f_color, fcd->blend_factor));
 	}
 }
