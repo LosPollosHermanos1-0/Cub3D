@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:07:59 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/25 09:13:04 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 12:39:30 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ static bool	ft_get_map_char(char **content, char ***map_ptr)
 
 bool	is_fillable(char input)
 {
-	return (input == '0' || input == 'D' || input == 'O');
+	return (input == '0' || input == 'D' || input == 'O'
+		|| input == 'N' || input == 'S' || input == 'W' || input == 'E');
 }
 
 /**

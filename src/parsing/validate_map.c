@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:51:26 by lzipp             #+#    #+#             */
-/*   Updated: 2024/07/25 09:02:52 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 12:55:12 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ bool	ft_validate_map(char ***map_ptr)
 	char	**map_fill_copy;
 
 	if (ft_only_valid_chars(map_ptr) == false)
+		return (false);
+	if (ft_validate_opponents(map_ptr) == false)
 		return (false);
 	pos = ft_get_player(map_ptr);
 	if (!pos)
