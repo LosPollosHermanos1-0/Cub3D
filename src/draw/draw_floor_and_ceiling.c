@@ -6,7 +6,7 @@
 /*   By: lzipp <lzipp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 22:05:52 by jmoritz           #+#    #+#             */
-/*   Updated: 2024/07/26 15:44:39 by lzipp            ###   ########.fr       */
+/*   Updated: 2024/07/28 10:26:45 by lzipp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,19 @@ inline void	draw_floor_and_ceiling(t_data *data, int y)
 
 static void	put_pixels(t_draw_floor_and_ceiling_data *fcd, t_data *data, int y)
 {
-	mlx_put_pixel(data->window->image, fcd->x, y,
-		blend_color(get_pixel(data->texture[FLOOR], fcd->texture.x,
-				fcd->texture.y), fcd->blend_factor));
-	mlx_put_pixel(data->window->image, fcd->x, data->window->height - y - 1,
-		blend_color(get_pixel(data->texture[CEILING], fcd->texture.x,
-				fcd->texture.y), fcd->blend_factor));
+	if (BONUS)
+	{
+		mlx_put_pixel(data->window->image, fcd->x, y,
+			blend_color(get_pixel(data->texture[FLOOR], fcd->texture.x,
+					fcd->texture.y), fcd->blend_factor));
+		mlx_put_pixel(data->window->image, fcd->x, data->window->height - y - 1,
+			blend_color(get_pixel(data->texture[CEILING], fcd->texture.x,
+					fcd->texture.y), fcd->blend_factor));
+	}
+	else
+	{
+		mlx_put_pixel(data->window->image, fcd->x, y, data->f_color);
+		mlx_put_pixel(data->window->image, fcd->x, data->window->height - y - 1,
+			data->c_color);
+	}
 }
